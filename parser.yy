@@ -102,7 +102,7 @@
 
 /* NUM has an attribute and is of type ival (int in union) */
 %token <ival> T_NUM "number" 
-%type <astnode> literal type globaldeclarations globaldeclaration variabledeclaration identifier
+%type <astnode> literal type globaldeclarations globaldeclaration globaldeclarationsPrime variabledeclaration identifier
 %type <astnode> functiondeclaration functionheader functiondeclarator functiondeclaratorleftFactor formalparameterlist formalparameterlistPrime formalparameter
 %type <astnode> mainfunctiondeclaration mainfunctiondeclarator block blockleftfactored blockstatements blockstatementsPrime blockstatement
 %type <astnode> statement statementreturnleftFactored statementifleftFactored statementexpression primary
@@ -115,7 +115,12 @@
 
 %%
 start           : /* empty */       
-                | globaldeclarations    {driver.RootNode->addChild($1);}
+                | globaldeclarations    {
+                                        AstNode * Temp = $1;
+                                        while(Temp != nullptr){
+                                            driver.RootNode->addChild(Temp);
+                                            Temp = Temp->NextSibling;
+                                        }}
                 ;
 
 literal         : T_NUM      {AstNode * newNode = driver.Number($1); $$ = newNode;}       
@@ -128,11 +133,21 @@ type            : T_BOOLEAN {AstNode * newNode = driver.Bool_type(); $$ = newNod
                 | T_INT {AstNode * newNode = driver.Int_type(); $$ = newNode;}
                 ;
 
-globaldeclarations      : globaldeclaration globaldeclarationsPrime     {$$ = $1;}
+globaldeclarations      : globaldeclaration globaldeclarationsPrime     {$$ = $1;
+                                                                        AstNode * Temp = $2;
+                                                                        while(Temp != nullptr){
+                                                                            $$->setSibling(Temp);
+                                                                            Temp = Temp->NextSibling;
+                                                                        }
+                                                                        }
                         ;
 
-globaldeclarationsPrime : globaldeclaration globaldeclarationsPrime {driver.RootNode->addChild($1);}
-                        | /* empty */   
+globaldeclarationsPrime : globaldeclaration globaldeclarationsPrime {$$ = $1; 
+                                                                    if($2 != nullptr){
+                                                                        $$->setSibling($2);
+                                                                    }
+                                                                    }
+                        | /* empty */   {$$ = nullptr;}
                         ;
                 
 globaldeclaration       : variabledeclaration               {$$ = $1;}
@@ -186,13 +201,13 @@ functiondeclarator      : identifier "(" functiondeclaratorleftFactor   {$$ = $1
                                                                         }
                         ;
 
-functiondeclaratorleftFactor : formalparameterlist ")" {AstNode* newNode = driver.Formals();
-                                                        $$ = newNode;
+functiondeclaratorleftFactor : formalparameterlist ")" {AstNode* newNode = driver.Formals_List();
                                                         AstNode * Temp = $1;
                                                         while(Temp != nullptr){
                                                             newNode->addChild(Temp);
                                                             Temp = Temp->NextSibling;
                                                         }
+                                                        $$ = newNode;
                                                         }
                         | ")"       {$$ = nullptr;}
                         ;
@@ -225,8 +240,6 @@ formalparameter         : type identifier   {AstNode* newNode = driver.Formals()
 
 mainfunctiondeclaration : mainfunctiondeclarator block          {AstNode * newNode = driver.Main_decl(); $$ = newNode;
                                                                 newNode->addChild($1);
-                                                                AstNode * newNode1 = driver.Formals();
-                                                                newNode->addChild(newNode1);
                                                                 newNode->addChild($2);
                                                                 }
                         ;
@@ -238,7 +251,7 @@ block                   : "{" blockleftfactored     {$$ = $2;}
                         ;
 
 blockleftfactored       : blockstatements "}"   {$$ = $1;}
-                        | "}"           {$$ = nullptr;}
+                        | "}"           {AstNode * newNode = driver.Block(); $$ = newNode;}
                         ;
 
 blockstatements         : blockstatement blockstatementsPrime   {AstNode * newNode = driver.Block(); $$ = newNode;

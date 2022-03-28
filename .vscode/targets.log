@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Mar 27 13:21:42 2022
+# Make data base, printed on Sun Mar 27 16:09:15 2022
 
 # Variables
 
@@ -57,7 +57,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-7f1ebe26-5703-40db-91dd-9c988d493e68.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-332f660f-ecf3-46c3-a389-84615a5225de.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -83,7 +83,7 @@ HOME = /home/abhay_comp
 # environment
 LOGNAME = abhay_comp
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 ZSH = /home/abhay_comp/.oh-my-zsh
 # environment
@@ -171,9 +171,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 10739): 14 files, no impossibilities.
+# . (device 2080, inode 10739): 30 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 30 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -211,7 +211,7 @@ parser.hh:
 # Not a target:
 parser.yy:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-22 01:20:35.5040416
+#  Last modified 2022-03-27 16:06:57.2596973
 #  File has been updated.
 #  Successfully updated.
 
@@ -250,7 +250,7 @@ build: parser.o scanner.o main.o driver.o ast.o
 parser.o: parser.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'parser'
-#  File does not exist.
+#  Last modified 2022-03-27 16:06:38.1296973
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -275,10 +275,10 @@ clean:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 29):
+ 
 	rm -f *.o *.d *.hh $(EXEC) *.cc 
 
 parser.cc: parser.yy
- 
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'parser'
 #  File is an intermediate prerequisite.
@@ -321,12 +321,12 @@ main.o:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 36 / storage = 289 B / avg = 8 B
-# current buf: size = 8162 B / used = 289 B / count = 36 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 45 / storage = 369 B / avg = 8 B
+# current buf: size = 8162 B / used = 369 B / count = 45 / avg = 8 B
 
-# strcache performance: lookups = 53 / hit rate = 32%
+# strcache performance: lookups = 69 / hit rate = 34%
 # hash-table stats:
-# Load=36/8192=0%, Rehash=0, Collisions=1/53=2%
-# Finished Make data base on Sun Mar 27 13:21:42 2022
+# Load=45/8192=1%, Rehash=0, Collisions=1/69=1%
+# Finished Make data base on Sun Mar 27 16:09:15 2022
 
  

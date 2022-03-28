@@ -1,5 +1,9 @@
-main(){
-
-    abhay(((8+98)<(98>88))&&((!abhay)||(90>0)));
+main (){
+    int foo;
 }
 
+int funt (int gg, boolean ppo){
+    if(6 == 7){
+
+    }
+}

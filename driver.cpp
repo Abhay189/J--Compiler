@@ -22,10 +22,16 @@ AstNode * Driver::Function_Invocation(){
     return newNode;
 }
 
+AstNode * Driver::Formals_List(){
+    AstNode * newNode = new AstNode(NodeType::FORMALS_List);
+    return newNode;
+}
+
 AstNode * Driver::Formals(){
     AstNode * newNode = new AstNode(NodeType::FORMALS);
     return newNode;
 }
+
 
 AstNode * Driver::void_(){
     AstNode * newNode = new AstNode(NodeType::VOID);
@@ -157,6 +163,7 @@ std::string NodeNameFunction(AstNode *Node){
         case NodeType::VOID: return "Void";
         case NodeType::ID: return "Identifier , Name: \'" + Node->AstStringval + "\'";
         case NodeType::FORMALS: return "Formal";
+        case NodeType::FORMALS_List: return "Formal List";
         case NodeType::VAR_DECL: return "Variable decleration";
         case NodeType::INT_TYPE: return "Int type";
         case NodeType::BOOL_TYPE: return "Boolean type";

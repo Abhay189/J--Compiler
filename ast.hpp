@@ -7,11 +7,13 @@
 
 typedef enum{
     PROGRAM_START_NODE, 
+    
     MAIN_FNC_DECL, 
     FNC_DECL, 
     FNC_INVOCATION,
     VOID, 
     ID, 
+    FORMALS_List,
     FORMALS,
     VAR_DECL,
     INT_TYPE, 
@@ -56,10 +58,4 @@ class AstNode{
 
     void addChild(AstNode* childNode);
 };
-
-
-
-
-
-
 #endif

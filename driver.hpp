@@ -10,11 +10,13 @@
 
 
 class Driver {
+
     public:
     AstNode * Ident(std::string Name);
     AstNode * Main_decl();
     AstNode * Fnc_decl();
     AstNode * Formals(); 
+    AstNode * Formals_List();
     AstNode * Function_Invocation();
     AstNode * void_();
     AstNode * Int_type();
@@ -53,8 +55,6 @@ class Driver {
     bool start(std::istream &in);
 
     // Stores AST. Parser will fill this.
-    // AST* tree = nullptr;
-
     std::string getFileName() { return file_name; }
 
     // Makes it easy to debug. Parser will set this as yylex.
