@@ -134,18 +134,12 @@ type            : T_BOOLEAN {AstNode * newNode = driver.Bool_type(); $$ = newNod
                 ;
 
 globaldeclarations      : globaldeclaration globaldeclarationsPrime     {$$ = $1;
-                                                                        AstNode * Temp = $2;
-                                                                        while(Temp != nullptr){
-                                                                            $$->setSibling(Temp);
-                                                                            Temp = Temp->NextSibling;
-                                                                        }
+                                                                        $$->setSibling($2);
                                                                         }
                         ;
 
 globaldeclarationsPrime : globaldeclaration globaldeclarationsPrime {$$ = $1; 
-                                                                    if($2 != nullptr){
-                                                                        $$->setSibling($2);
-                                                                    }
+                                                                    $$->setSibling($2);
                                                                     }
                         | /* empty */   {$$ = nullptr;}
                         ;
@@ -179,17 +173,15 @@ functiondeclaration     : functionheader block      {AstNode* newNode = driver.F
 functionheader          : type functiondeclarator   {   
                                                         $$ = $1;
                                                         AstNode * Temp = $2;
-                                                        while(Temp != nullptr){
+                                                        if(Temp != nullptr){
                                                             $$->setSibling(Temp);
-                                                            Temp = Temp->NextSibling;
                                                         }
                                                     }                     
                         | T_VOID functiondeclarator{    AstNode* newNode = driver.void_();
                                                         $$ = newNode;
                                                         AstNode * Temp = $2;
-                                                        while(Temp != nullptr){
+                                                        if(Temp != nullptr){
                                                             $$->setSibling(Temp);
-                                                            Temp = Temp->NextSibling;
                                                         }
                                                     } 
                         ;
@@ -214,18 +206,16 @@ functiondeclaratorleftFactor : formalparameterlist ")" {AstNode* newNode = drive
 
 formalparameterlist     : formalparameter formalparameterlistPrime      {$$ = $1; 
                                                                         AstNode * Temp = $2;
-                                                                        while(Temp != nullptr){
+                                                                        if(Temp != nullptr){
                                                                             $$->setSibling(Temp);
-                                                                            Temp = Temp->NextSibling;
                                                                         }
                                                                         }
                         ;
 
 formalparameterlistPrime : "," formalparameter formalparameterlistPrime {   $$ = $2;
                                                                             AstNode * Temp = $3;
-                                                                            while(Temp != nullptr){
+                                                                            if(Temp != nullptr){
                                                                                 $$->setSibling(Temp);
-                                                                                Temp = Temp->NextSibling;
                                                                             }
 
                                                                         }
@@ -266,7 +256,9 @@ blockstatements         : blockstatement blockstatementsPrime   {AstNode * newNo
                         ;
 
 blockstatementsPrime    : blockstatement blockstatementsPrime   {$$ = $1;
-                                                                $$->setSibling($2);                                                               
+                                                                if($2 != nullptr){
+                                                                    $$->setSibling($2);
+                                                                }                                        
                                                                 }
                         | /* empty */ {$$ = nullptr;}
                         ;
@@ -337,18 +329,16 @@ primary                 : literal {$$ = $1;}
 
 argumentlist            : expression argumentlistPrime  {$$ = $1; 
                                                         AstNode * Temp = $2;
-                                                        while(Temp != nullptr){
+                                                        if(Temp != nullptr){
                                                             $$->setSibling(Temp);
-                                                            Temp = Temp->NextSibling;
                                                         }
                                                         }
                         ;
 
 argumentlistPrime       : "," expression argumentlistPrime  {$$ = $2;
                                                             AstNode * Temp = $3;
-                                                            while(Temp != nullptr){
+                                                            if(Temp != nullptr){
                                                                 $$->setSibling(Temp);
-                                                                Temp = Temp->NextSibling;
                                                             }
                                                             }
                         | /* empty */   {$$ = nullptr;}

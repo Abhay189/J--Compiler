@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<string>
 #include<vector>
+#include <unordered_map>
 
 typedef enum{
     PROGRAM_START_NODE, 
@@ -44,7 +45,6 @@ class AstNode{
     NodeType AstNodeType;
     int AstIntval;
     std::string AstStringval; 
-
     //A vector containing all the children of this node. This will be empty if this node is a leaf node. 
     std::vector<AstNode*> ChildrenArray;
     //This is a linked list. If the NextSibling is empty then this will be empty. 

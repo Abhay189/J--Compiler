@@ -1,9 +1,4 @@
-main (){
-    int foo;
-}
 
-int funt (int gg, boolean ppo){
-    if(6 == 7){
+boolean funct1(int ppo, boolean ppo1, int poo2, int poo3){
 
-    }
 }

@@ -1,13 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory '/home/abhay_comp/CPSC-411-Github/CPSC-411-Project'
-bison -o parser.cc parser.yy
-g++ -std=c++14 -c parser.cc -MMD -MF parser.d
-flex --c++ -o scanner.cc scanner.l
-g++ -std=c++14 -c scanner.cc -MMD -MF scanner.d
-g++ -std=c++14 -c main.cpp -MMD -MF main.d
-g++ -std=c++14 -c driver.cpp -MMD -MF driver.d
-g++ -std=c++14 -c ast.cpp -MMD -MF ast.d
-g++ -std=c++14 -o parser parser.o scanner.o main.o driver.o ast.o
-rm scanner.cc parser.cc
+g++ -std=c++14 -o parser parser.o scanner.o main.o driver.o ast.o stab.o
 make: Leaving directory '/home/abhay_comp/CPSC-411-Github/CPSC-411-Project'
  

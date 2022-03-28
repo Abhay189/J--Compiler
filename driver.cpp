@@ -1,4 +1,5 @@
 #include "driver.hpp"
+#include "stab.hpp"
 
 
 AstNode * Driver::Ident(std::string Name){
@@ -253,6 +254,8 @@ bool Driver::parse(std::istream &in)
         std::cerr << "Parse failed!!\n";
         return 1;
     }
+
+    GlobalScopeIterator(RootNode);
 
     return 0;
 }

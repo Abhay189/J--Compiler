@@ -2,7 +2,7 @@
 
 CXX := g++
 CXXFLAGS := -std=c++14
-OBJS = parser.o scanner.o main.o driver.o ast.o
+OBJS = parser.o scanner.o main.o driver.o ast.o stab.o
 EXEC = parser
 
 
