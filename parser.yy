@@ -588,10 +588,8 @@ assignmentexpression    : conditionalorexpression   {$$ = $1;}
                         | assignment        {$$ = $1;}
                         ;
 
-assignment              : identifier "=" assignmentexpression   {AstNode * newNode = driver.AssignmentStmntExpression(); 
+assignment              : identifier "=" assignmentexpression   {AstNode * newNode = driver.Operator("=");
                                                                 newNode->addChild($1);
-                                                                AstNode * newNode1 = driver.Operator("=");
-                                                                newNode->addChild(newNode1);
                                                                 newNode->addChild($3);
                                                                 $$ = newNode;
 

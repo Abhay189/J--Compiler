@@ -1,7 +1,7 @@
 #include"stab.hpp"
 #include<string>
 #include<iostream>
-
+#include <vector>
 
 /**
  * Called to iterate over all the global declerations.  
@@ -9,6 +9,37 @@
  * @param RootNode 
  */
 int main_declaration_counter = 0;
+
+/**
+ * @brief This is the scope stack, it contains the pointer to the stab of current Node as the last value inside the vector. 
+ * 
+ */
+std::vector<std::unordered_map<std::string, std::string> *> scopeStack;
+
+/**
+ * @brief Looks up if an identifier has been defined in any stab in the stack scope. 
+ * this fucntion will first check the stab of the top of the stack, then the one below it and so on. 
+ * 
+ * @return std::string : The identifier of the function or the variable. 
+ */
+std::string AstStackLookup(std::string identifier){
+    std::unordered_map<std::string, std::string> * temp;
+
+    for (auto it =  scopeStack.rbegin(); it != scopeStack.rend(); ++it){
+        temp = *it;
+        if(temp->count(identifier) == 1){
+            return temp->at(identifier);
+        }
+    }
+    return "";
+
+}
+
+void SemanticCheck_Driver(AstNode *RootNode){
+    GlobalScopeIterator(RootNode);
+    secondIteration(RootNode);
+    printf("No semantic error detected! \n");
+}
 
 void GlobalScopeIterator(AstNode *RootNode){
     //This is the case when the rootnode has no children 
@@ -38,23 +69,29 @@ void GlobalScopeIterator(AstNode *RootNode){
  * @param thestring This function takes in an empty string that is processed and finally returned with all the info.  
  * 
  */
-void Formals_String_Generator(std::string * thestring ,AstNode * Node){
-    if(Node->ChildrenArray.empty()){
-        if(Node->AstNodeType == NodeType::INT_TYPE){
+void Formals_String_Generator(std::string * thestring ,AstNode * Node, std::unordered_map<std::string, std::string> * Node_stab){
+    //Each of a is goint to be of the type Formal. 
+    for(auto a : Node->ChildrenArray){
+        std::string variable_Type;
+        if(a->ChildrenArray[0]->AstNodeType == NodeType::INT_TYPE){
+            variable_Type = "INT";
             thestring->append(" INT");
         }
-        else if(Node->AstNodeType == NodeType::BOOL_TYPE){
+        else if(a->ChildrenArray[0]->AstNodeType == NodeType::BOOL_TYPE){
+            variable_Type = "BOOLEAN";
             thestring->append(" BOOLEAN");
         }
-        else if(Node->AstNodeType == NodeType::ID){
-            thestring->append(" " + Node->AstStringval);
-        }
-    }
-    else{
-        for(auto a : Node->ChildrenArray){
-            Formals_String_Generator(thestring, a);
-        }
 
+        if(Node_stab->count(a->ChildrenArray[1]->AstStringval) == 0){
+            std::string var_Identifier = a->ChildrenArray[1]->AstStringval;
+            
+            std::string var_Info = variable_Type + " " + var_Identifier;
+            Node_stab->insert({var_Identifier,var_Info});
+        }
+        else{
+            std::cerr << "Multiple Declerations of a Variable \"" + a->ChildrenArray[1]->AstStringval + "\"\n";
+            exit(EXIT_FAILURE);
+        }
     }
 }
 
@@ -106,7 +143,8 @@ void First_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::s
                         case NodeType::VOID: {Function_return_type = "VOID"; break;}
                         case NodeType::ID: {Function_Identifier = a->AstStringval; break;}
                         case NodeType::FORMALS_List: {
-                            Formals_String_Generator( &Function_parameters, a); break;
+                            auto Function_decleration_stab = &Node->Node_stab;
+                            Formals_String_Generator( &Function_parameters, a, Function_decleration_stab); break;
                         }
                         }
                 }
@@ -156,7 +194,7 @@ void First_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::s
 
 
 /**
- * @brief Goes over the AST the 2nd time to do semantic checking. 
+ * @brief Goes over the AST the 2nd time to do semantic checking. Also takes care of putting things on and off the scope stack. 
  * 
  * @param Rootnode Put in the root node of the AST while calling this function. 
  */
@@ -167,13 +205,113 @@ void secondIteration(AstNode * Rootnode){
     }
     else{
         Second_Iteration_Callback_Function(Rootnode,&Rootnode->Node_stab);
+        scopeStack.push_back(&Rootnode->Node_stab);
         for(auto a : Rootnode->ChildrenArray){
             secondIteration(a);
         }
+        if(!scopeStack.empty()){
+            scopeStack.pop_back();
+        }
+        
     }
 }
 
 
 void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::string, std::string> * Node_stab){
+    switch(Node->AstNodeType){
+        //if we find a variable decleration inside of a function, then we need to add that to the stab of function in which it is defined. 
+        //Do not do anyting if this variable decleration is in the global scope, as that has already been dealt with. 
+        case NodeType::VAR_DECL:{
+            std::string var_Type;
+            std::string var_Identifier;
+            std::string var_Info;
 
+            for(auto a : Node->ChildrenArray){
+                switch(a->AstNodeType){
+                    case NodeType::INT_TYPE: {var_Type = "INT"; break;}
+                    case NodeType::BOOL_TYPE: {var_Type = "BOOLEAN"; break;}
+                    case NodeType::ID: {var_Identifier = a->AstStringval; break;}
+                    }
+            }
+            var_Info = var_Type + " " + var_Identifier;
+
+            auto topStab = scopeStack.back();
+            //Does not check for the global variables as the scope size is more then 1 for his check. 
+            if(scopeStack.size() != 1){
+                if(scopeStack.size() == 3){
+                    if(topStab->count(var_Identifier) == 0){
+                    topStab->insert({var_Identifier,var_Info});
+                    }
+                    else{
+                        std::cerr << "Multiple Declerations of variable \"" + var_Identifier + "\" within the same scope\n";
+                        exit(EXIT_FAILURE);
+                    }
+                }
+                else{
+                    std::cerr << "Variable decleration not in outermost block \"" + var_Identifier + "\"\n";
+                        exit(EXIT_FAILURE);
+                }
+            }
+            break;
+        }
+ 
+        case NodeType::ID:{
+            auto node_stab_info = AstStackLookup(Node->AstStringval);
+            if(node_stab_info == ""){
+                std::cerr << "Identifier not defined! \"" + Node->AstStringval + "\"\n";
+                exit(EXIT_FAILURE);
+            }
+            break;
+        }
+        
+        case NodeType::FNC_INVOCATION:{
+            std::string Function_Identifier;
+            std::string Function_parameters;
+
+            std::string Function_info;
+            for(auto a : Node->ChildrenArray){
+                switch(a->AstNodeType){
+                    case NodeType::ID: {Function_Identifier = a->AstStringval; break;}
+                    case NodeType::NUMBEER: {Function_parameters.append(" INT"); break;}
+                    case NodeType::STRING: {Function_parameters.append(" STRING"); break;}
+                    case NodeType::TRUE: {Function_parameters.append(" BOOLEAN"); break;}
+                    case NodeType::FALSE: {Function_parameters.append(" BOOLEAN"); break;}
+                    default: break;
+                }
+            }
+            Function_info = Function_Identifier + Function_parameters;
+
+            auto node_stab_info = AstStackLookup(Function_Identifier);
+            if(node_stab_info == ""){
+                std::cerr << "Function not defined before use! \"" + Function_Identifier + "\"\n";
+                exit(EXIT_FAILURE);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            // std::string delimiter = " ";
+            // std::string token = node_stab_info.substr(3, node_stab_info.find(delimiter));
+
+            std::cout<<node_stab_info<<std::endl;
+            std::cout<<Function_info<<std::endl;
+            break;
+        }
+        
+        default: break;
+    }
 }

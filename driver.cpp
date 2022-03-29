@@ -227,6 +227,10 @@ bool Driver::start(std::istream &in)
     if (!res) {
         this->AstIteratorFunction(Driver::RootNode,0);
     }
+    //For running the global iterator function the first time and including the main and global
+    //function and variable declarations in the global stab. 
+    std::cout<<"\n----- semantic analysis -----\n";
+    SemanticCheck_Driver(RootNode);
 
     return res;
 }
@@ -241,7 +245,6 @@ int Driver::getToken(JCC::Parser::semantic_type *yylval, JCC::Parser::location_t
     return tok;
 }
 
-
 bool Driver::parse(std::istream &in) 
 {
     lexer = createLexer(&in);
@@ -254,8 +257,6 @@ bool Driver::parse(std::istream &in)
         std::cerr << "Parse failed!!\n";
         return 1;
     }
-    //For running the global iterator function the first time and including the main and global
-    //function and variable declarations in the global stab. 
-    GlobalScopeIterator(RootNode);
+
     return 0;
 }

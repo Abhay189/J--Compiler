@@ -1,12 +1,12 @@
 main(){
-    int num;
-}boolean goo2;
-
-int goo(){
-
+    funct(56,88);
+    int p;
+    p = 89;
+    
 }
 
+int funct(int goo, boolean poop){
+    poop = 87;
+}
 
-boolean goo2;
-
-boolean goo2;
+int kk ;
