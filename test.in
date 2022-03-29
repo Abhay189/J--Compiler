@@ -1,4 +1,12 @@
+main(){
+    int num;
+}boolean goo2;
 
-boolean funct1(int ppo, boolean ppo1, int poo2, int poo3){
+int goo(){
 
 }
+
+
+boolean goo2;
+
+boolean goo2;

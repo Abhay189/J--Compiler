@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Mar 28 00:51:59 2022
+# Make data base, printed on Mon Mar 28 16:34:49 2022
 
 # Variables
 
@@ -57,7 +57,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-b5d85112-11dc-46c8-9151-8096b8b63527.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-30d41919-c60d-4936-bb11-9c86b117a7af.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -163,7 +163,7 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=7/109=6%
+# Load=76/1024=7%, Rehash=0, Collisions=7/108=6%
 
 # Pattern-specific Variable Values
 
@@ -171,9 +171,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 10739): 32 files, no impossibilities.
+# . (device 2080, inode 10739): 31 files, no impossibilities.
 
-# 32 files, no impossibilities in 1 directories.
+# 31 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -207,7 +207,7 @@ scanner.l:
 scanner.o: scanner.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'scanner'
-#  Last modified 2022-03-28 00:51:26.2696973
+#  Last modified 2022-03-28 02:28:20.5096973
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
@@ -216,7 +216,7 @@ scanner.o: scanner.cc
 # Not a target:
 stab.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-28 00:48:15.3996973
+#  Last modified 2022-03-28 03:13:44.3296973
 #  File has been updated.
 #  Successfully updated.
 
@@ -228,7 +228,7 @@ parser.hh:
 # Not a target:
 parser.yy:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-27 18:01:33.7896973
+#  Last modified 2022-03-28 01:30:24.2296973
 #  File has been updated.
 #  Successfully updated.
 
@@ -239,12 +239,12 @@ all: build
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 
 driver.o: driver.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'driver'
-#  Last modified 2022-03-28 00:51:27.1096973
+#  Last modified 2022-03-28 02:28:21.4296973
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -267,43 +267,20 @@ ast.cpp:
 #  Successfully updated.
 
 # Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 Makefile:
 #  Implicit rule search has been done.
 #  Last modified 2022-03-28 00:51:54.3296973
 #  File has been updated.
 #  Successfully updated.
- 
 
 build: parser.o scanner.o main.o driver.o ast.o stab.o
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
-# automatic
-# @ := build
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := parser.o scanner.o main.o driver.o ast.o stab.o
-# automatic
-# | := 
-# automatic
-# < := parser.o
-# automatic
-# ^ := parser.o scanner.o main.o driver.o ast.o stab.o
-# automatic
-# ? := parser.o scanner.o main.o driver.o ast.o stab.o
+ 
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=3/15=20%
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
 #  recipe to execute (from 'Makefile', line 26):
 	$(CXX) $(CXXFLAGS) -o $(EXEC) $^
 
@@ -317,16 +294,34 @@ main.cpp:
 stab.o: stab.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'stab'
-#  Last modified 2022-03-28 00:51:27.6296973
+#  Last modified 2022-03-28 03:13:30.4796973
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := stab.o
+# automatic
+# % := 
+# automatic
+# * := stab
+# automatic
+# + := stab.cpp
+# automatic
+# | := 
+# automatic
+# < := stab.cpp
+# automatic
+# ^ := stab.cpp
+# automatic
+# ? := stab.cpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
 #  recipe to execute (from 'Makefile', line 23):
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
 
 parser.o: parser.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'parser'
-#  Last modified 2022-03-28 00:51:25.7796973
+#  Last modified 2022-03-28 02:28:20.0596973
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
@@ -341,7 +336,7 @@ parser.o: parser.cc
 ast.o: ast.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'ast'
-#  Last modified 2022-03-28 00:51:27.3596973
+#  Last modified 2022-03-28 02:28:21.7196973
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -374,14 +369,14 @@ driver.cpp:
 main.o: main.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-03-28 00:51:26.6496973
+#  Last modified 2022-03-28 02:28:20.9296973
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
 
 # files hash-table stats:
-# Load=21/1024=2%, Rehash=0, Collisions=0/77=0%
+# Load=21/1024=2%, Rehash=0, Collisions=0/76=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -391,9 +386,9 @@ main.o: main.cpp
 # strcache buffers: 1 (0) / strings = 59 / storage = 481 B / avg = 8 B
 # current buf: size = 8162 B / used = 481 B / count = 59 / avg = 8 B
 
-# strcache performance: lookups = 98 / hit rate = 39%
+# strcache performance: lookups = 96 / hit rate = 38%
 # hash-table stats:
-# Load=59/8192=1%, Rehash=0, Collisions=1/98=1%
-# Finished Make data base on Mon Mar 28 00:51:59 2022
+# Load=59/8192=1%, Rehash=0, Collisions=1/96=1%
+# Finished Make data base on Mon Mar 28 16:34:49 2022
 
  

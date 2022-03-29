@@ -49,6 +49,8 @@ class AstNode{
     std::vector<AstNode*> ChildrenArray;
     //This is a linked list. If the NextSibling is empty then this will be empty. 
     AstNode* NextSibling;
+    //stab pointer related to this AST node. 
+    std::unordered_map<std::string, std::string> Node_stab = {};
 
     AstNode();
 

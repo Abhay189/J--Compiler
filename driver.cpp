@@ -254,8 +254,8 @@ bool Driver::parse(std::istream &in)
         std::cerr << "Parse failed!!\n";
         return 1;
     }
-
+    //For running the global iterator function the first time and including the main and global
+    //function and variable declarations in the global stab. 
     GlobalScopeIterator(RootNode);
-
     return 0;
 }
