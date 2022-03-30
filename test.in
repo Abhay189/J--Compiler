@@ -1,12 +1,9 @@
 main(){
-    funct(56,88);
-    int p;
-    p = 89;
-    
+    int goo;
+    fun(!true);
 }
 
-int funct(int goo, boolean poop){
-    poop = 87;
-}
+int fun(boolean pop){
+    main();
 
-int kk ;
+}

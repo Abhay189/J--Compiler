@@ -1,0 +1,2 @@
+make a function that returns the input and return types of each operators. 
+Use this function to check that the function invocation has been called with the correct types. 
