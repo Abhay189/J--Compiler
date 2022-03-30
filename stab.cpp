@@ -505,3 +505,20 @@ void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::
     }
 }
 
+void third_Iteration(AstNode * RootNode){
+    if(Rootnode->ChildrenArray.empty()){
+        Third_Iteration_Callback_Function(Rootnode);
+        return;
+    }
+    else{
+        Third_Iteration_Callback_Function(Rootnode);
+        for(auto a : Rootnode->ChildrenArray){
+            third_Iteration(a);
+        }
+    }
+}
+
+void Third_Iteration_Callback_Function(AstNode * Node){
+    switch(Node.)
+
+}
