@@ -505,20 +505,31 @@ void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::
     }
 }
 
-void third_Iteration(AstNode * RootNode){
-    if(Rootnode->ChildrenArray.empty()){
-        Third_Iteration_Callback_Function(Rootnode);
-        return;
-    }
-    else{
-        Third_Iteration_Callback_Function(Rootnode);
-        for(auto a : Rootnode->ChildrenArray){
-            third_Iteration(a);
-        }
-    }
-}
+// void third_Iteration(AstNode * RootNode){
+//     if(RootNode->ChildrenArray.empty()){
+//         Third_Iteration_Callback_Function(RootNode);
+//         return;
+//     }
+//     else{
+//         Third_Iteration_Callback_Function(RootNode);
+//         for(auto a : RootNode->ChildrenArray){
+//             third_Iteration(a);
+//         }
+//     }
+// }
 
-void Third_Iteration_Callback_Function(AstNode * Node){
-    switch(Node.)
+// void Third_Iteration_Callback_Function(AstNode * Node){
+//     switch(Node->AstNodeType){
+//         {
+//         case NodeType::OPERATOR:{
+//             if(Node->AstStringval == "||"){
 
-}
+//             }
+//             break;
+//         }
+//         default:
+//             break;
+//         }
+//     }
+
+// }

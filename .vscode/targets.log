@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Mar 29 23:51:05 2022
+# Make data base, printed on Sun Apr  3 15:03:33 2022
 
 # Variables
 
@@ -33,7 +33,7 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /home/abhay_comp/.vscode-server/bin/c722ca6c7eed3d7987c0d5c3df5c45f6b15e77d1/node
+_ = /home/abhay_comp/.vscode-server/bin/e18005f0f1b33c29e81d732535d8c0e47cafb0b5/node
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -49,7 +49,7 @@ VSCODE_CWD = /mnt/c/Users/brows/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/abhay_comp/.vscode-server/bin/c722ca6c7eed3d7987c0d5c3df5c45f6b15e77d1/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Java/jdk1.8.0_311/bin:/mnt/d/Documents:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Program Files/MySQL/MySQL Shell 8.0/bin/:/mnt/c/Users/brows/AppData/Local/Programs/Python/Python310/Scripts/:/mnt/c/Users/brows/AppData/Local/Programs/Python/Python310/:/mnt/c/Users/brows/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/brows/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/brows/AppData/Roaming/npm:/mnt/c/Users/brows/.dotnet/tools:/mnt/c/msys64/mingw64/bin:/mnt/c/Users/brows/AppData/Local/GitHubDesktop/bin
+PATH = /home/abhay_comp/.vscode-server/bin/e18005f0f1b33c29e81d732535d8c0e47cafb0b5/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Java/jdk1.8.0_311/bin:/mnt/d/Documents:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Program Files/MySQL/MySQL Shell 8.0/bin/:/mnt/c/Users/brows/AppData/Local/Programs/Python/Python310/Scripts/:/mnt/c/Users/brows/AppData/Local/Programs/Python/Python310/:/mnt/c/Users/brows/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/brows/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/brows/AppData/Roaming/npm:/mnt/c/Users/brows/.dotnet/tools:/mnt/c/msys64/mingw64/bin:/mnt/c/Users/brows/AppData/Local/GitHubDesktop/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
@@ -57,7 +57,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-57bcfc8e-f6fe-4153-8938-10f173119532.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-f4714deb-cc4c-46fc-a778-45f14a4131df.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -113,7 +113,7 @@ LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/brows/.vscode/extensions/ms-vscode-remote.remote-wsl-0.64.2
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/brows/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.0
 # default
 MAKE_COMMAND := make
 # environment
@@ -163,7 +163,7 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=7/108=6%
+# Load=76/1024=7%, Rehash=0, Collisions=7/109=6%
 
 # Pattern-specific Variable Values
 
@@ -171,9 +171,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 10739): 32 files, no impossibilities.
+# . (device 2080, inode 10739): 34 files, no impossibilities.
 
-# 32 files, no impossibilities in 1 directories.
+# 34 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -207,7 +207,7 @@ scanner.l:
 scanner.o: scanner.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'scanner'
-#  Last modified 2022-03-29 14:22:31.4150767
+#  Last modified 2022-03-31 20:00:09.6881154
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
@@ -216,7 +216,7 @@ scanner.o: scanner.cc
 # Not a target:
 stab.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-29 14:25:06.5450767
+#  Last modified 2022-03-30 14:25:47.5161677
 #  File has been updated.
 #  Successfully updated.
 
@@ -239,12 +239,12 @@ all: build
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
 
 driver.o: driver.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'driver'
-#  Last modified 2022-03-29 14:22:32.5050767
+#  Last modified 2022-03-31 20:00:10.6381154
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -267,20 +267,43 @@ ast.cpp:
 #  Successfully updated.
 
 # Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 Makefile:
 #  Implicit rule search has been done.
 #  Last modified 2022-03-28 00:51:54.3296973
+ 
 #  File has been updated.
 #  Successfully updated.
 
 build: parser.o scanner.o main.o driver.o ast.o stab.o
 #  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
 #  File does not exist.
- 
 #  File has been updated.
 #  Needs to be updated (-q is set).
+# automatic
+# @ := build
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := parser.o scanner.o main.o driver.o ast.o stab.o
+# automatic
+# | := 
+# automatic
+# < := parser.o
+# automatic
+# ^ := parser.o scanner.o main.o driver.o ast.o stab.o
+# automatic
+# ? := parser.o scanner.o main.o driver.o ast.o stab.o
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=8/32=25%, Rehash=0, Collisions=3/15=20%
 #  recipe to execute (from 'Makefile', line 26):
 	$(CXX) $(CXXFLAGS) -o $(EXEC) $^
 
@@ -294,34 +317,16 @@ main.cpp:
 stab.o: stab.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'stab'
-#  Last modified 2022-03-29 14:22:47.6550767
+#  Last modified 2022-03-31 20:00:12.5681154
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := stab.o
-# automatic
-# % := 
-# automatic
-# * := stab
-# automatic
-# + := stab.cpp
-# automatic
-# | := 
-# automatic
-# < := stab.cpp
-# automatic
-# ^ := stab.cpp
-# automatic
-# ? := stab.cpp
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
 
 parser.o: parser.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'parser'
-#  Last modified 2022-03-29 14:22:30.8950767
+#  Last modified 2022-03-31 20:00:09.2081154
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
@@ -336,7 +341,7 @@ parser.o: parser.cc
 ast.o: ast.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'ast'
-#  Last modified 2022-03-29 14:22:32.8350767
+#  Last modified 2022-03-31 20:00:10.9481154
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -362,33 +367,33 @@ parser.cc: parser.yy
 # Not a target:
 driver.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-29 13:30:05.7550767
+#  Last modified 2022-03-31 01:14:15.4039955
 #  File has been updated.
 #  Successfully updated.
 
 main.o: main.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-03-29 14:22:31.9050767
+#  Last modified 2022-03-31 20:00:10.1281154
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
 
 # files hash-table stats:
-# Load=21/1024=2%, Rehash=0, Collisions=0/76=0%
+# Load=21/1024=2%, Rehash=0, Collisions=0/77=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 59 / storage = 481 B / avg = 8 B
-# current buf: size = 8162 B / used = 481 B / count = 59 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 61 / storage = 497 B / avg = 8 B
+# current buf: size = 8162 B / used = 497 B / count = 61 / avg = 8 B
 
-# strcache performance: lookups = 97 / hit rate = 39%
+# strcache performance: lookups = 100 / hit rate = 39%
 # hash-table stats:
-# Load=59/8192=1%, Rehash=0, Collisions=1/97=1%
-# Finished Make data base on Tue Mar 29 23:51:05 2022
+# Load=61/8192=1%, Rehash=0, Collisions=1/100=1%
+# Finished Make data base on Sun Apr  3 15:03:33 2022
 
  
