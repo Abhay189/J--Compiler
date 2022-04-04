@@ -1,5 +1,6 @@
 #include "driver.hpp"
 #include "stab.hpp"
+#include "code_generator.hpp"
 
 
 AstNode * Driver::Ident(std::string Name){
@@ -229,8 +230,12 @@ bool Driver::start(std::istream &in)
     }
     //For running the global iterator function the first time and including the main and global
     //function and variable declarations in the global stab. 
-    std::cout<<"\n----- semantic analysis -----\n";
-    SemanticCheck_Driver(RootNode);
+    
+    // std::cout<<"\n----- semantic analysis -----\n";
+    // SemanticCheck_Driver(RootNode);
+
+    Code_generator CodeGen;
+    CodeGen.code_generator_driver(Driver::RootNode);
 
     return res;
 }

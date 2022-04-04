@@ -1,6 +1,7 @@
 #ifndef AST_H
 #define AST_H
 
+#include "symbol_table.hpp"
 #include<stdio.h>
 #include<string>
 #include<vector>
@@ -50,7 +51,7 @@ class AstNode{
     //This is a linked list. If the NextSibling is empty then this will be empty. 
     AstNode* NextSibling;
     //stab pointer related to this AST node. 
-    std::unordered_map<std::string, std::string> Node_stab = {};
+    std::unordered_map<std::string, SymbolTable> Node_stab = {};
 
     AstNode();
 
