@@ -1,8 +1,6 @@
 main(){
-    int boo;
-    boolean mybol;
-    int ppo;
+}
 
-    ppo = 99;
-    boo = 78;
+int goo()
+{
 }

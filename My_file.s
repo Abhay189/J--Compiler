@@ -6,11 +6,9 @@ main:
     syscall
 
 Lable0 : 
-    subu $sp,$sp,16
+    subu $sp,$sp,4
     sw $ra,0($sp)
-    li $s7,99
-    li $s6,78
-Lable1 : 
+Lable2 : 
     lw $ra,0($sp)
-    addu $sp,$sp,16
+    addu $sp,$sp,4
     jr $ra

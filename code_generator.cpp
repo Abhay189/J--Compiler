@@ -7,6 +7,7 @@
 
 int counter = 1;
 std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6" ,"$t7" ,"$t8", "$t9", "$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7",};
+int stack_pointer = 0;
 
 //Lable0 will not be distributed through this function as that is fixed for the main function.
 std::string NewlableGenerator(){
@@ -74,12 +75,13 @@ int memory_counter(AstNode* BaseNode){
             }
         }
     }
+    stack_pointer += (returnnum * 4);
     return returnnum * 4;
 }
 
 void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
     std::ofstream outfile;
-    outfile.open(Out_file_name, std::ios_base::app); // append instead of overwrite
+    outfile.open(Out_file_name, std::ios_base::app);
     switch (node->AstNodeType)
     {
         case NodeType::MAIN_FNC_DECL: {
@@ -96,54 +98,36 @@ void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
     outfile.close();
 }
 
-void Tree_sub_treversal_func(AstNode * node, std::string fileName){
-    std::ofstream outfile;
-    outfile.open(fileName, std::ios_base::app); // append instead of overwrite
+// void Tree_sub_treversal_func(AstNode * node, std::string fileName){
+//     std::ofstream outfile;
+//     outfile.open(fileName, std::ios_base::app); // append instead of overwrite
 
-    switch (node->AstNodeType){
-        case NodeType::OPERATOR: {
-            if(node->AstStringval == "="){
-                auto reg = Register_allocator();
-                std::string value; 
+//     switch (node->AstNodeType){
+        
+//     }
+//     outfile.close();
+// }
 
-                for(auto a : node->ChildrenArray){
-                    if(a->AstNodeType == NodeType::NUMBEER){
-                        value = std::to_string(a->AstIntval);
-                        std::cout<<value<<std::endl;
-                        break;
-                    }
-                    //TODO: case when we are assigning a voolean type variable.
-                }
-                
-                outfile << "    li " << reg << "," << value <<"\n";
-                
-
-            }
-        }
-    }
-    outfile.close();
-}
-
-void Tree_sub_treversal(AstNode * node, std::string fileName){
-    if(node->ChildrenArray.empty()){
-        Tree_sub_treversal_func(node,fileName);
-    }
-    else{
-        Tree_sub_treversal_func(node,fileName);
-        for(auto a : node->ChildrenArray){
-            Tree_sub_treversal(a,fileName);
-        }
-    }
-}
+// void Tree_sub_treversal(AstNode * node, std::string fileName){
+//     if(node->ChildrenArray.empty()){
+//         Tree_sub_treversal_func(node,fileName);
+//     }
+//     else{
+//         Tree_sub_treversal_func(node,fileName);
+//         for(auto a : node->ChildrenArray){
+//             Tree_sub_treversal(a,fileName);
+//         }
+//     }
+// }
 
 //This is the actual function that generates the code on a node enterence. 
 void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
     std::ofstream outfile;
     if(node->AstNodeType == NodeType::PROGRAM_START_NODE){
-        outfile.open(Out_file_name, std::ios_base::trunc); // append instead of overwrite
+        outfile.open(Out_file_name, std::ios_base::trunc);
     }
     else{
-        outfile.open(Out_file_name, std::ios_base::app); // append instead of overwrite
+        outfile.open(Out_file_name, std::ios_base::app);
     }
     switch (node->AstNodeType)
     {
@@ -166,11 +150,24 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             outfile << "Lable0 : \n    subu $sp,$sp,"<< std::to_string(memory_)<<"\n";
             outfile << "    sw $ra,0($sp)\n";
             outfile.close();
-
-
-            Tree_sub_treversal(node,Out_file_name);
-            Second_Iter_Calc_NodeExit(node,Out_file_name);
             break;
+        }
+        case NodeType::OPERATOR: {
+            if(node->AstStringval == "="){
+                auto reg = Register_allocator();
+                std::string value; 
+
+                for(auto a : node->ChildrenArray){
+                    if(a->AstNodeType == NodeType::NUMBEER){
+                        value = std::to_string(a->AstIntval);
+                        std::cout<<value<<std::endl;
+                        break;
+                    }
+                    //ToDo: case when we are assigning a voolean type variable. sw $t0,4($sp)
+                }
+                outfile << "    li " << reg << "," << value <<"\n";
+                outfile << "    sw " << reg << "," ; // To do: create a scope stack for variable identification. 
+            }
         }
     }
     outfile.close();
@@ -185,13 +182,14 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
 void Second_iter(AstNode * Rootnode, std::string filename){
     if(Rootnode->ChildrenArray.empty()){
         Second_Iter_Calc_NodeEnterence(Rootnode,filename);
-
+        Second_Iter_Calc_NodeExit(Rootnode,filename);
     }
     else{
         Second_Iter_Calc_NodeEnterence(Rootnode,filename);
         for(auto a : Rootnode->ChildrenArray){
             Second_iter(a,filename);
         }   
+        Second_Iter_Calc_NodeExit(Rootnode,filename);
     }
 }
 
@@ -201,17 +199,4 @@ void Code_generator::code_generator_driver(AstNode* RootNode){
     First_iter(RootNode);
     std::string Out_file_name = "My_file.s";
     Second_iter(RootNode,Out_file_name);
-
-    // auto reg1 = Register_allocator();
-    // auto reg2 = Register_allocator();
-
-    // std::cout<< reg1 <<std::endl;
-    // std::cout<< reg2 <<std::endl;
- 
-    //For testing purposes ----------------------
-    // for(auto a : RootNode->ChildrenArray){
-    //     auto pp = a->Node_stab.at("Lable");
-    //     std::cout<<pp.Name<<std::endl;
-    // }
-    //For testing purposes ----------------------
 }
