@@ -9,7 +9,6 @@ class SymbolTable{
     std::string Exit_lable_name = "";
     int memory_Size = 0;
     int stack_Pointer_Location = 0;
-
 }
 ;
 #endif
