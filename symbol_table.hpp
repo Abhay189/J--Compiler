@@ -5,8 +5,10 @@
 
 class SymbolTable{
     public: 
-    std::string Name; 
-
+    std::string Enterence_lable_Name = ""; 
+    std::string Exit_lable_name = "";
+    int memory_Size = 0;
+    int stack_Pointer_Location = 0;
 
 }
 ;

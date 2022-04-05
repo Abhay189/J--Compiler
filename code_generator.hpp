@@ -4,6 +4,7 @@
 #include<string>
 #include<vector>
 #include"ast.hpp"
+#include <fstream>
 
 class Code_generator{
     public:
@@ -26,6 +27,8 @@ class Code_generator{
      * @param RootNode -> put in the Ast structures Rootnode into this function. 
      */
     void First_iter(AstNode * RootNode);
+
+    void Second_iter(AstNode * RootNode,  std::string out_finename);
 
 }
 ;

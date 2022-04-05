@@ -28,3 +28,18 @@ A non-void function must return a value. Note that you're only checking for the 
 A value returned from a function has the wrong type.
 An if- or while-condition must be of Boolean type.
 
+
+
+
+
+when you see the program code: 
+add this code snippet : 
+                        .text
+                        .globl main
+                main:
+
+        jal <lable for main decl>
+
+
+                        li $v0,10
+                        syscall

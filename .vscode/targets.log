@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Apr  3 16:42:40 2022
+# Make data base, printed on Mon Apr  4 16:37:04 2022
 
 # Variables
 
@@ -57,7 +57,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-f4714deb-cc4c-46fc-a778-45f14a4131df.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-1630bc71-e8e8-476e-8401-aefdc72fb943.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -73,7 +73,7 @@ PWD = /home/abhay_comp/CPSC-411-Github/CPSC-411-Project
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/11_interop
+WSL_INTEROP = /run/WSL/8362_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
@@ -171,9 +171,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 10739): 33 files, no impossibilities.
+# . (device 2080, inode 10739): 43 files, no impossibilities.
 
-# 33 files, no impossibilities in 1 directories.
+# 43 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -207,17 +207,45 @@ scanner.l:
 scanner.o: scanner.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'scanner'
-#  Last modified 2022-04-03 16:42:34.0141416
+#  Last modified 2022-04-04 14:17:29.0741416
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
 
+code_generator.o: code_generator.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'code_generator'
+#  Last modified 2022-04-04 14:46:28.3341416
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := code_generator.o
+# automatic
+# % := 
+# automatic
+# * := code_generator
+# automatic
+# + := code_generator.cpp
+# automatic
+# | := 
+# automatic
+# < := code_generator.cpp
+# automatic
+# ^ := code_generator.cpp
+# automatic
+# ? := code_generator.cpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  recipe to execute (from 'Makefile', line 23):
+	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
+
 # Not a target:
-code_generator.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+stab.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-03 15:30:18.3541416
+#  File has been updated.
+#  Successfully updated.
 
 parser.hh:
 #  Implicit rule search has not been done.
@@ -243,11 +271,12 @@ all: build
 driver.o: driver.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'driver'
-#  Last modified 2022-04-03 16:42:35.0641416
+#  Last modified 2022-04-04 14:17:30.1041416
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
+ 
 
 scanner.cc: scanner.l
 #  Implicit rule search has been done.
@@ -276,7 +305,6 @@ build: parser.o scanner.o main.o driver.o ast.o stab.o code_generator.o symbol_t
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
- 
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/5=0%
@@ -296,16 +324,19 @@ symbol_table.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-stab.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+stab.o: stab.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'stab'
+#  Last modified 2022-04-04 14:17:30.4441416
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 23):
+	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
 
 parser.o: parser.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'parser'
-#  Last modified 2022-04-03 16:42:33.5441416
+#  Last modified 2022-04-04 14:17:28.5241416
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
@@ -317,30 +348,19 @@ parser.o: parser.cc
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+code_generator.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-04-04 16:36:32.5841416
+#  File has been updated.
+#  Successfully updated.
+
 ast.o: ast.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'ast'
-#  File does not exist.
+#  Last modified 2022-04-04 14:17:30.4241416
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := ast.o
-# automatic
-# % := 
-# automatic
-# * := ast
-# automatic
-# + := ast.cpp
-# automatic
-# | := 
-# automatic
-# < := ast.cpp
-# automatic
-# ^ := ast.cpp
-# automatic
-# ? := ast.cpp
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
 
@@ -364,33 +384,33 @@ parser.cc: parser.yy
 # Not a target:
 driver.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-03 15:31:15.2841416
+#  Last modified 2022-04-03 16:53:08.9541416
 #  File has been updated.
 #  Successfully updated.
 
 main.o: main.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-04-03 16:42:34.5141416
+#  Last modified 2022-04-04 14:17:29.5241416
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
 
 # files hash-table stats:
-# Load=22/1024=2%, Rehash=0, Collisions=0/75=0%
+# Load=24/1024=2%, Rehash=0, Collisions=0/85=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 63 / storage = 574 B / avg = 9 B
-# current buf: size = 8162 B / used = 574 B / count = 63 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 72 / storage = 679 B / avg = 9 B
+# current buf: size = 8162 B / used = 679 B / count = 72 / avg = 9 B
 
-# strcache performance: lookups = 96 / hit rate = 34%
+# strcache performance: lookups = 114 / hit rate = 36%
 # hash-table stats:
-# Load=63/8192=1%, Rehash=0, Collisions=1/96=1%
-# Finished Make data base on Sun Apr  3 16:42:40 2022
+# Load=72/8192=1%, Rehash=0, Collisions=1/114=1%
+# Finished Make data base on Mon Apr  4 16:37:04 2022
 
  
