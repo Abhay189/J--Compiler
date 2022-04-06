@@ -1,7 +1,3 @@
 main(){
-        hoo = 990;
+        printp(true);
 }
-
-int hoo;
-
-

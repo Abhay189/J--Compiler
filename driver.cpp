@@ -225,9 +225,8 @@ bool Driver::start(std::istream &in)
     }
     bool res = parse(in);
     
-    SemanticCheck_Driver(RootNode);
-
     if (!res) {
+        SemanticCheck_Driver(RootNode);
         this->AstIteratorFunction(Driver::RootNode,0);
     }
     //For running the global iterator function the first time and including the main and global
@@ -235,8 +234,8 @@ bool Driver::start(std::istream &in)
     
 
 
-    Code_generator CodeGen;
-    CodeGen.code_generator_driver(Driver::RootNode);
+    // Code_generator CodeGen;
+    // CodeGen.code_generator_driver(Driver::RootNode);
 
     return res;
 }

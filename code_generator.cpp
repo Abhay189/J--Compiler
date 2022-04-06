@@ -244,6 +244,9 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 Register_free(reg);
             }
         }
+        case NodeType::FNC_INVOCATION:{
+            
+        }
     }
     outfile.close();
 }

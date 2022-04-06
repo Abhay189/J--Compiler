@@ -9,7 +9,7 @@
 
 typedef enum{
     PROGRAM_START_NODE, 
-    
+    PrebuildFunctions,
     MAIN_FNC_DECL, 
     FNC_DECL, 
     FNC_INVOCATION,

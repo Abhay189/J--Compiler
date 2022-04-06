@@ -186,6 +186,48 @@ SymbolTable* AstStackLookup(std::string identifier){
 }
 
 void SemanticCheck_Driver(AstNode *RootNode){
+    
+    //--------adding pre built functions here to the scope stack. 
+    std::unordered_map<std::string, SymbolTable> Node_stab = {};
+
+    SymbolTable getChar_table;
+    getChar_table.Identifier_Name = "getchar";
+    getChar_table.ReturnType = "INT";
+
+    SymbolTable halt_table;
+    halt_table.Identifier_Name = "halt";
+    halt_table.ReturnType = "VOID";
+
+    SymbolTable printb_table;
+    printb_table.Identifier_Name = "printb";
+    printb_table.ReturnType = "VOID";
+    printb_table.Formals.push_back("BOOLEAN");
+
+    SymbolTable printc_table;
+    printc_table.Identifier_Name = "printc";
+    printc_table.ReturnType = "VOID";
+    printc_table.Formals.push_back("INT");
+
+    SymbolTable printi_table;
+    printi_table.Identifier_Name = "printi";
+    printi_table.ReturnType = "VOID";
+    printi_table.Formals.push_back("INT");
+
+    SymbolTable prints_table;
+    prints_table.Identifier_Name = "prints";
+    prints_table.ReturnType = "VOID";
+    prints_table.Formals.push_back("STRING");
+
+    Node_stab.insert({getChar_table.Identifier_Name,getChar_table});
+    Node_stab.insert({"halt",halt_table});
+    Node_stab.insert({printb_table.Identifier_Name,printb_table});
+    Node_stab.insert({printc_table.Identifier_Name,printc_table});
+    Node_stab.insert({printi_table.Identifier_Name,printi_table});
+    Node_stab.insert({prints_table.Identifier_Name,prints_table});
+
+    scopeStack.push_back(&Node_stab);
+    //----------------------------------------------. 
+
     GlobalScopeIterator(RootNode);
     secondIteration(RootNode);
 }
@@ -434,19 +476,18 @@ void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::
                                 Function_Invocation_table.Formals.push_back("INT");
                             }
                         }
+                        
                         break;
                     }
-                    default: break;
                 }
             }
-
             auto node_stab_info = AstStackLookup(Function_Invocation_table.Identifier_Name);
-            if(node_stab_info->isMainFunction){
-                std::cerr << "error: Main function called inside a function. \n";
-                exit(EXIT_FAILURE);
-            }
             if(node_stab_info == nullptr){
                 std::cerr << "error: Function not defined before use! \"" + Function_Invocation_table.Identifier_Name + "\"\n";
+                exit(EXIT_FAILURE);
+            }
+            if(node_stab_info->isMainFunction){
+                std::cerr << "error: Main function called inside a function. \n";
                 exit(EXIT_FAILURE);
             }
             
