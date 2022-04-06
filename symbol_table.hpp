@@ -23,6 +23,9 @@ class SymbolTable{
 
     //-----For variables :
     std::string Var_type = "";
+    bool isglobalVariable = false;
+    int Var_Int_value = 0;
+    bool Var_Bool_Value;
 
     //------For identifying main function
     bool isMainFunction = false;

@@ -18,6 +18,7 @@ typedef enum{
     FORMALS_List,
     FORMALS,
     VAR_DECL,
+    GLOBAL_VAR_DECL,
     INT_TYPE, 
     BOOL_TYPE,
     BLOCK,

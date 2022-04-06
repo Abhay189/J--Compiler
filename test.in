@@ -1,3 +1,7 @@
 main(){
-    
+        hoo = 990;
 }
+
+int hoo;
+
+
