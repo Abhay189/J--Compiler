@@ -75,5 +75,12 @@
         "typeindex": "cpp",
         "valarray": "cpp",
         "variant": "cpp"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/abhay_comp/CPSC-411-Github/CPSC-411-Project",
+            "binaryPath": "/home/abhay_comp/CPSC-411-Github/CPSC-411-Project/parser",
+            "binaryArgs": []
+        }
+    ]
 }

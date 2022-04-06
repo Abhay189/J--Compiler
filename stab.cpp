@@ -187,8 +187,7 @@ SymbolTable* AstStackLookup(std::string identifier){
 
 void SemanticCheck_Driver(AstNode *RootNode){
     GlobalScopeIterator(RootNode);
-    // secondIteration(RootNode);
-    printf("No semantic error detected! \n");
+    secondIteration(RootNode);
 }
 
 void GlobalScopeIterator(AstNode *RootNode){
@@ -274,6 +273,7 @@ void First_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::s
                 }
                 if(RootNode_symboltable->count(node_name) == 0){
                     SymbolTable main_stab;
+                    main_stab.isMainFunction = true;
                     main_stab.Identifier_Name = node_name;
                     RootNode_symboltable->insert({node_name,main_stab});
                 }else{
@@ -341,162 +341,131 @@ void First_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::s
  * 
  * @param Rootnode Put in the root node of the AST while calling this function. 
  */
-// void secondIteration(AstNode * Rootnode){
-//     if(Rootnode->ChildrenArray.empty()){
-//         Second_Iteration_Callback_Function(Rootnode,&Rootnode->Node_stab);
-//         return;
-//     }
-//     else{
-//         Second_Iteration_Callback_Function(Rootnode,&Rootnode->Node_stab);
-//         scopeStack.push_back(&Rootnode->Node_stab);
-//         for(auto a : Rootnode->ChildrenArray){
-//             secondIteration(a);
-//         }
-//         if(!scopeStack.empty()){
-//             scopeStack.pop_back();
-//         }
+void secondIteration(AstNode * Rootnode){
+    if(Rootnode->ChildrenArray.empty()){
+        Second_Iteration_Callback_Function(Rootnode,&Rootnode->Node_stab);
+        return;
+    }
+    else{
+        Second_Iteration_Callback_Function(Rootnode,&Rootnode->Node_stab);
+        scopeStack.push_back(&Rootnode->Node_stab);
+        for(auto a : Rootnode->ChildrenArray){
+            secondIteration(a);
+        }
+        if(!scopeStack.empty()){
+            scopeStack.pop_back();
+        }
         
-//     }
-// }
+    }
+}
 
-// /**
-//  * @brief This function is for splitting the inputted string into tokens and returning those tokens into a vector of strings. 
-//  * 
-//  * @param s : The input string to be tokenized
-//  * @param option : there are two options - input 1 for decleration strings - 2 for function invocations.  
-//  * @return std::vector<std::string> : Vector containing string tokens, splitted at whitespaces.
-//  */
-// std::vector<std::string> simple_tokenizer(std::string s, int option)
-// { 
-//     std::vector<std::string> temp;
-//     std::stringstream ss(s);
-//     std::string word;
-//     int count = 0;
-//     while (ss >> word) {
-//         if(count != 0 || option == 2){
-//             temp.push_back(word);
-//         }
-//         count++;
-//     }
-//     return temp;
-// }
+void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::string, SymbolTable> * Node_stab){
+    switch(Node->AstNodeType){
+        //if we find a variable decleration inside of a function, then we need to add that to the stab of function in which it is defined. 
+        //Do not do anyting if this variable decleration is in the global scope, as that has already been dealt with. 
+        case NodeType::VAR_DECL:{
+            SymbolTable VariableTable;
 
-// void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::string, std::string> * Node_stab){
-//     switch(Node->AstNodeType){
-//         //if we find a variable decleration inside of a function, then we need to add that to the stab of function in which it is defined. 
-//         //Do not do anyting if this variable decleration is in the global scope, as that has already been dealt with. 
-//         case NodeType::VAR_DECL:{
-//             std::string var_Type;
-//             std::string var_Identifier;
-//             std::string var_Info;
+            for(auto a : Node->ChildrenArray){
+                switch(a->AstNodeType){
+                    case NodeType::INT_TYPE: {VariableTable.Var_type = "INT"; break;}
+                    case NodeType::BOOL_TYPE: {VariableTable.Var_type = "BOOLEAN"; break;}
+                    case NodeType::ID: {VariableTable.Identifier_Name = a->AstStringval; break;}
+                    }
+            }
 
-//             for(auto a : Node->ChildrenArray){
-//                 switch(a->AstNodeType){
-//                     case NodeType::INT_TYPE: {var_Type = "INT"; break;}
-//                     case NodeType::BOOL_TYPE: {var_Type = "BOOLEAN"; break;}
-//                     case NodeType::ID: {var_Identifier = a->AstStringval; break;}
-//                     }
-//             }
-//             var_Info = var_Type + " " + var_Identifier;
-
-//             auto topStab = scopeStack.back();
-//             //Does not check for the global variables as the scope size is more then 1 for his check. 
-//             if(scopeStack.size() != 1){
-//                 if(scopeStack.size() == 3){
-//                     if(topStab->count(var_Identifier) == 0){
-//                     topStab->insert({var_Identifier,var_Info});
-//                     }
-//                     else{
-//                         std::cerr << "error: Multiple Declerations of variable \"" + var_Identifier + "\" within the same scope\n";
-//                         exit(EXIT_FAILURE);
-//                     }
-//                 }
-//                 else{
-//                     std::cerr << "error: Variable decleration not in outermost block \"" + var_Identifier + "\"\n";
-//                         exit(EXIT_FAILURE);
-//                 }
-//             }
-//             break;
-//         }
+            auto topStab = scopeStack.back();
+            //Does not check for the global variables as the scope size is more then 1 for his check. 
+            if(scopeStack.size() != 1){
+                if(scopeStack.size() == 3){
+                    if(topStab->count(VariableTable.Identifier_Name) == 0){
+                    topStab->insert({VariableTable.Identifier_Name,VariableTable});
+                    }
+                    else{
+                        std::cerr << "error: Multiple Declerations of variable \"" + VariableTable.Identifier_Name + "\" within the same scope\n";
+                        exit(EXIT_FAILURE);
+                    }
+                }
+                else{
+                    std::cerr << "error: Variable decleration not in outermost block \"" + VariableTable.Identifier_Name + "\"\n";
+                        exit(EXIT_FAILURE);
+                }
+            }
+            break;
+        }
         
-//         case NodeType::ID:{
-//             auto node_stab_info = AstStackLookup(Node->AstStringval);
-//             if(node_stab_info == ""){
-//                 std::cerr << "error: Identifier not defined! \"" + Node->AstStringval + "\"\n";
-//                 exit(EXIT_FAILURE);
-//             }
-//             break;
-//         }
+        case NodeType::ID:{
+            auto node_stab_info = AstStackLookup(Node->AstStringval);
+            if(node_stab_info == nullptr){
+                std::cerr << "error: Identifier not defined! \"" + Node->AstStringval + "\"\n";
+                exit(EXIT_FAILURE);
+            }
+            break;
+        }
         
-//         case NodeType::FNC_INVOCATION:{
-//             std::string Function_Identifier;
-//             std::string Function_parameters;
+        case NodeType::FNC_INVOCATION:{
+            SymbolTable Function_Invocation_table;
+            for(auto a : Node->ChildrenArray){
+                switch(a->AstNodeType){
+                    case NodeType::ID: {Function_Invocation_table.Identifier_Name = a->AstStringval; break;}
+                    case NodeType::NUMBEER: {Function_Invocation_table.Formals.push_back("INT"); break;}
+                    case NodeType::STRING: {Function_Invocation_table.Formals.push_back("STRING"); break;}
+                    case NodeType::TRUE: {Function_Invocation_table.Formals.push_back("BOOLEAN"); break;}
+                    case NodeType::FALSE: {Function_Invocation_table.Formals.push_back("BOOLEAN"); break;}
+                    case NodeType::OPERATOR: {
+                        auto ppp = OperatorTypeChecker(a->AstStringval);
+                        for(auto a : ppp){
+                            if(a[2] == NodeType::BOOL_TYPE){
+                                Function_Invocation_table.Formals.push_back("BOOLEAN");
+                            }
+                            else if(a[2] == NodeType::INT_TYPE){
+                                Function_Invocation_table.Formals.push_back("INT");
+                            }
+                        }
+                        break;
+                    }
+                    case NodeType::UNARY_EXPRESSION: {
+                        auto ppp = OperatorTypeChecker(a->AstStringval);
+                        for(auto a : ppp){
+                            if(a[1] == NodeType::BOOL_TYPE){
+                                Function_Invocation_table.Formals.push_back("BOOLEAN");
+                            }
+                            else if(a[1] == NodeType::INT_TYPE){
+                                Function_Invocation_table.Formals.push_back("INT");
+                            }
+                        }
+                        break;
+                    }
+                    default: break;
+                }
+            }
 
-//             std::string Function_info;
-//             for(auto a : Node->ChildrenArray){
-//                 switch(a->AstNodeType){
-//                     case NodeType::ID: {Function_Identifier = a->AstStringval; break;}
-//                     case NodeType::NUMBEER: {Function_parameters.append(" INT"); break;}
-//                     case NodeType::STRING: {Function_parameters.append(" STRING"); break;}
-//                     case NodeType::TRUE: {Function_parameters.append(" BOOLEAN"); break;}
-//                     case NodeType::FALSE: {Function_parameters.append(" BOOLEAN"); break;}
-//                     case NodeType::OPERATOR: {
-//                         auto ppp = OperatorTypeChecker(a->AstStringval);
-//                         for(auto a : ppp){
-//                             if(a[2] == NodeType::BOOL_TYPE){
-//                                 Function_parameters.append(" BOOLEAN");
-//                             }
-//                             else if(a[2] == NodeType::INT_TYPE){
-//                                 Function_parameters.append(" INT");
-//                             }
-//                         }
-//                         break;
-//                     }
-//                     case NodeType::UNARY_EXPRESSION: {
-//                         auto ppp = OperatorTypeChecker(a->AstStringval);
-//                         for(auto a : ppp){
-//                             if(a[1] == NodeType::BOOL_TYPE){
-//                                 Function_parameters.append(" BOOLEAN");
-//                             }
-//                             else if(a[1] == NodeType::INT_TYPE){
-//                                 Function_parameters.append(" INT");
-//                             }
-//                         }
-//                         break;
-//                     }
-//                     default: Function_parameters.append(" something"); break;
-//                 }
-//             }
-//             Function_info = Function_Identifier + Function_parameters;
-
-//             auto node_stab_info = AstStackLookup(Function_Identifier);
-//             if(node_stab_info == Function_Identifier){
-//                 std::cerr << "error: Main function called inside a function. \n";
-//                 exit(EXIT_FAILURE);
-//             }
-//             if(node_stab_info == ""){
-//                 std::cerr << "error: Function not defined before use! \"" + Function_Identifier + "\"\n";
-//                 exit(EXIT_FAILURE);
-//             }
-//             auto node_stab_info_vector = simple_tokenizer(node_stab_info,1);
-//             auto function_info_vector = simple_tokenizer(Function_info,2);
+            auto node_stab_info = AstStackLookup(Function_Invocation_table.Identifier_Name);
+            if(node_stab_info->isMainFunction){
+                std::cerr << "error: Main function called inside a function. \n";
+                exit(EXIT_FAILURE);
+            }
+            if(node_stab_info == nullptr){
+                std::cerr << "error: Function not defined before use! \"" + Function_Invocation_table.Identifier_Name + "\"\n";
+                exit(EXIT_FAILURE);
+            }
             
-//             //Checking is the function invocation is called with the right amount of parameters. 
-//             if(function_info_vector.size() != node_stab_info_vector.size()){
-//                 std::cerr << "error: Number of parameter in the function invocation \"" + Function_Identifier + "\" are not equal to number of parameter in its decleration.\n";
-//                 exit(EXIT_FAILURE);
-//             }
-//             //To check if the function has been called with the right types of parameters. 
-//             if(node_stab_info_vector != function_info_vector){
-//                 std::cerr << "error: Function \"" + Function_Identifier + "\" is called with wrong type(s) of parameter.\n";
-//                 exit(EXIT_FAILURE);
-//             }
-//             break;
-//         }
+            //Checking is the function invocation is called with the right amount of parameters. 
+            if(Function_Invocation_table.Formals.size() != node_stab_info->Formals.size()){
+                std::cerr << "error: Number of parameter in the function invocation \"" + Function_Invocation_table.Identifier_Name + "\" are not equal to number of parameter in its decleration.\n";
+                exit(EXIT_FAILURE);
+            }
+            //To check if the function has been called with the right types of parameters. 
+            if(Function_Invocation_table.Formals != node_stab_info->Formals){
+                std::cerr << "error: Function \"" + Function_Invocation_table.Identifier_Name + "\" is called with wrong type(s) of parameter.\n";
+                exit(EXIT_FAILURE);
+            }
+            break;
+        }
         
-//         default: break;
-//     }
-// }
+        default: break;
+    }
+}
 
 // void third_Iteration(AstNode * RootNode){
 //     if(RootNode->ChildrenArray.empty()){

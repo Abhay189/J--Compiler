@@ -224,8 +224,7 @@ bool Driver::start(std::istream &in)
         return 1;
     }
     bool res = parse(in);
-
-    std::cout<<"\n----- semantic analysis -----\n";
+    
     SemanticCheck_Driver(RootNode);
 
     if (!res) {

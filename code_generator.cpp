@@ -8,6 +8,7 @@
 int counter = 1;
 std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6" ,"$t7" ,"$t8", "$t9", "$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7",};
 int stack_pointer = 0;
+int localVariables = 0;
 
 //Lable0 will not be distributed through this function as that is fixed for the main function.
 std::string NewlableGenerator(){
@@ -166,7 +167,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                     //ToDo: case when we are assigning a voolean type variable. sw $t0,4($sp)
                 }
                 outfile << "    li " << reg << "," << value <<"\n";
-                outfile << "    sw " << reg << "," ; // To do: create a scope stack for variable identification. 
+                outfile << "    sw " << reg << "," << "\n"; // To do: create a scope stack for variable identification. 
             }
         }
     }

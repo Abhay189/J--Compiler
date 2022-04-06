@@ -11,6 +11,7 @@ class SymbolTable{
     std::string Exit_lable_name = "";
     int memory_Size = 0;
     int stack_Pointer_Location = 0;
+    int local_variables = 0;
     //------
 
     //------Things needed for semantic analysis. 
@@ -22,6 +23,9 @@ class SymbolTable{
 
     //-----For variables :
     std::string Var_type = "";
+
+    //------For identifying main function
+    bool isMainFunction = false;
 
 }
 ;
