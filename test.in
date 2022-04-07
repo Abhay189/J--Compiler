@@ -1,4 +1,3 @@
 main(){
-        prints("ioo");
+        printc(48);
 }
-

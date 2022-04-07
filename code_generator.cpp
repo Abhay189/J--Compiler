@@ -272,16 +272,32 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                     }
                     outfile<< "    .data\n";
                     outfile<< lable << " :\n";
-                    outfile<< "    .bite ";
+                    outfile<< "    .byte ";
                     int stringlen = printParam.size();
-                    counter = 1;
-                    for (auto a : printParam){
+                    int counter = 1;
+                    for (int i = 0; i < printParam.size(); i++){
+                        auto a = printParam[i];
                         if(counter != stringlen && counter != 1){
                             // std::cout<<a<<std::endl;
                             if(a == '\\'){
-                                //case when we have escape character.
+                                i++;
+                                counter++;
+                                auto b = printParam[i];
+                                switch(b){
+                                    case 'b': outfile<< int('\b')<< " ,"; break; 
+                                    case 'f': outfile<< int('\f')<< " ,"; break; 
+                                    case 't': outfile<< int('\t')<< " ,"; break; 
+                                    case 'r': outfile<< int('\r')<< " ,"; break; 
+                                    case 'n': outfile<< int('\n')<< " ,"; break; 
+                                    case '\'': outfile<< int('\'')<< " ,"; break; 
+                                    case '\"': outfile<< int('\"')<< " ,"; break; 
+                                    case '\\': outfile<< int('\\')<< " ,"; break; 
+                                    default: outfile<< int(b)<< " ,"; break;
+                                }
+                            }else{
+                                outfile<< int(a)<< " ,";
                             }
-                            outfile<< int(a)<< " ,";
+                            
                         }
                         counter++;
                     }
@@ -295,10 +311,35 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                     outfile<<"    jal Lprints\n"; 
                     Register_free(reg);
                 }
+                // li $t0,1
+                // move $a0,$t0
+                // jal Lprintb
+                if(function_decl_table->Identifier_Name == "printb"){
+                    auto reg = Register_allocator();
+                    // auto lable = boolean_exp_handler();          //Will be done like this later on. 
+                    //----Temporary code
+                        std::string lable = ""; 
+                        for(auto a : node->ChildrenArray){
+                            if(a->AstNodeType == NodeType::TRUE){
+                                lable = "1";
+                                break;
+                            }
+                            if(a->AstNodeType == NodeType::FALSE){
+                                lable = "0";
+                                break;
+                            }
+                        }
+                    //----
+                    outfile<< "    la " << reg << ","<< lable<<"\n";
+                    outfile<< "    move "<< "$a0," << reg << "\n";
+                    outfile<<"    jal Lprintb\n"; 
+                    Register_free(reg);
+                }
             }
             break;
             
         }
+    
     }
     outfile.close();
 }
@@ -325,6 +366,17 @@ void Second_iter(AstNode * Rootnode, std::string filename){
         }
         Second_Iter_Calc_NodeExit(Rootnode,filename);
     }
+}
+
+void function_lable_adder(std::string filename){
+    std::ofstream outfile;
+    outfile.open(filename, std::ios_base::app);
+    outfile<< "\nLprints: \n    li	$v0, 4\n    syscall\n    jr $ra\n\n" ;
+    outfile<< "Lprintb: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;  //needs to be reimplemented.
+    outfile<< "Lprintc: \n    li	$v0, 11\n    syscall\n    jr $ra\n\n" ;
+    outfile<< "Lprinti: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;
+
+    outfile.close();
 }
 
 // This is the deriver function that is called to do the code generation by the deriver. 
@@ -384,4 +436,5 @@ void Code_generator::code_generator_driver(AstNode* RootNode){
     std::string Out_file_name = "My_file.s";
     First_iter(RootNode,Out_file_name);
     Second_iter(RootNode,Out_file_name);
+    function_lable_adder(Out_file_name);
 }
