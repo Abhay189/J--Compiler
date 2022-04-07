@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Apr  6 22:00:59 2022
+# Make data base, printed on Thu Apr  7 15:21:53 2022
 
 # Variables
 
@@ -57,7 +57,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-1b063195-5f79-4701-98c6-5f41f0d41847.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-0b82878f-7523-4918-b702-6f994492b2b0.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -207,7 +207,7 @@ scanner.l:
 scanner.o: scanner.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'scanner'
-#  Last modified 2022-04-06 18:20:42.1716523
+#  Last modified 2022-04-07 07:21:17.4332541
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
@@ -216,7 +216,7 @@ scanner.o: scanner.cc
 code_generator.o: code_generator.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'code_generator'
-#  Last modified 2022-04-06 18:27:59.1016523
+#  Last modified 2022-04-07 07:26:34.0232541
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -237,7 +237,7 @@ parser.hh:
 # Not a target:
 parser.yy:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-06 18:18:18.1716523
+#  Last modified 2022-04-07 02:18:38.7162055
 #  File has been updated.
 #  Successfully updated.
 
@@ -253,7 +253,7 @@ all: build
 driver.o: driver.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'driver'
-#  Last modified 2022-04-06 18:20:43.1316523
+#  Last modified 2022-04-07 07:21:18.5132541
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -326,7 +326,7 @@ main.cpp:
 symbol_table.o: symbol_table.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'symbol_table'
-#  Last modified 2022-04-06 18:20:45.8116523
+#  Last modified 2022-04-07 07:21:21.2332541
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -335,7 +335,7 @@ symbol_table.o: symbol_table.cpp
 stab.o: stab.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'stab'
-#  Last modified 2022-04-06 18:20:44.9416523
+#  Last modified 2022-04-07 07:21:20.3432541
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -344,7 +344,7 @@ stab.o: stab.cpp
 parser.o: parser.cc
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'parser'
-#  Last modified 2022-04-06 18:20:41.6916523
+#  Last modified 2022-04-07 07:21:16.9432541
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
@@ -359,14 +359,14 @@ parser.o: parser.cc
 # Not a target:
 code_generator.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-06 18:27:53.7916523
+#  Last modified 2022-04-07 07:26:28.5632541
 #  File has been updated.
 #  Successfully updated.
 
 ast.o: ast.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'ast'
-#  Last modified 2022-04-06 18:20:43.4616523
+#  Last modified 2022-04-07 07:21:18.8632541
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -392,14 +392,14 @@ parser.cc: parser.yy
 # Not a target:
 driver.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-06 16:42:51.1216523
+#  Last modified 2022-04-07 06:56:53.1032541
 #  File has been updated.
 #  Successfully updated.
 
 main.o: main.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-04-06 18:20:42.6116523
+#  Last modified 2022-04-07 07:21:17.9232541
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 23):
@@ -426,6 +426,6 @@ symbol_table.cpp:
 # strcache performance: lookups = 118 / hit rate = 38%
 # hash-table stats:
 # Load=73/8192=1%, Rehash=0, Collisions=1/118=1%
-# Finished Make data base on Wed Apr  6 22:00:59 2022
+# Finished Make data base on Thu Apr  7 15:21:53 2022
 
  

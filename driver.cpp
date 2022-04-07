@@ -163,7 +163,7 @@ std::string NodeNameFunction(AstNode *Node){
         case NodeType::FNC_DECL: return "Function decleration";
         case NodeType::FNC_INVOCATION: return "Function Invocation";
         case NodeType::VOID: return "Void";
-        case NodeType::ID: return "Function Identifier, Name: \"" + Node->AstStringval + "\"";
+        case NodeType::ID: return "Identifier, Name: \"" + Node->AstStringval + "\"";
         case NodeType::FORMALS: return "Formal";
         case NodeType::FORMALS_List: return "Formal List";
         case NodeType::VAR_DECL: return "Variable decleration";

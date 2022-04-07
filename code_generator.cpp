@@ -7,7 +7,7 @@
 
 int counter = 1;
 std::vector<std::unordered_map<std::string, SymbolTable> *> generator_scopeStack;
-std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6" ,"$t7" ,"$t8", "$t9", "$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7",};
+std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6" ,"$t7" ,"$t8", "$t9", "$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7"};
 int stack_pointer = 0;
 int localVariables = 0;
 
@@ -71,28 +71,84 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
             outfile << "    li "<< allocated_reg << "," <<node->AstIntval<<"\n";
             break;
         }
+
         case NodeType::OPERATOR:{
             if(node->AstStringval == "+"){
-                outfile << "    addu "<< allocated_reg << "," <<children_reg.at(0)<<"," <<children_reg.at(1)<<"\n";
+                outfile << "    addu "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "*"){
-                outfile << "    mul "<< allocated_reg << "," <<children_reg.at(0)<<"," <<children_reg.at(1)<<"\n";
+                outfile << "    mul "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "-"){
-                outfile << "    subu "<< allocated_reg << "," <<children_reg.at(0)<<"," <<children_reg.at(1)<<"\n";
+                outfile << "    subu "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == "/"){
+                auto devision_lable = NewlableGenerator();
+                auto error_lable = NewlableGenerator();
+                outfile << "    bnez "<<children_reg.at(0)<< "," <<devision_lable <<"\n";
+                outfile << "    .data\n";
+                outfile << error_lable << " :\n";
+                outfile << "    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0\n";
+                outfile << "    .align 2\n";
+                outfile << "    .text\n";
+                outfile << "    la $a0,"<<error_lable<<"\n";
+                outfile << "    j error\n";
+
+                outfile << devision_lable << " :\n";
+                outfile << "    div "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == "%"){
+                auto devision_lable = NewlableGenerator();
+                auto error_lable = NewlableGenerator();
+                outfile << "    bnez "<<children_reg.at(0)<< "," <<devision_lable <<"\n";
+                outfile << "    .data\n";
+                outfile << error_lable << " :\n";
+                outfile << "    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0\n";
+                outfile << "    .align 2\n";
+                outfile << "    .text\n";
+                outfile << "    la $a0,"<<error_lable<<"\n";
+                outfile << "    j error\n";
+
+                outfile << devision_lable << " :\n";
+                outfile << "    rem "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             break;
         }
-        default: outfile<<"very bad \n";
+
+        case NodeType::UNARY_EXPRESSION:{
+            outfile << "    negu "<< allocated_reg << "," <<children_reg.at(0)<<"\n";
+            for(auto a : children_reg){
+                    Register_free(a);
+                }
+            break;
+        }
+        //this is the case of a variable.
+        case NodeType::ID:{
+            auto node_stab = Generator_AstStackLookup(node->AstStringval);
+            if(node_stab->isglobalVariable){
+                outfile << "    lw "<< allocated_reg << "," <<node_stab->Enterence_lable_Name<<"\n";
+            }else{
+                outfile << "    lw "<< allocated_reg << "," <<node_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+            }
+            
+            break;
+        }
+        default: outfile<<"a case not handled in arithmatic expressions  \n";
     }
     outfile.close();
 }
@@ -214,6 +270,102 @@ void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
 //     }
 // }
 
+void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
+    std::ofstream outfile;
+    outfile.open(Out_file_name, std::ios_base::app);
+    switch (node->AstNodeType)
+    {
+        case NodeType::OPERATOR: {
+            if(node->AstStringval == "="){
+                auto reg = Register_allocator();
+                std::string value = ""; 
+                int VAriableStackLocation = 0;
+                bool is_global = false;
+                SymbolTable *variable_symbol_table;
+                bool is_expression = false;
+
+                for(auto a : node->ChildrenArray){
+                    if(a->AstNodeType == NodeType::ID){
+                        variable_symbol_table = Generator_AstStackLookup(a->AstStringval);
+                        is_global = variable_symbol_table->isglobalVariable;
+                        if(!is_global){
+                            if(variable_symbol_table->stack_Pointer_Location == 0){
+                                localVariables ++;
+                                VAriableStackLocation = (4*localVariables);
+                                variable_symbol_table->stack_Pointer_Location = VAriableStackLocation;
+                            }else{
+                                VAriableStackLocation = variable_symbol_table->stack_Pointer_Location;
+                            }
+                        }
+                    }
+                    if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
+                        is_expression = true;
+                        auto reg = Register_allocator(); 
+                        std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                        assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, reg,children_reg);
+                        value = reg;
+                        Register_free(reg);
+                        break;
+                    }
+                    // Handle variable to variable assignment 
+                    if(a->AstNodeType == NodeType::OPERATOR || a->AstNodeType ==NodeType::UNARY_EXPRESSION){
+                        is_expression = true;
+                        auto reg = Register_allocator(); 
+                        std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                        assignment_expression_treversal(a, Out_file_name, reg,children_reg);
+                        value = reg;
+                        Register_free(reg);
+                        break;
+                    }
+                    if(a->AstNodeType == NodeType::NUMBEER){
+                        value = std::to_string(a->AstIntval);
+                        break;
+                    }
+                    //ToDo: case when we are assigning a voolean type variable. sw $t0,4($sp)
+                }
+                if(is_expression){
+                    if(!is_global){
+                        outfile << "    sw " << value << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                    }
+                    else{
+                        outfile << "    sw " << value << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                    }
+                }else{
+                    if(!is_global){
+                        outfile << "    li " << reg << "," << value <<"\n";
+                        outfile << "    sw " << reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                    }
+                    else{
+                        //save this value in the ast of the variable.
+                        outfile << "    li " << reg << "," << value <<"\n";
+                        outfile << "    sw " << reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                    }
+                }
+                
+                Register_free(reg);
+            }
+            break;
+        }
+        default: break;
+    }
+}
+
+void Third_iter(AstNode * Rootnode, std::string filename){
+    if(Rootnode->ChildrenArray.empty()){
+        Third_iter_callbackfunc(Rootnode,filename);
+    }
+    else{
+        generator_scopeStack.push_back(&Rootnode->Node_stab);
+        for(auto a : Rootnode->ChildrenArray){
+            Third_iter(a,filename);
+        }   
+        if(!generator_scopeStack.empty()){
+            generator_scopeStack.pop_back();
+        }
+        Third_iter_callbackfunc(Rootnode,filename);
+    }
+}
+
 //This is the actual function that generates the code on a node enterence. 
 void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
     std::ofstream outfile;
@@ -255,67 +407,77 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             break;
         }
 
-        case NodeType::OPERATOR: {
-            if(node->AstStringval == "="){
-                auto reg = Register_allocator();
-                std::string value = ""; 
-                int VAriableStackLocation = 0;
-                bool is_global = false;
-                SymbolTable *variable_symbol_table;
-                bool is_expression = false;
+        // case NodeType::OPERATOR: {
+        //     if(node->AstStringval == "="){
+        //         auto reg = Register_allocator();
+        //         std::string value = ""; 
+        //         int VAriableStackLocation = 0;
+        //         bool is_global = false;
+        //         SymbolTable *variable_symbol_table;
+        //         bool is_expression = false;
 
-                for(auto a : node->ChildrenArray){
-                    if(a->AstNodeType == NodeType::ID){
-                        variable_symbol_table = Generator_AstStackLookup(a->AstStringval);
-                        is_global = variable_symbol_table->isglobalVariable;
-                        if(!is_global){
-                            if(variable_symbol_table->stack_Pointer_Location == 0){
-                                localVariables ++;
-                                VAriableStackLocation = stack_pointer - (4*localVariables);
-                                variable_symbol_table->stack_Pointer_Location = VAriableStackLocation;
-                            }else{
-                                VAriableStackLocation = variable_symbol_table->stack_Pointer_Location;
-                            }
-                        }
-                    }
-                    if(a->AstNodeType == NodeType::OPERATOR || a->AstNodeType ==NodeType::UNARY_EXPRESSION){
-                        is_expression = true;
-                        auto reg = Register_allocator(); 
-                        std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
-                        assignment_expression_treversal(a, Out_file_name, reg,children_reg);
-                        value = reg;
-                        Register_free(reg);
-                        break;
-                    }
-                    if(a->AstNodeType == NodeType::NUMBEER){
-                        value = std::to_string(a->AstIntval);
-                        break;
-                    }
-                    //ToDo: case when we are assigning a voolean type variable. sw $t0,4($sp)
-                }
-                if(is_expression){
-                    if(!is_global){
-                        outfile << "    sw " << value << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
-                    }
-                    else{
-                        outfile << "    sw " << value << "," << variable_symbol_table->Enterence_lable_Name << "\n";
-                    }
-                }else{
-                    if(!is_global){
-                        outfile << "    li " << reg << "," << value <<"\n";
-                        outfile << "    sw " << reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
-                    }
-                    else{
-                        //save this value in the ast of the variable.
-                        outfile << "    li " << reg << "," << value <<"\n";
-                        outfile << "    sw " << reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
-                    }
-                }
+        //         for(auto a : node->ChildrenArray){
+        //             if(a->AstNodeType == NodeType::ID){
+        //                 variable_symbol_table = Generator_AstStackLookup(a->AstStringval);
+        //                 is_global = variable_symbol_table->isglobalVariable;
+        //                 if(!is_global){
+        //                     if(variable_symbol_table->stack_Pointer_Location == 0){
+        //                         localVariables ++;
+        //                         VAriableStackLocation = (4*localVariables);
+        //                         variable_symbol_table->stack_Pointer_Location = VAriableStackLocation;
+        //                     }else{
+        //                         VAriableStackLocation = variable_symbol_table->stack_Pointer_Location;
+        //                     }
+        //                 }
+        //             }
+        //             if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
+        //                 is_expression = true;
+        //                 auto reg = Register_allocator(); 
+        //                 std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+        //                 assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, reg,children_reg);
+        //                 value = reg;
+        //                 Register_free(reg);
+        //                 break;
+        //             }
+        //             // Handle variable to variable assignment 
+        //             if(a->AstNodeType == NodeType::OPERATOR || a->AstNodeType ==NodeType::UNARY_EXPRESSION){
+        //                 is_expression = true;
+        //                 auto reg = Register_allocator(); 
+        //                 std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+        //                 assignment_expression_treversal(a, Out_file_name, reg,children_reg);
+        //                 value = reg;
+        //                 Register_free(reg);
+        //                 break;
+        //             }
+        //             if(a->AstNodeType == NodeType::NUMBEER){
+        //                 value = std::to_string(a->AstIntval);
+        //                 break;
+        //             }
+        //             //ToDo: case when we are assigning a voolean type variable. sw $t0,4($sp)
+        //         }
+        //         if(is_expression){
+        //             if(!is_global){
+        //                 outfile << "    sw " << value << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+        //             }
+        //             else{
+        //                 outfile << "    sw " << value << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+        //             }
+        //         }else{
+        //             if(!is_global){
+        //                 outfile << "    li " << reg << "," << value <<"\n";
+        //                 outfile << "    sw " << reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+        //             }
+        //             else{
+        //                 //save this value in the ast of the variable.
+        //                 outfile << "    li " << reg << "," << value <<"\n";
+        //                 outfile << "    sw " << reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+        //             }
+        //         }
                 
-                Register_free(reg);
-            }
-            break;
-        }
+        //         Register_free(reg);
+        //     }
+        //     break;
+        // }
 
         case NodeType::FNC_INVOCATION:{
             std::string Function_Identifier = "";
@@ -389,19 +551,34 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                         std::string lable = ""; 
                         for(auto a : node->ChildrenArray){
                             if(a->AstNodeType == NodeType::TRUE){
-                                lable = "1";
+                                lable = "true";
                                 break;
                             }
                             if(a->AstNodeType == NodeType::FALSE){
-                                lable = "0";
+                                lable = "false";
                                 break;
                             }
                         }
                     //----
-                    outfile<< "    la " << reg << ","<< lable<<"\n";
+                    outfile<< "    li " << reg << ","<< lable<<"\n";
                     outfile<< "    move "<< "$a0," << reg << "\n";
                     outfile<<"    jal Lprintb\n"; 
                     Register_free(reg);
+                }
+                else if(function_decl_table->Identifier_Name == "printi"){
+                    if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
+                        auto temp_reg = Register_allocator();
+                        auto node1_stab = Generator_AstStackLookup(node->ChildrenArray.at(1)->AstStringval);
+                        if(node1_stab->isglobalVariable){
+                            outfile<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
+                        }else{
+                            outfile<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+                        }
+                        
+                        outfile<< "    move "<< "$a0," << temp_reg << "\n";
+                        outfile<<"    jal Lprinti\n"; 
+                        Register_free(temp_reg);
+                    }
                 }
             }
             break;
@@ -425,17 +602,23 @@ void Second_iter(AstNode * Rootnode, std::string filename){
         Second_Iter_Calc_NodeExit(Rootnode,filename);
     }
     else{
-        Second_Iter_Calc_NodeEnterence(Rootnode,filename);
-        generator_scopeStack.push_back(&Rootnode->Node_stab);
-        for(auto a : Rootnode->ChildrenArray){
-            Second_iter(a,filename);
-        }   
-        if(!generator_scopeStack.empty()){
-            generator_scopeStack.pop_back();
+        if(Rootnode->AstNodeType == NodeType::OPERATOR && Rootnode->AstStringval=="="){
+            Third_iter(Rootnode,filename);
+            //Do nothing for children. they will be handled...
+        }else{
+            Second_Iter_Calc_NodeEnterence(Rootnode,filename);
+            generator_scopeStack.push_back(&Rootnode->Node_stab);
+            for(auto a : Rootnode->ChildrenArray){
+                Second_iter(a,filename);
+            } 
+            if(!generator_scopeStack.empty()){
+                generator_scopeStack.pop_back();
+            }
+            Second_Iter_Calc_NodeExit(Rootnode,filename);
         }
-        Second_Iter_Calc_NodeExit(Rootnode,filename);
     }
 }
+
 
 void function_lable_adder(std::string filename){
     std::ofstream outfile;

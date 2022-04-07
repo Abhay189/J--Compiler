@@ -13,6 +13,7 @@ class SymbolTable{
     int stack_Pointer_Location = 0;
     int local_variables = 0;
     std::vector<std::string> Children_regester;
+    bool is_already_seen = false;
     //------
 
     //------Things needed for semantic analysis. 
