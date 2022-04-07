@@ -418,10 +418,10 @@ void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::
 
             auto topStab = scopeStack.back();
             //Does not check for the global variables as the scope size is more then 1 for his check. 
-            if(scopeStack.size() != 1){
-                if(scopeStack.size() == 3){
+            if(scopeStack.size() != 2){
+                if(scopeStack.size() == 4){
                     if(topStab->count(VariableTable.Identifier_Name) == 0){
-                    topStab->insert({VariableTable.Identifier_Name,VariableTable});
+                        topStab->insert({VariableTable.Identifier_Name,VariableTable});
                     }
                     else{
                         std::cerr << "error: Multiple Declerations of variable \"" + VariableTable.Identifier_Name + "\" within the same scope\n";

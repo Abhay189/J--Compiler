@@ -228,14 +228,15 @@ bool Driver::start(std::istream &in)
     if (!res) {
         SemanticCheck_Driver(RootNode);
         this->AstIteratorFunction(Driver::RootNode,0);
+        Code_generator CodeGen;
+        CodeGen.code_generator_driver(Driver::RootNode);
     }
     //For running the global iterator function the first time and including the main and global
     //function and variable declarations in the global stab. 
     
 
 
-    // Code_generator CodeGen;
-    // CodeGen.code_generator_driver(Driver::RootNode);
+    
 
     return res;
 }

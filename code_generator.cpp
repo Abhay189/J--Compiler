@@ -173,6 +173,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
     else{
         outfile.open(Out_file_name, std::ios_base::app);
     }
+
     switch (node->AstNodeType)
     {
         case NodeType::PROGRAM_START_NODE: {
@@ -181,6 +182,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             Global_Valriablehandler(node,Out_file_name);
         break;
         }
+
         case NodeType::MAIN_FNC_DECL: {
             localVariables = 0;
             int memory_ = memory_counter(node);
@@ -202,6 +204,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             outfile.close();
             break;
         }
+
         case NodeType::OPERATOR: {
             if(node->AstStringval == "="){
                 auto reg = Register_allocator();
@@ -244,7 +247,56 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 Register_free(reg);
             }
         }
+
         case NodeType::FNC_INVOCATION:{
+            std::string Function_Identifier = "";
+            for(auto a : node->ChildrenArray){
+                if(a->AstNodeType == NodeType::ID){
+                    Function_Identifier = a->AstStringval;
+                    break;
+                }
+            }
+            auto function_decl_table = Generator_AstStackLookup(Function_Identifier);
+
+            if(function_decl_table->is_builtinFunction){
+                //this is the case when the function invocation is for the built in prints function. 
+                if(function_decl_table->Identifier_Name == "prints"){
+                    //generate a lable for the function.
+                    std::string lable = NewlableGenerator();
+                    std::string printParam = "";
+                    for(auto a : node->ChildrenArray){
+                        if(a->AstNodeType == NodeType::STRING){
+                            printParam = a->AstStringval;
+                            break;
+                        }
+                    }
+                    outfile<< "    .data\n";
+                    outfile<< lable << " :\n";
+                    outfile<< "    .bite ";
+                    int stringlen = printParam.size();
+                    counter = 1;
+                    for (auto a : printParam){
+                        if(counter != stringlen && counter != 1){
+                            // std::cout<<a<<std::endl;
+                            if(a == '\\'){
+                                //case when we have escape character.
+                            }
+                            outfile<< int(a)<< " ,";
+                        }
+                        counter++;
+                    }
+                    outfile << "0\n";
+                    outfile<< "    .align 2\n";
+                    outfile<< "    .text\n";
+
+                    auto reg = Register_allocator();
+                    outfile<< "    la " << reg << ","<< lable<<"\n";
+                    outfile<< "    move "<< "$a0," << reg << "\n";
+                    outfile<<"    jal Lprints\n"; 
+                    Register_free(reg);
+                }
+            }
+            break;
             
         }
     }
@@ -278,6 +330,57 @@ void Second_iter(AstNode * Rootnode, std::string filename){
 // This is the deriver function that is called to do the code generation by the deriver. 
 void Code_generator::code_generator_driver(AstNode* RootNode){
     std::cout<<"---------"<<std::endl; 
+    std::unordered_map<std::string, SymbolTable> Node_stab = {};
+
+    SymbolTable getChar_table;
+    getChar_table.Identifier_Name = "getchar";
+    getChar_table.ReturnType = "INT";
+    getChar_table.Enterence_lable_Name = "Lgetchar";
+    getChar_table.is_builtinFunction = true;
+
+    SymbolTable halt_table;
+    halt_table.Identifier_Name = "halt";
+    halt_table.ReturnType = "VOID";
+    halt_table.Enterence_lable_Name = "Lhalt";
+    halt_table.is_builtinFunction = true;
+
+    SymbolTable printb_table;
+    printb_table.Identifier_Name = "printb";
+    printb_table.ReturnType = "VOID";
+    printb_table.Formals.push_back("BOOLEAN");
+    printb_table.Enterence_lable_Name = "Lprintb";
+    printb_table.is_builtinFunction = true;
+
+    SymbolTable printc_table;
+    printc_table.Identifier_Name = "printc";
+    printc_table.ReturnType = "VOID";
+    printc_table.Formals.push_back("INT");
+    printc_table.Enterence_lable_Name = "Lprintc";
+    printc_table.is_builtinFunction = true;
+
+    SymbolTable printi_table;
+    printi_table.Identifier_Name = "printi";
+    printi_table.ReturnType = "VOID";
+    printi_table.Formals.push_back("INT");
+    printi_table.Enterence_lable_Name = "Lprinti";
+    printi_table.is_builtinFunction = true;
+
+    SymbolTable prints_table;
+    prints_table.Identifier_Name = "prints";
+    prints_table.ReturnType = "VOID";
+    prints_table.Formals.push_back("STRING");
+    prints_table.Enterence_lable_Name = "Lprints";
+    prints_table.is_builtinFunction = true;
+
+    Node_stab.insert({getChar_table.Identifier_Name,getChar_table});
+    Node_stab.insert({"halt",halt_table});
+    Node_stab.insert({printb_table.Identifier_Name,printb_table});
+    Node_stab.insert({printc_table.Identifier_Name,printc_table});
+    Node_stab.insert({printi_table.Identifier_Name,printi_table});
+    Node_stab.insert({prints_table.Identifier_Name,prints_table});
+
+    generator_scopeStack.push_back(&Node_stab);
+
     std::string Out_file_name = "My_file.s";
     First_iter(RootNode,Out_file_name);
     Second_iter(RootNode,Out_file_name);

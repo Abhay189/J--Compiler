@@ -1,3 +1,4 @@
 main(){
-        printp(true);
+        prints("ioo");
 }
+

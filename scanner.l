@@ -77,7 +77,7 @@ ID              {alpha}({alpha}|{digit}|{underscore})*
 <STRING>\\b|\\f|\\t|\\r|\\n     {yymore();}
 <STRING>\\\\|\\'|\\\"           {yymore();}
 <STRING>\"                      {BEGIN(INITIAL); yylval->strVal = new std::string(yytext);return Token::T_STRING;}
-<STRING>\\                      {std::cerr << "error: Illegal character inside string in line " << *loc<< std::endl;}
+<STRING>\\                      {std::cerr << "error: Illegal character inside string in line " << *loc<< std::endl; exit(EXIT_FAILURE);}
 <STRING>.                       {yymore();}
 
 ""

@@ -20,6 +20,7 @@ class SymbolTable{
     //----Just for functions : 
     std::string ReturnType = "";
     std::vector<std::string> Formals; 
+    bool is_builtinFunction = false;
 
     //-----For variables :
     std::string Var_type = "";

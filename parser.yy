@@ -606,5 +606,6 @@ expression              : assignmentexpression  {$$ = $1;}
 void JCC::Parser::error(const location_type &loc, const std::string &errmsg)
 {
     std::cerr << "Error: " << errmsg << " at " << loc << "\n";
+    /* exit(EXIT_FAILURE); */
 }
 
