@@ -63,6 +63,56 @@ void Global_Valriablehandler(AstNode * RootNode,std::string Out_file_name){
     }
 }
 
+void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::string allocated_reg, std::vector<std::string> children_reg){
+    std::ofstream outfile;
+    outfile.open(Out_file_name, std::ios_base::app);
+    switch(node->AstNodeType){
+        case NodeType::NUMBEER:{
+            outfile << "    li "<< allocated_reg << "," <<node->AstIntval<<"\n";
+            break;
+        }
+        case NodeType::OPERATOR:{
+            if(node->AstStringval == "+"){
+                outfile << "    addu "<< allocated_reg << "," <<children_reg.at(0)<<"," <<children_reg.at(1)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == "*"){
+                outfile << "    mul "<< allocated_reg << "," <<children_reg.at(0)<<"," <<children_reg.at(1)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == "-"){
+                outfile << "    subu "<< allocated_reg << "," <<children_reg.at(0)<<"," <<children_reg.at(1)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            break;
+        }
+        default: outfile<<"very bad \n";
+    }
+    outfile.close();
+}
+
+void assignment_expression_treversal(AstNode * node, std::string outfile, std::string allocated_reg, std::vector<std::string> children_reg){
+    if(node->ChildrenArray.empty()){
+        arithmaticExpressionHandler(node,outfile,allocated_reg,children_reg);
+        return;
+    }
+    else{
+        std::vector<std::string> children_reg;
+        for(auto a : node->ChildrenArray){
+            auto reg = Register_allocator();
+            children_reg.push_back(reg);
+            assignment_expression_treversal(a, outfile, reg, children_reg);
+        }//free the regesters.
+        arithmaticExpressionHandler(node,outfile,allocated_reg,children_reg);
+    }
+}
+
 void First_iter(AstNode * Rootnode,std::string Out_file_name){
     for(auto a : Rootnode->ChildrenArray){
         if(a->AstNodeType != NodeType::MAIN_FNC_DECL){
@@ -208,10 +258,11 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
         case NodeType::OPERATOR: {
             if(node->AstStringval == "="){
                 auto reg = Register_allocator();
-                std::string value; 
+                std::string value = ""; 
                 int VAriableStackLocation = 0;
                 bool is_global = false;
                 SymbolTable *variable_symbol_table;
+                bool is_expression = false;
 
                 for(auto a : node->ChildrenArray){
                     if(a->AstNodeType == NodeType::ID){
@@ -220,32 +271,50 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                         if(!is_global){
                             if(variable_symbol_table->stack_Pointer_Location == 0){
                                 localVariables ++;
-                                VAriableStackLocation = (4*localVariables);
+                                VAriableStackLocation = stack_pointer - (4*localVariables);
                                 variable_symbol_table->stack_Pointer_Location = VAriableStackLocation;
                             }else{
                                 VAriableStackLocation = variable_symbol_table->stack_Pointer_Location;
                             }
                         }
                     }
+                    if(a->AstNodeType == NodeType::OPERATOR || a->AstNodeType ==NodeType::UNARY_EXPRESSION){
+                        is_expression = true;
+                        auto reg = Register_allocator(); 
+                        std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                        assignment_expression_treversal(a, Out_file_name, reg,children_reg);
+                        value = reg;
+                        Register_free(reg);
+                        break;
+                    }
                     if(a->AstNodeType == NodeType::NUMBEER){
-                        variable_symbol_table->Var_Int_value = a->AstIntval;
                         value = std::to_string(a->AstIntval);
                         break;
                     }
                     //ToDo: case when we are assigning a voolean type variable. sw $t0,4($sp)
                 }
-                if(!is_global){
-                    outfile << "    li " << reg << "," << value <<"\n";
-                    outfile << "    sw " << reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                if(is_expression){
+                    if(!is_global){
+                        outfile << "    sw " << value << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                    }
+                    else{
+                        outfile << "    sw " << value << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                    }
+                }else{
+                    if(!is_global){
+                        outfile << "    li " << reg << "," << value <<"\n";
+                        outfile << "    sw " << reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                    }
+                    else{
+                        //save this value in the ast of the variable.
+                        outfile << "    li " << reg << "," << value <<"\n";
+                        outfile << "    sw " << reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                    }
                 }
-                else{
-                    // li $t0,9
-                    // sw $t0,G2
-                    outfile << "    li " << reg << "," << value <<"\n";
-                    outfile << "    sw " << reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
-                }
+                
                 Register_free(reg);
             }
+            break;
         }
 
         case NodeType::FNC_INVOCATION:{
@@ -278,7 +347,6 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                     for (int i = 0; i < printParam.size(); i++){
                         auto a = printParam[i];
                         if(counter != stringlen && counter != 1){
-                            // std::cout<<a<<std::endl;
                             if(a == '\\'){
                                 i++;
                                 counter++;
@@ -340,6 +408,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             
         }
     
+        default: break;
     }
     outfile.close();
 }
@@ -382,6 +451,7 @@ void function_lable_adder(std::string filename){
 // This is the deriver function that is called to do the code generation by the deriver. 
 void Code_generator::code_generator_driver(AstNode* RootNode){
     std::cout<<"---------"<<std::endl; 
+    std::cout<<"number of Registers free initially : " <<Regester_Stack.size()<<std::endl;
     std::unordered_map<std::string, SymbolTable> Node_stab = {};
 
     SymbolTable getChar_table;
@@ -437,4 +507,6 @@ void Code_generator::code_generator_driver(AstNode* RootNode){
     First_iter(RootNode,Out_file_name);
     Second_iter(RootNode,Out_file_name);
     function_lable_adder(Out_file_name);
+
+    std::cout<<"number of Registers free : " <<Regester_Stack.size()<<std::endl;
 }

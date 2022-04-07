@@ -1,3 +1,5 @@
 main(){
-        printc(48);
+        int goo;
+        goo = ((8*9)*78)-1259;
 }
+

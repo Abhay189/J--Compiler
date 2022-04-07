@@ -440,7 +440,7 @@ additiveexpressionPrime : "+" multiplicativeexpression additiveexpressionPrime {
                                                                                     $$ = newNode1;
                                                                                     }
                         | "-" multiplicativeexpression additiveexpressionPrime  {
-                                                                                    AstNode * newNode1 = driver.Operator("+");
+                                                                                    AstNode * newNode1 = driver.Operator("-");
                                                                                     if($2 != nullptr){
                                                                                         newNode1->addChild($2);
                                                                                     }

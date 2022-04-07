@@ -12,6 +12,7 @@ class SymbolTable{
     int memory_Size = 0;
     int stack_Pointer_Location = 0;
     int local_variables = 0;
+    std::vector<std::string> Children_regester;
     //------
 
     //------Things needed for semantic analysis. 
@@ -30,6 +31,8 @@ class SymbolTable{
 
     //------For identifying main function
     bool isMainFunction = false;
+
+
 
 }
 ;
