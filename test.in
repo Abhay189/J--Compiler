@@ -1,11 +1,10 @@
 main(){
-        int hoo;
+        foo(89);
+}
+
+int foo(int goop){
         int goo;
-        hoo = goo =  98;
-        printi(hoo);
+        goo = 78;
         printi(goo);
 }
 
-//      =
-//hoo             =
-//        goo             98

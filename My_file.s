@@ -5,38 +5,19 @@ main:
     li $v0,10 
     syscall
 
-    .data
-Lable1 :
-    .word 0
-    .text
-    .data
-Lable2 :
-    .word 0
-    .text
 Lable0 : 
+    subu $sp,$sp,4
+    sw $ra,0($sp)
+Lable2 : 
+    lw $ra,0($sp)
+    addu $sp,$sp,4
+    jr $ra
+Lable1 : 
     subu $sp,$sp,12
     sw $ra,0($sp)
-    li $s7,123
-    sw $s7,Lable1
-    li $s7,456
+    li $s7,78
     sw $s7,4($sp)
-    li $s7,789
-    sw $s7,Lable2
-    li $s7,42
-    sw $s7,Lable2
-    lw $s6,Lable2
-    sw $s6,4($sp)
     lw $s7,4($sp)
-    sw $s7,Lable1
-    li $s7,10
-    sw $s7,8($sp)
-    lw $s7,Lable1
-    move $a0,$s7
-    jal Lprinti
-    lw $s7,4($sp)
-    move $a0,$s7
-    jal Lprinti
-    lw $s7,Lable2
     move $a0,$s7
     jal Lprinti
 Lable3 : 
