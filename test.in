@@ -1,10 +1,12 @@
 main(){
-        foo(89);
+        int goo;
+        goo = 87;
+        foo(goo,98);
 }
 
-int foo(int goop){
-        int goo;
-        goo = 78;
-        printi(goo);
+void foo(int goop, int pop){
+        int ret;
+        ret = goop; 
+        printi(ret);
 }
 

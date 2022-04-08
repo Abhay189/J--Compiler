@@ -360,8 +360,6 @@ void First_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::s
                     }
             }
 
-            // std::cout<<var_Info + "\n";
-
             if(RootNode_symboltable->count(VarsymbolTable.Identifier_Name) == 0){
                 RootNode_symboltable->insert({VarsymbolTable.Identifier_Name,VarsymbolTable});
             }
@@ -447,9 +445,19 @@ void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::
         
         case NodeType::FNC_INVOCATION:{
             SymbolTable Function_Invocation_table;
+            int count = 0;
             for(auto a : Node->ChildrenArray){
                 switch(a->AstNodeType){
-                    case NodeType::ID: {Function_Invocation_table.Identifier_Name = a->AstStringval; break;}
+                    case NodeType::ID: {
+                        if(count == 0){
+                            Function_Invocation_table.Identifier_Name = a->AstStringval; 
+                            break;
+                        }
+                        else{
+                            auto identifier_stab = AstStackLookup(a->AstStringval);
+                            Function_Invocation_table.Formals.push_back(identifier_stab->Var_type); break;
+                        }
+                        }
                     case NodeType::NUMBEER: {Function_Invocation_table.Formals.push_back("INT"); break;}
                     case NodeType::STRING: {Function_Invocation_table.Formals.push_back("STRING"); break;}
                     case NodeType::TRUE: {Function_Invocation_table.Formals.push_back("BOOLEAN"); break;}
@@ -480,6 +488,7 @@ void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::
                         break;
                     }
                 }
+                count++;
             }
             auto node_stab_info = AstStackLookup(Function_Invocation_table.Identifier_Name);
             if(node_stab_info == nullptr){

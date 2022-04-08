@@ -442,6 +442,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
 
         case NodeType::FNC_INVOCATION:{
             std::string Function_Identifier = "";
+            
             for(auto a : node->ChildrenArray){
                 if(a->AstNodeType == NodeType::ID){
                     Function_Identifier = a->AstStringval;
@@ -556,6 +557,28 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                         Register_free(temp_reg);
                     }
                 }
+            }else{
+                // li $t0,89
+                // move $a0,$t0
+                // jal L1
+                // move $t0,$v0
+                int counter = -1;
+                for(auto a : node->ChildrenArray){
+                    if(counter == -1){
+                        counter++;
+                        continue;
+                    }
+                    else if(a->AstNodeType == NodeType::NUMBEER){
+                        auto temp_reg = Register_allocator();
+                        outfile << "    li " << temp_reg << ","<< a->AstIntval<<"\n";
+                        outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                        Register_free(temp_reg);
+                    }
+                    counter++;
+                }
+
+                outfile << "    jal "<<function_decl_table->Enterence_lable_Name<<"\n";
+
             }
             break;
             
@@ -583,6 +606,27 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             outfile.close();
             break;
         }
+        
+        case NodeType::FORMALS_List:{
+            int c = 0;
+            for(auto a: node->ChildrenArray){
+                auto var_Identifier = a->ChildrenArray.at(1)->AstStringval;
+                auto variable_symbol_table = Generator_AstStackLookup(var_Identifier);
+                auto VAriableStackLocation = variable_symbol_table->stack_Pointer_Location;
+                if(variable_symbol_table->stack_Pointer_Location == 0){
+                    localVariables ++;
+                    VAriableStackLocation = (4*localVariables);
+                    variable_symbol_table->stack_Pointer_Location = VAriableStackLocation;
+                }else{
+                    VAriableStackLocation = variable_symbol_table->stack_Pointer_Location;
+                }
+                // sw $a0,4($sp)
+                // sw $a1,8($sp)
+                outfile << "    sw $a"<< std::to_string(c) <<","<< VAriableStackLocation <<"($sp)\n";
+                c++;
+            }
+        }
+        
         default: break;
     }
     outfile.close();
