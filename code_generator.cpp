@@ -10,6 +10,7 @@ std::vector<std::unordered_map<std::string, SymbolTable> *> generator_scopeStack
 std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6" ,"$t7" ,"$t8", "$t9", "$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7"};
 int stack_pointer = 0;
 int localVariables = 0;
+std::string Current_function_exit_lable = "";
 
 SymbolTable* Generator_AstStackLookup(std::string identifier){
     std::unordered_map<std::string, SymbolTable> * temp;
@@ -353,7 +354,16 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                         value = std::to_string(a->AstIntval);
                         break;
                     }
-                    //ToDo: case when we are assigning a voolean type variable. sw $t0,4($sp)
+                    if(a->AstNodeType == NodeType::TRUE){
+                        value = "1";
+                        break;
+                    }
+                    if(a->AstNodeType == NodeType::FALSE){
+                        value = "0";
+                        break;
+                    }
+                    
+                    //ToDo: case when we are assigning a boolean type variable. sw $t0,4($sp)
                 }
                 if(is_expression){
                     if(!is_global){
@@ -377,69 +387,7 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
             }
             break;
         }
-        default: break;
-    }
-    outfile.close();
-}
-
-void Third_iter(AstNode * Rootnode, std::string filename){
-    if(Rootnode->ChildrenArray.empty()){
-        Third_iter_callbackfunc(Rootnode,filename);
-    }
-    else{
-        generator_scopeStack.push_back(&Rootnode->Node_stab);
-        for(auto a : Rootnode->ChildrenArray){
-            Third_iter(a,filename);
-        }   
-        if(!generator_scopeStack.empty()){
-            generator_scopeStack.pop_back();
-        }
-        Third_iter_callbackfunc(Rootnode,filename);
-    }
-}
-
-//This is the actual function that generates the code on a node enterence. 
-void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
-    std::ofstream outfile;
-    if(node->AstNodeType == NodeType::PROGRAM_START_NODE){
-        outfile.open(Out_file_name, std::ios_base::trunc);
-    }
-    else{
-        outfile.open(Out_file_name, std::ios_base::app);
-    }
-
-    switch (node->AstNodeType)
-    {
-        case NodeType::PROGRAM_START_NODE: {
-            outfile <<   "    .text \n    .globl main \nmain: \n    jal Lable0 \n    li $v0,10 \n    syscall\n\n";
-            outfile.close();
-            Global_Valriablehandler(node,Out_file_name);
-        break;
-        }
-
-        case NodeType::MAIN_FNC_DECL: {
-            localVariables = 0;
-            stack_pointer = 0; //first randome change .
-            int memory_ = memory_counter(node);
-            std::string ExitLable_ = NewlableGenerator();
-            std::string main_function_ID = ""; 
-            for(auto a : node->ChildrenArray){
-                if(a->AstNodeType == NodeType::ID){
-                    main_function_ID = a->AstStringval;
-                    break;
-                }
-            }
-
-            SymbolTable *main_symbol_table = Generator_AstStackLookup(main_function_ID);
-            main_symbol_table->Exit_lable_name = ExitLable_;
-            main_symbol_table->memory_Size = memory_;
-
-            outfile << "Lable0 : \n    subu $sp,$sp,"<< std::to_string(memory_)<<"\n";
-            outfile << "    sw $ra,0($sp)\n";
-            outfile.close();
-            break;
-        }
-
+        
         case NodeType::FNC_INVOCATION:{
             std::string Function_Identifier = "";
             
@@ -510,21 +458,46 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                     auto reg = Register_allocator();
                     // auto lable = boolean_exp_handler();          //Will be done like this later on. 
                     //----Temporary code
-                        std::string lable = ""; 
+                        std::string lable = "";
+                        bool flag = false;
+                        int cou = 0; 
                         for(auto a : node->ChildrenArray){
+                            if(cou == 0){
+                                cou++;
+                                continue;
+                            }
+                            if(a->AstNodeType == NodeType::ID){
+                                auto temp_reg = Register_allocator();
+                                auto node1_stab = Generator_AstStackLookup(a->AstStringval);
+                                if(node1_stab->isglobalVariable){
+                                    outfile<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
+                                }else{
+                                    outfile<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+                                }
+                                
+                                outfile<< "    move "<< "$a0," << temp_reg << "\n";
+                                Register_free(temp_reg);
+                                flag = true;
+
+                            }
                             if(a->AstNodeType == NodeType::TRUE){
-                                lable = "true";
+                                lable = "1";
                                 break;
                             }
                             if(a->AstNodeType == NodeType::FALSE){
-                                lable = "false";
+                                lable = "0";
                                 break;
                             }
+                            cou++;
                         }
                     //----
-                    outfile<< "    li " << reg << ","<< lable<<"\n";
-                    outfile<< "    move "<< "$a0," << reg << "\n";
-                    outfile<<"    jal Lprintb\n"; 
+                    if(!flag){
+                        outfile<< "    li " << reg << ","<< lable<<"\n";
+                        outfile<< "    move "<< "$a0," << reg << "\n";
+                    }
+                    
+                    
+                    outfile<< "    jal Lprintb\n"; 
                     Register_free(reg);
                 }
                 else if(function_decl_table->Identifier_Name == "printc"){
@@ -563,6 +536,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 // jal L1
                 // move $t0,$v0
                 int counter = -1;
+
                 for(auto a : node->ChildrenArray){
                     if(counter == -1){
                         counter++;
@@ -571,6 +545,26 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                     else if(a->AstNodeType == NodeType::NUMBEER){
                         auto temp_reg = Register_allocator();
                         outfile << "    li " << temp_reg << ","<< a->AstIntval<<"\n";
+                        outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                        Register_free(temp_reg);
+                    }
+                    else if (a->AstNodeType == NodeType::ID){
+                        auto Identifiername = a->AstStringval;
+                        auto identifier_nodestab = Generator_AstStackLookup(Identifiername);
+                        auto temp_reg = Register_allocator();
+                        if(identifier_nodestab->isglobalVariable){
+                            outfile << "    lw " << temp_reg << ","<< identifier_nodestab->Enterence_lable_Name<<"\n";
+                            outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                        }else{
+                            outfile << "    lw " << temp_reg << ","<< identifier_nodestab->stack_Pointer_Location<<"($sp)\n";
+                            outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                        
+                        }
+                        Register_free(temp_reg);
+                    }
+                    else if (a->AstNodeType == NodeType::FNC_INVOCATION){   //have to re implement this 
+                        auto temp_reg = Register_allocator();
+                        outfile << "    move " << temp_reg << ","<< "$v0"<<"\n";
                         outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
                         Register_free(temp_reg);
                     }
@@ -583,12 +577,76 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             break;
             
         }
-    
-        case NodeType::FNC_DECL:{
+
+        default: break;
+    }
+    outfile.close();
+}
+
+void Third_iter(AstNode * Rootnode, std::string filename){
+    if(Rootnode->ChildrenArray.empty()){
+        Third_iter_callbackfunc(Rootnode,filename);
+    }
+    else{
+        generator_scopeStack.push_back(&Rootnode->Node_stab);
+        for(auto a : Rootnode->ChildrenArray){
+            Third_iter(a,filename);
+        }   
+        if(!generator_scopeStack.empty()){
+            generator_scopeStack.pop_back();
+        }
+        Third_iter_callbackfunc(Rootnode,filename);
+    }
+}
+
+//This is the actual function that generates the code on a node enterence. 
+void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
+    std::ofstream outfile;
+    if(node->AstNodeType == NodeType::PROGRAM_START_NODE){
+        outfile.open(Out_file_name, std::ios_base::trunc);
+    }
+    else{
+        outfile.open(Out_file_name, std::ios_base::app);
+    }
+
+    switch (node->AstNodeType)
+    {
+        case NodeType::PROGRAM_START_NODE: {
+            outfile <<   "    .text \n    .globl main \nmain: \n    jal Lable0 \n    li $v0,10 \n    syscall\n\n";
+            outfile.close();
+            Global_Valriablehandler(node,Out_file_name);
+        break;
+        }
+
+        case NodeType::MAIN_FNC_DECL: {
             localVariables = 0;
             stack_pointer = 0; //first randome change .
             int memory_ = memory_counter(node);
             std::string ExitLable_ = NewlableGenerator();
+            std::string main_function_ID = ""; 
+            for(auto a : node->ChildrenArray){
+                if(a->AstNodeType == NodeType::ID){
+                    main_function_ID = a->AstStringval;
+                    break;
+                }
+            }
+
+            SymbolTable *main_symbol_table = Generator_AstStackLookup(main_function_ID);
+            main_symbol_table->Exit_lable_name = ExitLable_;
+            main_symbol_table->memory_Size = memory_;
+
+            outfile << "Lable0 : \n    subu $sp,$sp,"<< std::to_string(memory_)<<"\n";
+            outfile << "    sw $ra,0($sp)\n";
+            outfile.close();
+            break;
+        }
+    
+        case NodeType::FNC_DECL:{
+            localVariables = 0;
+            stack_pointer = 0; 
+            int memory_ = memory_counter(node);
+            std::string ExitLable_ = NewlableGenerator();
+            Current_function_exit_lable = ExitLable_;
             std::string function_ID = ""; 
             for(auto a : node->ChildrenArray){
                 if(a->AstNodeType == NodeType::ID){
@@ -606,7 +664,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             outfile.close();
             break;
         }
-        
+    
         case NodeType::FORMALS_List:{
             int c = 0;
             for(auto a: node->ChildrenArray){
@@ -626,7 +684,14 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 c++;
             }
         }
-        
+
+        case NodeType::RETURN:{
+            for(auto a : node->ChildrenArray){
+                // to be implemented 
+            }
+            break;
+        }
+
         default: break;
     }
     outfile.close();
@@ -647,7 +712,11 @@ void Second_iter(AstNode * Rootnode, std::string filename){
         if(Rootnode->AstNodeType == NodeType::OPERATOR && Rootnode->AstStringval=="="){
             Third_iter(Rootnode,filename);
             //Do nothing for children. they will be handled...
-        }else{
+        }
+        else if(Rootnode->AstNodeType == NodeType::FNC_INVOCATION){
+            Third_iter(Rootnode,filename);
+        }
+        else{
             Second_Iter_Calc_NodeEnterence(Rootnode,filename);
             generator_scopeStack.push_back(&Rootnode->Node_stab);
             for(auto a : Rootnode->ChildrenArray){
@@ -666,7 +735,7 @@ void function_lable_adder(std::string filename){
     std::ofstream outfile;
     outfile.open(filename, std::ios_base::app);
     outfile<< "\nLprints: \n    li	$v0, 4\n    syscall\n    jr $ra\n\n" ;
-    outfile<< "Lprintb: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;  //needs to be reimplemented.
+    outfile << "    .data\nLTrue : \n    .byte 116 ,114 ,117 ,101 ,0\n    .align 2\n    .text\n    .data\nLFalse : \n    .byte 116 ,114 ,117 ,101 ,0\n    .align 2\n    .text\nLprintb: \n    li $t0,0\n    li $t1,1\n    beq $a0,$t0,LFal\n    beq $a0,$t1,LTru\n    jr $ra\nLFal: \n    la $t0,LFalse\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra\nLTru: \n    la $t0,LTrue\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra \n\n";
     outfile<< "Lprintc: \n    li	$v0, 11\n    syscall\n    jr $ra\n\n" ;
     outfile<< "Lprinti: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;
 
