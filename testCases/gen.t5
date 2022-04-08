@@ -1,7 +1,7 @@
-int i;
+int i;      //Lable1
 
 main() {
-        int j;
+        int j;      //4($sp)
         i = 123;
         j = 456;
         k = 789;
@@ -15,4 +15,4 @@ main() {
         printi(k);      printc(NL);
 }
 
-int k;
+int k;      //Lable2

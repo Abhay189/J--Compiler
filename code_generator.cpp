@@ -248,28 +248,6 @@ void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
     outfile.close();
 }
 
-// void Tree_sub_treversal_func(AstNode * node, std::string fileName){
-//     std::ofstream outfile;
-//     outfile.open(fileName, std::ios_base::app); // append instead of overwrite
-
-//     switch (node->AstNodeType){
-        
-//     }
-//     outfile.close();
-// }
-
-// void Tree_sub_treversal(AstNode * node, std::string fileName){
-//     if(node->ChildrenArray.empty()){
-//         Tree_sub_treversal_func(node,fileName);
-//     }
-//     else{
-//         Tree_sub_treversal_func(node,fileName);
-//         for(auto a : node->ChildrenArray){
-//             Tree_sub_treversal(a,fileName);
-//         }
-//     }
-// }
-
 void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
     std::ofstream outfile;
     outfile.open(Out_file_name, std::ios_base::app);
@@ -278,6 +256,8 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
         case NodeType::OPERATOR: {
             if(node->AstStringval == "="){
                 auto reg = Register_allocator();
+                std::string source_reg = "";
+                std::string source_lable = "";
                 std::string value = ""; 
                 int VAriableStackLocation = 0;
                 bool is_global = false;
@@ -298,23 +278,58 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                             }
                         }
                     }
-                    if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
+                    //what to do hen you see a situation like a = b = c ?
+                    //tackle b =c first. 
+                    //when you come to a = .. then the right hand side of this equation will actully be the equal to node 
+                    //from the equal to node, load the value of the left hand side of the sub qualt to node and move that to out primary identifier.  
+                    if(node->ChildrenArray.at(1)->AstNodeType == NodeType::OPERATOR && node->ChildrenArray.at(1)->AstStringval == "="){
+                        //this is the sub uqual to node inside the tree. we need the value of its left child. 
                         is_expression = true;
-                        auto reg = Register_allocator(); 
-                        std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
-                        assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, reg,children_reg);
-                        value = reg;
+                        printf("ola im here amigo\n");
+                        auto subequalnode = node->ChildrenArray.at(1);
+                        //this is the variable or function value that we need to pass up the tree. 
+                        auto subEq_leftchild = subequalnode->ChildrenArray.at(0);
+                        //we need to lookup this nodes stab first. 
+                        auto subEq_leftChild_nodestab = Generator_AstStackLookup(subEq_leftchild->AstStringval);
+                        auto temp_regg = Register_allocator();
+                        std::string temp_source = "";
+                        if(subEq_leftChild_nodestab->isglobalVariable){
+                            temp_source = subEq_leftChild_nodestab->Enterence_lable_Name;
+                        }else{
+                            temp_source =  std::to_string(subEq_leftChild_nodestab->stack_Pointer_Location)+"($sp)";
+                        }
+                        if(!is_global){
+                            outfile << "    lw " << temp_regg << "," << temp_source <<"\n";
+                            outfile << "    sw " << temp_regg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                        }
+                        else{
+                            //save this value in the ast of the variable.
+                            outfile << "    lw " << temp_regg << "," << temp_source <<"\n";
+                            outfile << "    sw " << temp_regg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                        }
+                        
                         Register_free(reg);
+                        Register_free(temp_regg);
+                        outfile.close();
+                        return;
                         break;
                     }
-                    // Handle variable to variable assignment 
+                    if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
+                        is_expression = true;
+                        auto temp_reg1 = Register_allocator(); 
+                        std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                        assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, temp_reg1,children_reg);
+                        source_reg = temp_reg1;
+                        Register_free(source_reg);
+                        break;
+                    }
                     if(a->AstNodeType == NodeType::OPERATOR || a->AstNodeType ==NodeType::UNARY_EXPRESSION){
                         is_expression = true;
-                        auto reg = Register_allocator(); 
+                        auto temp_reg1 = Register_allocator(); 
                         std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
-                        assignment_expression_treversal(a, Out_file_name, reg,children_reg);
-                        value = reg;
-                        Register_free(reg);
+                        assignment_expression_treversal(a, Out_file_name, temp_reg1,children_reg);
+                        source_reg = temp_reg1;
+                        Register_free(source_reg);
                         break;
                     }
                     if(a->AstNodeType == NodeType::NUMBEER){
@@ -325,10 +340,10 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                 }
                 if(is_expression){
                     if(!is_global){
-                        outfile << "    sw " << value << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                        outfile << "    sw " << source_reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
                     }
                     else{
-                        outfile << "    sw " << value << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                        outfile << "    sw " << source_reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
                     }
                 }else{
                     if(!is_global){
@@ -341,13 +356,13 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                         outfile << "    sw " << reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
                     }
                 }
-                
                 Register_free(reg);
             }
             break;
         }
         default: break;
     }
+    outfile.close();
 }
 
 void Third_iter(AstNode * Rootnode, std::string filename){

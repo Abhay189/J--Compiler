@@ -24,13 +24,10 @@ Lable0 :
     sw $s7,Lable2
     li $s7,42
     sw $s7,Lable2
-    lw $s5,Lable2
-    li $s4,42
+    lw $s6,Lable2
     sw $s6,4($sp)
-    lw $s3,4($sp)
-    lw $s1,Lable2
-    li $s0,42
-    sw $s6,Lable1
+    lw $s7,4($sp)
+    sw $s7,Lable1
     li $s7,10
     sw $s7,8($sp)
     lw $s7,Lable1
