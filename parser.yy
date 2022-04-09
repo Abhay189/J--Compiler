@@ -58,7 +58,7 @@
 
 /* Semantic type (YYSTYPE) */
 %union{
-    int ival;
+    long long int ival;
     std::string* strVal;
     AstNode* astnode;
 };

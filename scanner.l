@@ -69,12 +69,13 @@ ID              {alpha}({alpha}|{digit}|{underscore})*
 ","         return Token::T_COMMA;
 
 {ID}        {yylval->strVal = new std::string(yytext); return Token::T_ID;}
-{num}       {yylval->ival = std::stoi(yytext);return Token::T_NUM;}
+{num}       {yylval->ival = std::stoll(yytext); std::cout<<yylval->ival<<std::endl; return Token::T_NUM;}
 
 "\""                            {yymore();BEGIN(STRING);}
 <STRING>\n                      {std::cerr << "error: newline in string literal at or near line " << *loc -1<< std::endl;}
 <STRING>{alpha}|{digit}|[ ]     {yymore();}
 <STRING>\\b|\\f|\\t|\\r|\\n     {yymore();}
+<STRING>\0                      {yymore(); std::cout<<"\\ 0 detected in the string\n";}
 <STRING>\\\\|\\'|\\\"           {yymore();}
 <STRING>\"                      {BEGIN(INITIAL); yylval->strVal = new std::string(yytext);return Token::T_STRING;}
 <STRING>\\                      {std::cerr << "error: Illegal character inside string in line " << *loc<< std::endl; exit(EXIT_FAILURE);}

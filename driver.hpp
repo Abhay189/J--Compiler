@@ -25,7 +25,7 @@ class Driver {
     AstNode * Progran_start_node();
     AstNode * Block();
     AstNode * Operator(std::string name);
-    AstNode * Number(int num_val);
+    AstNode * Number(long long int num_val);
     AstNode * String(std::string name);
     AstNode * True();
     AstNode * False();

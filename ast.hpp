@@ -45,7 +45,7 @@ typedef enum{
 class AstNode{
     public :
     NodeType AstNodeType;
-    int AstIntval;
+    long long int AstIntval;
     std::string AstStringval; 
     //A vector containing all the children of this node. This will be empty if this node is a leaf node. 
     std::vector<AstNode*> ChildrenArray;

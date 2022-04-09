@@ -1,8 +1,9 @@
-void nl() {
-        prints("\n");
+main(){
+        boolean gg;
+        gg = !func();
+        printb(gg);
 }
 
-main() {
-        printi(-123);           nl();
-        printi(-2147483648);    nl();
+boolean func(){
+        return true;
 }

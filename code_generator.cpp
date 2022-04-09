@@ -10,8 +10,8 @@ std::vector<std::unordered_map<std::string, SymbolTable> *> generator_scopeStack
 std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6" ,"$t7" ,"$t8", "$t9", "$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7"};
 int stack_pointer = 0;
 int localVariables = 0;
-std::string Current_function_exit_lable = "";
-
+std::string Current_function_identifier = "";
+//For lookup of any identifier.
 SymbolTable* Generator_AstStackLookup(std::string identifier){
     std::unordered_map<std::string, SymbolTable> * temp;
 
@@ -19,6 +19,21 @@ SymbolTable* Generator_AstStackLookup(std::string identifier){
         temp = *it;
         if(temp->count(identifier) == 1){
             return &temp->at(identifier);
+        }
+    }
+    return nullptr;
+}
+
+//For lookup of a function identifier 
+SymbolTable* Generator_Function_AstStackLookup(std::string identifier){
+    std::unordered_map<std::string, SymbolTable> * temp;
+
+    for (auto it =  generator_scopeStack.rbegin(); it != generator_scopeStack.rend(); ++it){
+        temp = *it;
+        if(temp->count(identifier) == 1){
+            if(temp->at(identifier).ReturnType != ""){
+                return &temp->at(identifier);
+            }
         }
     }
     return nullptr;
@@ -187,15 +202,29 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
         //this is the case of a variable.
         case NodeType::ID:{
             auto node_stab = Generator_AstStackLookup(node->AstStringval);
-            if(node_stab->isglobalVariable){
-                outfile << "    lw "<< allocated_reg << "," <<node_stab->Enterence_lable_Name<<"\n";
-            }else{
-                outfile << "    lw "<< allocated_reg << "," <<node_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+            //This if statement makes sure that this identifier is not a part of a function invocation. 
+            if(node_stab->ReturnType == ""){
+                if(node_stab->isglobalVariable){
+                    outfile << "    lw "<< allocated_reg << "," <<node_stab->Enterence_lable_Name<<"\n";
+                }else{
+                    outfile << "    lw "<< allocated_reg << "," <<node_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+                }
             }
+            
             
             break;
         }
         
+        case NodeType::TRUE:{
+            outfile << "    li "<< allocated_reg << "," <<"1"<<"\n";
+            break;
+        }
+
+        case NodeType::FALSE:{
+            outfile << "    li "<< allocated_reg << "," <<"0"<<"\n";
+            break;
+        }
+
         default: outfile<<"a case not handled in arithmatic expressions  \n";
     }
     outfile.close();
@@ -409,7 +438,22 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                         value = "0";
                         break;
                     }
-                    
+                    if(a->AstNodeType == NodeType::FNC_INVOCATION){
+                        // move $t0,$v0
+                        // sw $t0,4($sp)
+                        auto local_Var = Register_allocator();
+                        outfile << "    move " << local_Var << ","<<"$v0\n";
+                        if(is_global){
+                            outfile << "    sw " << variable_symbol_table->Enterence_lable_Name << ","<<"$v0\n";
+                        }
+                        else{
+                            outfile << "    sw " << local_Var << "," << std::to_string(variable_symbol_table->stack_Pointer_Location)<<"($sp)\n";
+
+                        }
+                        Register_free(local_Var);
+                        Register_free(reg);
+                        return;
+                    }
                     //ToDo: case when we are assigning a boolean type variable. sw $t0,4($sp)
                 }
                 if(is_expression){
@@ -570,6 +614,7 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                     std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
                     assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, temp_reg1,children_reg);
                     source_reg = temp_reg1;
+                    Register_free(temp_reg1);
                     Register_free(source_reg);
                     outfile<< "    move "<< "$a0," << source_reg << "\n";
                     outfile<<"    jal Lprinti\n"; 
@@ -674,6 +719,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                     break;
                 }
             }
+            Current_function_identifier = main_function_ID;
 
             SymbolTable *main_symbol_table = Generator_AstStackLookup(main_function_ID);
             main_symbol_table->Exit_lable_name = ExitLable_;
@@ -690,7 +736,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             stack_pointer = 0; 
             int memory_ = memory_counter(node);
             std::string ExitLable_ = NewlableGenerator();
-            Current_function_exit_lable = ExitLable_;
+            
             std::string function_ID = ""; 
             for(auto a : node->ChildrenArray){
                 if(a->AstNodeType == NodeType::ID){
@@ -698,7 +744,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                     break;
                 }
             }
-
+            Current_function_identifier = function_ID;
             SymbolTable *funct_symbol_table = Generator_AstStackLookup(function_ID);
             funct_symbol_table->Exit_lable_name = ExitLable_;
             funct_symbol_table->memory_Size = memory_;
@@ -731,6 +777,28 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
 
         case NodeType::RETURN:{
             for(auto a : node->ChildrenArray){
+                //My current function identifier is inside the global variable Current_function_identifier. 
+                //Use this variable to lookup for the stack pointer to the function and use that for return. 
+                
+                //This is the stab of the function that the return statement is inside.
+                auto Function_stab = Generator_Function_AstStackLookup(Current_function_identifier);
+                auto Function_Enterence_lable = Function_stab->Enterence_lable_Name;
+                auto Function_Exit_lable = Function_stab->Exit_lable_name;
+
+                // li $t0,89
+                // move $v0,$t0
+                // j L2
+                auto source_reg = Register_allocator();
+                auto temp_reg1 = Register_allocator(); 
+                std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
+                source_reg = temp_reg1;
+                Register_free(temp_reg1);
+                Register_free(source_reg);
+                outfile<< "    move "<< "$v0," << source_reg << "\n";
+                outfile<<"    j " << Function_Exit_lable<< "\n"; 
+                
+
                 // to be implemented 
             }
             break;
@@ -773,7 +841,6 @@ void Second_iter(AstNode * Rootnode, std::string filename){
         }
     }
 }
-
 
 void function_lable_adder(std::string filename){
     std::ofstream outfile;

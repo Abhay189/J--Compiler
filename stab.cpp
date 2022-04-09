@@ -151,7 +151,6 @@ std::vector<std::vector<NodeType>> OperatorTypeChecker(std::string operatorType)
         pp.push_back(p);
     }
     else if(operatorType == "-"){
-        std::cout<<"im here\n";
         std::vector<NodeType> p; 
         p.push_back(NodeType::INT_TYPE);
         p.push_back(NodeType::INT_TYPE);

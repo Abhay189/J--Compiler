@@ -8,14 +8,27 @@ main:
 Lable0 : 
     subu $sp,$sp,8
     sw $ra,0($sp)
-    li $s7,89
-    sw $s7,4($sp)
+    jal Lable1
+    lw $s4,0($sp)
+a case not handled in arithmatic expressions  
+    xori $s6,$s5,1
+    sw $s6,4($sp)
     lw $s6,4($sp)
     move $a0,$s6
-    jal Lprinti
-Lable1 : 
+    jal Lprintb
+Lable2 : 
     lw $ra,0($sp)
     addu $sp,$sp,8
+    jr $ra
+Lable1 : 
+    subu $sp,$sp,4
+    sw $ra,0($sp)
+    li $s6,1
+    move $v0,$s6
+    j Lable3
+Lable3 : 
+    lw $ra,0($sp)
+    addu $sp,$sp,4
     jr $ra
 
 Lprints: 
