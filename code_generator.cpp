@@ -128,14 +128,60 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
                     Register_free(a);
                 }
             }
+            else if(node->AstStringval == ">"){
+                outfile << "    sgt "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == "<"){
+                outfile << "    slt "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == "<="){
+                outfile << "    sle "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == ">="){
+                outfile << "    sge "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == "=="){
+                outfile << "    seq "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            else if(node->AstStringval == "!="){
+                outfile << "    sne "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+            }
+            
             break;
         }
 
         case NodeType::UNARY_EXPRESSION:{
-            outfile << "    negu "<< allocated_reg << "," <<children_reg.at(0)<<"\n";
-            for(auto a : children_reg){
-                    Register_free(a);
-                }
+            if(node->AstStringval == "-"){
+                outfile << "    negu "<< allocated_reg << "," <<children_reg.at(0)<<"\n";
+                for(auto a : children_reg){
+                        Register_free(a);
+                    }
+            }
+            else if(node->AstStringval == "!"){
+                outfile << "    xori "<< allocated_reg << "," <<children_reg.at(0)<< ",1" <<"\n";
+                for(auto a : children_reg){
+                        Register_free(a);
+                    }
+            }
+            
             break;
         }
         //this is the case of a variable.
@@ -149,6 +195,7 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
             
             break;
         }
+        
         default: outfile<<"a case not handled in arithmatic expressions  \n";
     }
     outfile.close();
@@ -391,12 +438,14 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
         case NodeType::FNC_INVOCATION:{
             std::string Function_Identifier = "";
             
+            
             for(auto a : node->ChildrenArray){
                 if(a->AstNodeType == NodeType::ID){
                     Function_Identifier = a->AstStringval;
                     break;
                 }
             }
+            
             auto function_decl_table = Generator_AstStackLookup(Function_Identifier);
 
             if(function_decl_table->is_builtinFunction){
@@ -454,7 +503,7 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                 // li $t0,1
                 // move $a0,$t0
                 // jal Lprintb
-                if(function_decl_table->Identifier_Name == "printb"){
+                else if(function_decl_table->Identifier_Name == "printb"){
                     auto reg = Register_allocator();
                     // auto lable = boolean_exp_handler();          //Will be done like this later on. 
                     //----Temporary code
@@ -516,19 +565,14 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                     }
                 }
                 else if(function_decl_table->Identifier_Name == "printi"){
-                    if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
-                        auto temp_reg = Register_allocator();
-                        auto node1_stab = Generator_AstStackLookup(node->ChildrenArray.at(1)->AstStringval);
-                        if(node1_stab->isglobalVariable){
-                            outfile<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
-                        }else{
-                            outfile<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
-                        }
-                        
-                        outfile<< "    move "<< "$a0," << temp_reg << "\n";
-                        outfile<<"    jal Lprinti\n"; 
-                        Register_free(temp_reg);
-                    }
+                    auto source_reg = Register_allocator();
+                    auto temp_reg1 = Register_allocator(); 
+                    std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                    assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, temp_reg1,children_reg);
+                    source_reg = temp_reg1;
+                    Register_free(source_reg);
+                    outfile<< "    move "<< "$a0," << source_reg << "\n";
+                    outfile<<"    jal Lprinti\n"; 
                 }
             }else{
                 // li $t0,89
@@ -735,7 +779,7 @@ void function_lable_adder(std::string filename){
     std::ofstream outfile;
     outfile.open(filename, std::ios_base::app);
     outfile<< "\nLprints: \n    li	$v0, 4\n    syscall\n    jr $ra\n\n" ;
-    outfile << "    .data\nLTrue : \n    .byte 116 ,114 ,117 ,101 ,0\n    .align 2\n    .text\n    .data\nLFalse : \n    .byte 116 ,114 ,117 ,101 ,0\n    .align 2\n    .text\nLprintb: \n    li $t0,0\n    li $t1,1\n    beq $a0,$t0,LFal\n    beq $a0,$t1,LTru\n    jr $ra\nLFal: \n    la $t0,LFalse\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra\nLTru: \n    la $t0,LTrue\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra \n\n";
+    outfile << "    .data\nLTrue : \n    .byte 116 ,114 ,117 ,101 ,0\n    .align 2\n    .text\n    .data\nLFalse : \n    .byte 102 ,97 ,108 ,115 ,101 ,0\n    .align 2\n    .text\nLprintb: \n    li $t0,0\n    li $t1,1\n    beq $a0,$t0,LFal\n    beq $a0,$t1,LTru\n    jr $ra\nLFal: \n    la $t0,LFalse\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra\nLTru: \n    la $t0,LTrue\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra \n\n";
     outfile<< "Lprintc: \n    li	$v0, 11\n    syscall\n    jr $ra\n\n" ;
     outfile<< "Lprinti: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;
 

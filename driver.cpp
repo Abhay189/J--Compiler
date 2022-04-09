@@ -218,6 +218,7 @@ Driver::~Driver()
 
 bool Driver::start(std::istream &in) 
 {
+    std::cout<<"parser working \n";
     // If the stream is bad or if the stream is at EOF
     // Return 1
     if (!in.good() && in.eof()) {
@@ -233,11 +234,6 @@ bool Driver::start(std::istream &in)
     }
     //For running the global iterator function the first time and including the main and global
     //function and variable declarations in the global stab. 
-    
-
-
-    
-
     return res;
 }
 

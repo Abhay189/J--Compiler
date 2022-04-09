@@ -151,14 +151,15 @@ std::vector<std::vector<NodeType>> OperatorTypeChecker(std::string operatorType)
         pp.push_back(p);
     }
     else if(operatorType == "-"){
+        std::cout<<"im here\n";
         std::vector<NodeType> p; 
         p.push_back(NodeType::INT_TYPE);
         p.push_back(NodeType::INT_TYPE);
         p.push_back(NodeType::INT_TYPE);
 
         std::vector<NodeType> p1; 
-        p.push_back(NodeType::INT_TYPE);
-        p.push_back(NodeType::INT_TYPE);
+        p1.push_back(NodeType::INT_TYPE);
+        p1.push_back(NodeType::INT_TYPE);
         
         pp.push_back(p);
         pp.push_back(p1);
@@ -476,15 +477,18 @@ void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::
                     }
                     case NodeType::UNARY_EXPRESSION: {
                         auto ppp = OperatorTypeChecker(a->AstStringval);
-                        for(auto a : ppp){
-                            if(a[1] == NodeType::BOOL_TYPE){
-                                Function_Invocation_table.Formals.push_back("BOOLEAN");
-                            }
-                            else if(a[1] == NodeType::INT_TYPE){
+                        if(a->AstStringval == "-"){
+                            auto aa = ppp[1];
+                            if(aa[1] == NodeType::INT_TYPE){
                                 Function_Invocation_table.Formals.push_back("INT");
                             }
                         }
-                        
+                        else if(a->AstStringval == "!"){
+                            auto aa = ppp[0];
+                            if(aa[1] == NodeType::INT_TYPE){
+                                Function_Invocation_table.Formals.push_back("BOOLEAN");
+                            }
+                        }
                         break;
                     }
                 }
