@@ -6,17 +6,11 @@ main:
     syscall
 
 Lable0 : 
-    subu $sp,$sp,20
+    subu $sp,$sp,4
     sw $ra,0($sp)
-    li $s7,2
-    sw $s7,4($sp)
-    li $s7,1
-    sw $s7,8($sp)
-    li $s7,0
-    sw $s7,12($sp)
     .data
 Lable2 :
-    .byte 102 ,105 ,98 ,40 ,48 ,41 ,32 ,61 ,32 ,48 ,10 ,0
+    .byte 97 ,115 ,100 ,102 ,0
     .align 2
     .text
     la $s7,Lable2
@@ -24,64 +18,34 @@ Lable2 :
     jal Lprints
     .data
 Lable3 :
-    .byte 102 ,105 ,98 ,40 ,49 ,41 ,32 ,61 ,32 ,49 ,10 ,0
+    .byte 8 ,9 ,10 ,12 ,13 ,34 ,39 ,92 ,0
     .align 2
     .text
     la $s7,Lable3
     move $a0,$s7
     jal Lprints
+    .data
 Lable4 :
-    li $s6,47
-    lw $s5,4($sp)
-    slt $s7,$s5,$s6
+    .byte 1 ,26 ,0
+    .align 2
+    .text
+    la $s7,Lable4
+    move $a0,$s7
+    jal Lprints
+    li $s7,1
     beqz $s7,Lable5
     .data
 Lable6 :
-    .byte 102 ,105 ,98 ,40 ,0
+    .byte 32 ,97 ,115 ,100 ,102 ,0
     .align 2
     .text
     la $s7,Lable6
     move $a0,$s7
     jal Lprints
-    lw $s5,4($sp)
-    move $a0,$s5
-    jal Lprinti
-    .data
-Lable7 :
-    .byte 41 ,32 ,61 ,32 ,0
-    .align 2
-    .text
-    la $s5,Lable7
-    move $a0,$s5
-    jal Lprints
-    lw $s6,12($sp)
-    lw $s4,8($sp)
-    addu $s5,$s4,$s6
-    sw $s5,16($sp)
-    lw $s5,16($sp)
-    move $a0,$s5
-    jal Lprinti
-    lw $s5,8($sp)
-    sw $s5,12($sp)
-    lw $s5,16($sp)
-    sw $s5,8($sp)
-    .data
-Lable8 :
-    .byte 10 ,0
-    .align 2
-    .text
-    la $s5,Lable8
-    move $a0,$s5
-    jal Lprints
-    li $s4,1
-    lw $s6,4($sp)
-    addu $s5,$s6,$s4
-    sw $s5,4($sp)
-    j Lable4
 Lable5 :
 Lable1 : 
     lw $ra,0($sp)
-    addu $sp,$sp,20
+    addu $sp,$sp,4
     jr $ra
 
 Lprints: 
