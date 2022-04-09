@@ -11,6 +11,10 @@ std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t
 int stack_pointer = 0;
 int localVariables = 0;
 std::string Current_function_identifier = "";
+std::vector<std::string> if_statements_exit_lable_stack; 
+std::vector<std::string> else_statement_lable_stack ;
+
+
 //For lookup of any identifier.
 SymbolTable* Generator_AstStackLookup(std::string identifier){
     std::unordered_map<std::string, SymbolTable> * temp;
@@ -337,6 +341,12 @@ void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
             outfile << "    lw $ra,0($sp)\n";
             outfile << "    addu $sp,$sp,"<< memory_ <<"\n" ;
             outfile<< "    jr $ra\n";
+            break;
+        }
+        case NodeType::IF_STATEMENT: {
+            auto if_statement_exit_lable = if_statements_exit_lable_stack.back();
+            outfile<< if_statement_exit_lable<< " :\n";
+            if_statements_exit_lable_stack.pop_back(); 
             break;
         }
     }
@@ -773,6 +783,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 outfile << "    sw $a"<< std::to_string(c) <<","<< VAriableStackLocation <<"($sp)\n";
                 c++;
             }
+            break;
         }
 
         case NodeType::RETURN:{
@@ -804,6 +815,45 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             break;
         }
 
+        case NodeType::IF_STATEMENT:{
+            bool contain_else = false ;
+            for(auto a : node->ChildrenArray){
+                if(a->AstNodeType == NodeType::ELSE_STATEMENT){
+                    contain_else = true;
+                }
+            }
+            if(!contain_else){
+                auto if_statement_end_Lable = NewlableGenerator();
+                if_statements_exit_lable_stack.push_back(if_statement_end_Lable);
+                auto temp_reg1 = Register_allocator(); 
+                std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
+                Register_free(temp_reg1);
+                outfile<< "    beqz "<< temp_reg1<<","<< if_statement_end_Lable<< "\n";
+            }else{
+                auto if_statement_end_Lable = NewlableGenerator();
+                auto else_statement_end_lable = NewlableGenerator();
+                else_statement_lable_stack.push_back(else_statement_end_lable);
+                if_statements_exit_lable_stack.push_back(if_statement_end_Lable);
+                auto temp_reg1 = Register_allocator(); 
+                std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
+                Register_free(temp_reg1);
+                outfile<< "    beqz "<< temp_reg1<<","<< else_statement_end_lable<< "\n";
+            }
+            break;
+        }
+
+        case NodeType::ELSE_STATEMENT:{
+            auto if_exit_lable = if_statements_exit_lable_stack.back();
+            auto else_exit_Lable = else_statement_lable_stack.back();
+            outfile<< "    j "<< if_exit_lable<< "\n";
+            outfile<< else_exit_Lable<<" :\n";
+            if(!else_statement_lable_stack.empty()){
+                else_statement_lable_stack.pop_back();
+            }
+            break;
+        }
         default: break;
     }
     outfile.close();

@@ -6,27 +6,22 @@ main:
     syscall
 
 Lable0 : 
-    subu $sp,$sp,8
-    sw $ra,0($sp)
-    jal Lable1
-    lw $s4,0($sp)
-a case not handled in arithmatic expressions  
-    xori $s6,$s5,1
-    sw $s6,4($sp)
-    lw $s6,4($sp)
-    move $a0,$s6
-    jal Lprintb
-Lable2 : 
-    lw $ra,0($sp)
-    addu $sp,$sp,8
-    jr $ra
-Lable1 : 
     subu $sp,$sp,4
     sw $ra,0($sp)
-    li $s6,1
-    move $v0,$s6
-    j Lable3
-Lable3 : 
+    li $s6,9
+    li $s5,88
+    sgt $s7,$s5,$s6
+    beqz $s7,Lable3
+    li $s5,5889
+    move $a0,$s5
+    jal Lprinti
+    j Lable2
+Lable3 :
+    li $s5,58
+    move $a0,$s5
+    jal Lprinti
+Lable2 :
+Lable1 : 
     lw $ra,0($sp)
     addu $sp,$sp,4
     jr $ra

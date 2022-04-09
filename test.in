@@ -1,9 +1,7 @@
 main(){
-        boolean gg;
-        gg = !func();
-        printb(gg);
-}
-
-boolean func(){
-        return true;
+        if(88>9){
+                printi(5889);
+        }else{
+                printi(58);
+        }
 }

@@ -33,6 +33,9 @@ class SymbolTable{
     //------For identifying main function
     bool isMainFunction = false;
 
+    //------For if statements : 
+    std::string If_statement_exit_lable = "";
+
 
 
 }

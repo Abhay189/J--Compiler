@@ -82,5 +82,6 @@
             "binaryPath": "/home/abhay_comp/CPSC-411-Github/CPSC-411-Project/parser",
             "binaryArgs": []
         }
-    ]
+    ],
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }

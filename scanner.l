@@ -69,7 +69,7 @@ ID              {alpha}({alpha}|{digit}|{underscore})*
 ","         return Token::T_COMMA;
 
 {ID}        {yylval->strVal = new std::string(yytext); return Token::T_ID;}
-{num}       {yylval->ival = std::stoll(yytext); std::cout<<yylval->ival<<std::endl; return Token::T_NUM;}
+{num}       {yylval->ival = std::stoll(yytext); return Token::T_NUM;}
 
 "\""                            {yymore();BEGIN(STRING);}
 <STRING>\n                      {std::cerr << "error: newline in string literal at or near line " << *loc -1<< std::endl;}
