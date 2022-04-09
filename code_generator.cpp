@@ -13,7 +13,8 @@ int localVariables = 0;
 std::string Current_function_identifier = "";
 std::vector<std::string> if_statements_exit_lable_stack; 
 std::vector<std::string> else_statement_lable_stack ;
-
+std::vector<std::string> while_statement_exit_lable_stack;
+std::vector<std::string> while_statement_entry_lable_stack;
 
 //For lookup of any identifier.
 SymbolTable* Generator_AstStackLookup(std::string identifier){
@@ -349,6 +350,14 @@ void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
             if_statements_exit_lable_stack.pop_back(); 
             break;
         }
+        case NodeType::WHILE_STATEMENT:{
+            auto while_statement_entry_lable = while_statement_entry_lable_stack.back();
+            auto while_statement_exit_lable = while_statement_exit_lable_stack.back();
+            outfile<<"    j "<<while_statement_entry_lable<<"\n";
+            outfile<<while_statement_exit_lable<<" :\n";
+            while_statement_entry_lable_stack.pop_back();
+            while_statement_exit_lable_stack.pop_back();
+        }
     }
     outfile.close();
 }
@@ -603,6 +612,9 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                     outfile<< "    jal Lprintb\n"; 
                     Register_free(reg);
                 }
+                else if(function_decl_table->Identifier_Name == "getchar"){
+                    outfile<<"    jal Lgetchar\n";
+                }
                 else if(function_decl_table->Identifier_Name == "printc"){
                     if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
                         auto temp_reg = Register_allocator();
@@ -854,6 +866,23 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             }
             break;
         }
+        
+        case NodeType::WHILE_STATEMENT:{
+            auto while_statement_entry_Lable = NewlableGenerator();
+            auto while_statement_exit_lable = NewlableGenerator();
+            while_statement_entry_lable_stack.push_back(while_statement_entry_Lable);
+            while_statement_exit_lable_stack.push_back(while_statement_exit_lable);
+            outfile<<while_statement_entry_Lable<<" :\n";
+            outfile.close();
+            auto temp_reg1 = Register_allocator(); 
+            std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+            assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
+            Register_free(temp_reg1);
+            outfile.open(Out_file_name, std::ios_base::app);
+            outfile<< "    beqz "<< temp_reg1<<","<< while_statement_exit_lable<< "\n";
+            break;
+        }
+
         default: break;
     }
     outfile.close();
@@ -899,6 +928,7 @@ void function_lable_adder(std::string filename){
     outfile << "    .data\nLTrue : \n    .byte 116 ,114 ,117 ,101 ,0\n    .align 2\n    .text\n    .data\nLFalse : \n    .byte 102 ,97 ,108 ,115 ,101 ,0\n    .align 2\n    .text\nLprintb: \n    li $t0,0\n    li $t1,1\n    beq $a0,$t0,LFal\n    beq $a0,$t1,LTru\n    jr $ra\nLFal: \n    la $t0,LFalse\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra\nLTru: \n    la $t0,LTrue\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra \n\n";
     outfile<< "Lprintc: \n    li	$v0, 11\n    syscall\n    jr $ra\n\n" ;
     outfile<< "Lprinti: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;
+    outfile << "Lgetchar:\n    li $v0, 12\n    syscall\n    jr $ra\n\n";
 
     outfile.close();
 }

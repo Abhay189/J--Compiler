@@ -1,7 +1,9 @@
 main(){
-        if(88>9){
-                printi(5889);
-        }else{
-                printi(58);
-        }
+        int gg;
+        gg = out();
+
+}
+
+int out(){
+        return 87;
 }
