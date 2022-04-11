@@ -85,7 +85,7 @@ ID              {alpha}({alpha}|{digit}|{underscore})*
 
 "//"             BEGIN(COMMENT);
 <COMMENT>.
-<COMMENT>\n     {BEGIN(INITIAL); }
+<COMMENT>\n     {BEGIN(INITIAL); loc->lines();}
 
 .               {std::cerr << "Illegal char at line " << *loc << std::endl;exit(EXIT_FAILURE);}
 

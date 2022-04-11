@@ -1,21 +1,19 @@
-/********************************
- * Example C++ Parser
- * Written for CPSC 411 Tutorial
- * File: scanner.cpp
- * Shankar Ganesh
- * *****************************/
-
-
 #include <cstdlib>
 #include <cerrno>
 #include <cstring>
 
 #include "driver.hpp"
 
+
+/**
+ * @brief this is the main function that calls the driver to make the parser and the scannar. and also do the code geneartion. 
+ * 
+ * @param argc 
+ * @param argv The executable needs to be called with the input file. 
+ * @return int 
+ */
 int main(int argc, char **argv) {
 
-    // Create a driver. 
-    // Driver can be considered an instance of my compiler
     Driver *driver;
     std::istream *input = &std::cin;
 
@@ -34,10 +32,13 @@ int main(int argc, char **argv) {
         input = &file;
     }
 
-    // The constructor just sets the filename, does not open the file
-    // You can fix this in your implementation
-    (argc == 2) ? driver = new Driver(argv[1]) : driver = new Driver("stdin"); 
-
+    if (argc == 2) {
+        driver = new Driver(argv[1]);
+        } 
+    else{
+        std::cerr<<"Error: No input File provided \n";
+        exit(EXIT_FAILURE);
+        } 
     bool res = driver->start(*input);
     
     if (file.is_open()) file.close();

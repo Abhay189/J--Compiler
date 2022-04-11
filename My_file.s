@@ -5,50 +5,34 @@ main:
     li $v0,10 
     syscall
 
-Lable1 : 
-    subu $sp,$sp,4
-    sw $ra,0($sp)
-    .data
-Lable3 :
-    .byte 10 ,0
-    .align 2
-    .text
-    la $s7,Lable3
-    move $a0,$s7
-    jal Lprints
-Lable2 : 
-    lw $ra,0($sp)
-    addu $sp,$sp,4
-    jr $ra
 Lable0 : 
-    subu $sp,$sp,4
+    subu $sp,$sp,8
     sw $ra,0($sp)
-    li $s5,123
-    negu $s6,$s5
-    move $a0,$s6
+    li $s7,0
+    sw $s7,4($sp)
+Lable2 :
+    li $s6,20
+    lw $s5,4($sp)
+    slt $s7,$s5,$s6
+    beqz $s7,Lable3
+    lw $s5,4($sp)
+    move $a0,$s5
     jal Lprinti
-    jal Lable1
-    li $s5,2147483648
-    negu $s6,$s5
-    move $a0,$s6
-    jal Lprinti
-    jal Lable1
-    li $s4,2147483648
-    negu $s5,$s4
-    negu $s6,$s5
-    move $a0,$s6
-    jal Lprinti
-    jal Lable1
-    li $s3,2147483648
-    negu $s4,$s3
-    negu $s5,$s4
-    negu $s6,$s5
-    move $a0,$s6
-    jal Lprinti
-    jal Lable1
-Lable4 : 
+    li $s5,15
+    lw $s6,4($sp)
+    seq $s5,$s6,$s5
+    beqz $s5,Lable4
+    j Lable3
+Lable4 :
+    li $s5,1
+    lw $s4,4($sp)
+    addu $s6,$s4,$s5
+    sw $s6,4($sp)
+    j Lable2
+Lable3 :
+Lable1 : 
     lw $ra,0($sp)
-    addu $sp,$sp,4
+    addu $sp,$sp,8
     jr $ra
 
 Lprints: 
