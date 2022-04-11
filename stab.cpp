@@ -347,6 +347,26 @@ void First_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::s
                     std::cerr << "error: Multiple Declerations of a function \"" + function_stab.Identifier_Name + "\"\n";
                     exit(EXIT_FAILURE);
                 }
+                //this is a semantic check to see if the function has a return type or not. 
+                if(function_stab.ReturnType != "VOID"){
+                    int return_counter = 0; 
+                    AstNode * Function_block;
+                    for(auto a : Node->ChildrenArray){
+                        if(a->AstNodeType == NodeType::BLOCK){
+                            Function_block = a;
+                            break;
+                        }
+                    }
+                    for(auto b : Function_block->ChildrenArray){
+                        if(b->AstNodeType == NodeType::RETURN){
+                            return_counter++;
+                        }
+                    }
+                    if(return_counter == 0){
+                        std::cerr << "error: No return statement for the non-void function \"" + function_stab.Identifier_Name + "\"\n";
+                        exit(EXIT_FAILURE);
+                    }
+                }
                 break;
             }
         //Case to deal with global variable declerations 

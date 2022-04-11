@@ -251,6 +251,8 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
             break;
         }
 
+
+
         default: outfile<<"a case not handled in arithmatic expressions  \n";
     }
     outfile.close();
@@ -956,6 +958,7 @@ void function_lable_adder(std::string filename){
     outfile<< "Lprintc: \n    li	$v0, 11\n    syscall\n    jr $ra\n\n" ;
     outfile<< "Lprinti: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;
     outfile << "Lgetchar:\n    li $v0, 12\n    syscall\n    jr $ra\n\n";
+    outfile << "error:\n    li $v0, 4\n    syscall\n    li $v0, 10\n    syscall\n\n";
 
     outfile.close();
 }

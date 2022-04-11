@@ -7,3 +7,5 @@ int foo(int x) {
 main() {
         foo(-1);
 }
+
+//this is supposed to be a semantic check.
