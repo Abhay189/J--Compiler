@@ -6,26 +6,19 @@ main:
     syscall
 
 Lable0 : 
-    subu $sp,$sp,8
+    subu $sp,$sp,4
     sw $ra,0($sp)
+    .data
 Lable2 :
-    li $s5,1
-    negu $s6,$s5
-    lw $s4,0($sp)
-a case not handled in arithmatic expressions  
-    sne $s7,$s5,$s6
-    beqz $s7,Lable3
-    jal Lgetchar
-    move $s5,$v0
-    sw $s5,4($sp)
-    lw $s7,4($sp)
+    .byte 72 ,101 ,108 ,108 ,111 ,44 ,32 ,119 ,111 ,114 ,108 ,100 ,33 ,10 ,0
+    .align 2
+    .text
+    la $s7,Lable2
     move $a0,$s7
-    jal Lprintc
-    j Lable2
-Lable3 :
+    jal Lprints
 Lable1 : 
     lw $ra,0($sp)
-    addu $sp,$sp,8
+    addu $sp,$sp,4
     jr $ra
 
 Lprints: 

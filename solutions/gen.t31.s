@@ -5,27 +5,48 @@ main:
     li $v0,10 
     syscall
 
-Lable0 : 
-    subu $sp,$sp,8
-    sw $ra,0($sp)
+    .data
+Lable1 :
+    .word 0
+    .text
+    .data
 Lable2 :
-    li $s5,1
-    negu $s6,$s5
-    lw $s4,0($sp)
-a case not handled in arithmatic expressions  
-    sne $s7,$s5,$s6
-    beqz $s7,Lable3
-    jal Lgetchar
-    move $s5,$v0
-    sw $s5,4($sp)
-    lw $s7,4($sp)
-    move $a0,$s7
-    jal Lprintc
-    j Lable2
-Lable3 :
-Lable1 : 
+    .word 0
+    .text
+Lable0 : 
+    subu $sp,$sp,4
+    sw $ra,0($sp)
+    li $s7,12
+    sw $s7,Lable1
+    jal Lable3
+    li $s4,2
+    lw $s3,Lable2
+    subu $s5,$s3,$s4
+    lw $s3,Lable1
+    bnez $s5,Lable5
+    .data
+Lable6 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable6
+    j error
+Lable5 :
+    div $s6,$s3,$s5
+    move $a0,$s6
+    jal Lprinti
+Lable4 : 
     lw $ra,0($sp)
-    addu $sp,$sp,8
+    addu $sp,$sp,4
+    jr $ra
+Lable3 : 
+    subu $sp,$sp,4
+    sw $ra,0($sp)
+    li $s6,2
+    sw $s6,Lable2
+Lable7 : 
+    lw $ra,0($sp)
+    addu $sp,$sp,4
     jr $ra
 
 Lprints: 

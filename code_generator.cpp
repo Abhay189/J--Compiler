@@ -58,7 +58,8 @@ std::string Register_allocator(){
         return temp;
     }
     else{
-        "Error : Over complex expression. Out of regesters !";
+        std::cerr<<"Error : Over complex expression. Out of regesters !\n";
+        exit(EXIT_FAILURE);
     }
     return "";
 }
@@ -68,16 +69,16 @@ void Register_free(std::string reg){
 }
 
 void Global_Valriablehandler(AstNode * RootNode,std::string Out_file_name){
-    std::ofstream outfile;
-    outfile.open(Out_file_name, std::ios_base::app);
+    // std::ofstream std::cout;
+    // std::cout.open(Out_file_name, std::ios_base::app);
     for(auto a : RootNode->ChildrenArray){
         switch(a->AstNodeType){
             case NodeType::VAR_DECL:{
                 RootNode->Node_stab.at(a->ChildrenArray[1]->AstStringval).isglobalVariable = true;
-                outfile << "    .data\n";
-                outfile<< RootNode->Node_stab.at(a->ChildrenArray[1]->AstStringval).Enterence_lable_Name << " :\n";
-                outfile<< "    .word 0\n";
-                outfile<< "    .text\n";
+                std::cout << "    .data\n";
+                std::cout<< RootNode->Node_stab.at(a->ChildrenArray[1]->AstStringval).Enterence_lable_Name << " :\n";
+                std::cout<< "    .word 0\n";
+                std::cout<< "    .text\n";
                 break;
             }
         }
@@ -85,29 +86,29 @@ void Global_Valriablehandler(AstNode * RootNode,std::string Out_file_name){
 }
 
 void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::string allocated_reg, std::vector<std::string> children_reg){
-    std::ofstream outfile;
-    outfile.open(Out_file_name, std::ios_base::app);
+    // std::ofstream std::cout;
+    // std::cout.open(Out_file_name, std::ios_base::app);
     switch(node->AstNodeType){
         case NodeType::NUMBEER:{
-            outfile << "    li "<< allocated_reg << "," <<node->AstIntval<<"\n";
+            std::cout << "    li "<< allocated_reg << "," <<node->AstIntval<<"\n";
             break;
         }
 
         case NodeType::OPERATOR:{
             if(node->AstStringval == "+"){
-                outfile << "    addu "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    addu "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "*"){
-                outfile << "    mul "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    mul "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "-"){
-                outfile << "    subu "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    subu "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
@@ -115,17 +116,17 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
             else if(node->AstStringval == "/"){
                 auto devision_lable = NewlableGenerator();
                 auto error_lable = NewlableGenerator();
-                outfile << "    bnez "<<children_reg.at(0)<< "," <<devision_lable <<"\n";
-                outfile << "    .data\n";
-                outfile << error_lable << " :\n";
-                outfile << "    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0\n";
-                outfile << "    .align 2\n";
-                outfile << "    .text\n";
-                outfile << "    la $a0,"<<error_lable<<"\n";
-                outfile << "    j error\n";
+                std::cout << "    bnez "<<children_reg.at(0)<< "," <<devision_lable <<"\n";
+                std::cout << "    .data\n";
+                std::cout << error_lable << " :\n";
+                std::cout << "    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0\n";
+                std::cout << "    .align 2\n";
+                std::cout << "    .text\n";
+                std::cout << "    la $a0,"<<error_lable<<"\n";
+                std::cout << "    j error\n";
 
-                outfile << devision_lable << " :\n";
-                outfile << "    div "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << devision_lable << " :\n";
+                std::cout << "    div "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
@@ -133,77 +134,77 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
             else if(node->AstStringval == "%"){
                 auto devision_lable = NewlableGenerator();
                 auto error_lable = NewlableGenerator();
-                outfile << "    bnez "<<children_reg.at(0)<< "," <<devision_lable <<"\n";
-                outfile << "    .data\n";
-                outfile << error_lable << " :\n";
-                outfile << "    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0\n";
-                outfile << "    .align 2\n";
-                outfile << "    .text\n";
-                outfile << "    la $a0,"<<error_lable<<"\n";
-                outfile << "    j error\n";
+                std::cout << "    bnez "<<children_reg.at(0)<< "," <<devision_lable <<"\n";
+                std::cout << "    .data\n";
+                std::cout << error_lable << " :\n";
+                std::cout << "    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0\n";
+                std::cout << "    .align 2\n";
+                std::cout << "    .text\n";
+                std::cout << "    la $a0,"<<error_lable<<"\n";
+                std::cout << "    j error\n";
 
-                outfile << devision_lable << " :\n";
-                outfile << "    rem "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << devision_lable << " :\n";
+                std::cout << "    rem "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == ">"){
-                outfile << "    sgt "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    sgt "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "<"){
-                outfile << "    slt "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    slt "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "<="){
-                outfile << "    sle "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    sle "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == ">="){
-                outfile << "    sge "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    sge "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "=="){
-                outfile << "    seq "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    seq "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "!="){
-                outfile << "    sne "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
+                std::cout << "    sne "<< allocated_reg << "," <<children_reg.at(1)<<"," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
             }
             else if(node->AstStringval == "||"){
                 auto Node_exit_lable = NewlableGenerator();
-                outfile<< "    move "<< allocated_reg<<","<<children_reg.at(0)<<"\n" ;
-                outfile<< "    beqz "<< children_reg.at(1) << "," << Node_exit_lable << "\n";
-                outfile<< "    move "<< allocated_reg<<","<<children_reg.at(1)<<"\n" ;
+                std::cout<< "    move "<< allocated_reg<<","<<children_reg.at(0)<<"\n" ;
+                std::cout<< "    beqz "<< children_reg.at(1) << "," << Node_exit_lable << "\n";
+                std::cout<< "    move "<< allocated_reg<<","<<children_reg.at(1)<<"\n" ;
                 for(auto a : children_reg){
                     Register_free(a);
                 }
-                outfile<< Node_exit_lable <<" :\n";
+                std::cout<< Node_exit_lable <<" :\n";
             }
             else if(node->AstStringval == "&&"){
                 auto Node_exit_lable = NewlableGenerator();
-                outfile<< "    move "<< allocated_reg<<","<<children_reg.at(0)<<"\n" ;
-                outfile<< "    beqz "<< allocated_reg << "," << Node_exit_lable << "\n";
-                outfile<< "    move "<< allocated_reg<<","<<children_reg.at(1)<<"\n" ;
-                outfile<< "    beqz "<< allocated_reg << "," << Node_exit_lable << "\n";
+                std::cout<< "    move "<< allocated_reg<<","<<children_reg.at(0)<<"\n" ;
+                std::cout<< "    beqz "<< allocated_reg << "," << Node_exit_lable << "\n";
+                std::cout<< "    move "<< allocated_reg<<","<<children_reg.at(1)<<"\n" ;
+                std::cout<< "    beqz "<< allocated_reg << "," << Node_exit_lable << "\n";
                 for(auto a : children_reg){
                     Register_free(a);
                 }
-                outfile<< Node_exit_lable <<" :\n";
+                std::cout<< Node_exit_lable <<" :\n";
             }
             
             break;
@@ -211,13 +212,13 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
 
         case NodeType::UNARY_EXPRESSION:{
             if(node->AstStringval == "-"){
-                outfile << "    negu "<< allocated_reg << "," <<children_reg.at(0)<<"\n";
+                std::cout << "    negu "<< allocated_reg << "," <<children_reg.at(0)<<"\n";
                 for(auto a : children_reg){
                         Register_free(a);
                     }
             }
             else if(node->AstStringval == "!"){
-                outfile << "    xori "<< allocated_reg << "," <<children_reg.at(0)<< ",1" <<"\n";
+                std::cout << "    xori "<< allocated_reg << "," <<children_reg.at(0)<< ",1" <<"\n";
                 for(auto a : children_reg){
                         Register_free(a);
                     }
@@ -231,9 +232,9 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
             //This if statement makes sure that this identifier is not a part of a function invocation. 
             if(node_stab->ReturnType == ""){
                 if(node_stab->isglobalVariable){
-                    outfile << "    lw "<< allocated_reg << "," <<node_stab->Enterence_lable_Name<<"\n";
+                    std::cout << "    lw "<< allocated_reg << "," <<node_stab->Enterence_lable_Name<<"\n";
                 }else{
-                    outfile << "    lw "<< allocated_reg << "," <<node_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+                    std::cout << "    lw "<< allocated_reg << "," <<node_stab->stack_Pointer_Location<<"($sp)"<<"\n";
                 }
             }
             
@@ -242,20 +243,20 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
         }
         
         case NodeType::TRUE:{
-            outfile << "    li "<< allocated_reg << "," <<"1"<<"\n";
+            std::cout << "    li "<< allocated_reg << "," <<"1"<<"\n";
             break;
         }
 
         case NodeType::FALSE:{
-            outfile << "    li "<< allocated_reg << "," <<"0"<<"\n";
+            std::cout << "    li "<< allocated_reg << "," <<"0"<<"\n";
             break;
         }
 
 
 
-        default: outfile<<"a case not handled in arithmatic expressions  \n";
+        default: std::cout<<"a case not handled in arithmatic expressions  \n";
     }
-    outfile.close();
+    // std::cout.close();
 }
 
 void assignment_expression_treversal(AstNode * node, std::string outfile, std::string allocated_reg, std::vector<std::string> children_reg){
@@ -327,8 +328,8 @@ int memory_counter(AstNode* BaseNode){
 }
 
 void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
-    std::ofstream outfile;
-    outfile.open(Out_file_name, std::ios_base::app);
+    // std::ofstream std::cout;
+    // std::cout.open(Out_file_name, std::ios_base::app);
     switch (node->AstNodeType)
     {
         case NodeType::MAIN_FNC_DECL: {
@@ -343,10 +344,10 @@ void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
             SymbolTable *main_symbol_table = Generator_AstStackLookup(main_function_ID);
             int memory_ = main_symbol_table->memory_Size;
             std::string lable = main_symbol_table->Exit_lable_name;
-            outfile << lable << " : \n" ;
-            outfile << "    lw $ra,0($sp)\n";
-            outfile << "    addu $sp,$sp,"<< memory_ <<"\n" ;
-            outfile<< "    jr $ra\n";
+            std::cout << lable << " : \n" ;
+            std::cout << "    lw $ra,0($sp)\n";
+            std::cout << "    addu $sp,$sp,"<< memory_ <<"\n" ;
+            std::cout<< "    jr $ra\n";
             break;
         }
         case NodeType::FNC_DECL: {
@@ -361,33 +362,33 @@ void Second_Iter_Calc_NodeExit(AstNode * node, std::string Out_file_name){
             SymbolTable *Function_symbol_table = Generator_AstStackLookup(function_ID);
             int memory_ = Function_symbol_table->memory_Size;
             std::string lable = Function_symbol_table->Exit_lable_name;
-            outfile << lable << " : \n" ;
-            outfile << "    lw $ra,0($sp)\n";
-            outfile << "    addu $sp,$sp,"<< memory_ <<"\n" ;
-            outfile<< "    jr $ra\n";
+            std::cout << lable << " : \n" ;
+            std::cout << "    lw $ra,0($sp)\n";
+            std::cout << "    addu $sp,$sp,"<< memory_ <<"\n" ;
+            std::cout<< "    jr $ra\n";
             break;
         }
         case NodeType::IF_STATEMENT: {
             auto if_statement_exit_lable = if_statements_exit_lable_stack.back();
-            outfile<< if_statement_exit_lable<< " :\n";
+            std::cout<< if_statement_exit_lable<< " :\n";
             if_statements_exit_lable_stack.pop_back(); 
             break;
         }
         case NodeType::WHILE_STATEMENT:{
             auto while_statement_entry_lable = while_statement_entry_lable_stack.back();
             auto while_statement_exit_lable = while_statement_exit_lable_stack.back();
-            outfile<<"    j "<<while_statement_entry_lable<<"\n";
-            outfile<<while_statement_exit_lable<<" :\n";
+            std::cout<<"    j "<<while_statement_entry_lable<<"\n";
+            std::cout<<while_statement_exit_lable<<" :\n";
             while_statement_entry_lable_stack.pop_back();
             while_statement_exit_lable_stack.pop_back();
         }
     }
-    outfile.close();
+    // std::cout.close();
 }
 
 void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
-    std::ofstream outfile;
-    outfile.open(Out_file_name, std::ios_base::app);
+    // std::ofstream std::cout;
+    // std::cout.open(Out_file_name, std::ios_base::app);
     switch (node->AstNodeType)
     {
         case NodeType::OPERATOR: {
@@ -435,18 +436,18 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                             temp_source =  std::to_string(subEq_leftChild_nodestab->stack_Pointer_Location)+"($sp)";
                         }
                         if(!is_global){
-                            outfile << "    lw " << temp_regg << "," << temp_source <<"\n";
-                            outfile << "    sw " << temp_regg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                            std::cout << "    lw " << temp_regg << "," << temp_source <<"\n";
+                            std::cout << "    sw " << temp_regg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
                         }
                         else{
                             //save this value in the ast of the variable.
-                            outfile << "    lw " << temp_regg << "," << temp_source <<"\n";
-                            outfile << "    sw " << temp_regg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                            std::cout << "    lw " << temp_regg << "," << temp_source <<"\n";
+                            std::cout << "    sw " << temp_regg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
                         }
                         
                         Register_free(reg);
                         Register_free(temp_regg);
-                        outfile.close();
+                        // std::cout.close();
                         return;
                         break;
                     }
@@ -484,12 +485,12 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                         // move $t0,$v0
                         // sw $t0,4($sp)
                         auto local_Var = Register_allocator();
-                        outfile << "    move " << local_Var << ","<<"$v0\n";
+                        std::cout << "    move " << local_Var << ","<<"$v0\n";
                         if(is_global){
-                            outfile << "    sw " << variable_symbol_table->Enterence_lable_Name << ","<<"$v0\n";
+                            std::cout << "    sw " << variable_symbol_table->Enterence_lable_Name << ","<<"$v0\n";
                         }
                         else{
-                            outfile << "    sw " << local_Var << "," << std::to_string(variable_symbol_table->stack_Pointer_Location)<<"($sp)\n";
+                            std::cout << "    sw " << local_Var << "," << std::to_string(variable_symbol_table->stack_Pointer_Location)<<"($sp)\n";
 
                         }
                         Register_free(local_Var);
@@ -500,20 +501,20 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                 }
                 if(is_expression){
                     if(!is_global){
-                        outfile << "    sw " << source_reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                        std::cout << "    sw " << source_reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
                     }
                     else{
-                        outfile << "    sw " << source_reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                        std::cout << "    sw " << source_reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
                     }
                 }else{
                     if(!is_global){
-                        outfile << "    li " << reg << "," << value <<"\n";
-                        outfile << "    sw " << reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
+                        std::cout << "    li " << reg << "," << value <<"\n";
+                        std::cout << "    sw " << reg << "," << VAriableStackLocation<<"($sp)\n"; // To do: create a scope stack for variable identification. 
                     }
                     else{
                         //save this value in the ast of the variable.
-                        outfile << "    li " << reg << "," << value <<"\n";
-                        outfile << "    sw " << reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
+                        std::cout << "    li " << reg << "," << value <<"\n";
+                        std::cout << "    sw " << reg << "," << variable_symbol_table->Enterence_lable_Name << "\n";
                     }
                 }
                 Register_free(reg);
@@ -546,9 +547,9 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                             break;
                         }
                     }
-                    outfile<< "    .data\n";
-                    outfile<< lable << " :\n";
-                    outfile<< "    .byte ";
+                    std::cout<< "    .data\n";
+                    std::cout<< lable << " :\n";
+                    std::cout<< "    .byte ";
                     int stringlen = printParam.size();
                     int counter = 1;
                     for (int i = 0; i < printParam.size(); i++){
@@ -559,31 +560,31 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                                 counter++;
                                 auto b = printParam[i];
                                 switch(b){
-                                    case 'b': outfile<< int('\b')<< " ,"; break; 
-                                    case 'f': outfile<< int('\f')<< " ,"; break; 
-                                    case 't': outfile<< int('\t')<< " ,"; break; 
-                                    case 'r': outfile<< int('\r')<< " ,"; break; 
-                                    case 'n': outfile<< int('\n')<< " ,"; break; 
-                                    case '\'': outfile<< int('\'')<< " ,"; break; 
-                                    case '\"': outfile<< int('\"')<< " ,"; break; 
-                                    case '\\': outfile<< int('\\')<< " ,"; break; 
-                                    default: outfile<< int(b)<< " ,"; break;
+                                    case 'b': std::cout<< int('\b')<< " ,"; break; 
+                                    case 'f': std::cout<< int('\f')<< " ,"; break; 
+                                    case 't': std::cout<< int('\t')<< " ,"; break; 
+                                    case 'r': std::cout<< int('\r')<< " ,"; break; 
+                                    case 'n': std::cout<< int('\n')<< " ,"; break; 
+                                    case '\'': std::cout<< int('\'')<< " ,"; break; 
+                                    case '\"': std::cout<< int('\"')<< " ,"; break; 
+                                    case '\\': std::cout<< int('\\')<< " ,"; break; 
+                                    default: std::cout<< int(b)<< " ,"; break;
                                 }
                             }else{
-                                outfile<< int(a)<< " ,";
+                                std::cout<< int(a)<< " ,";
                             }
                             
                         }
                         counter++;
                     }
-                    outfile << "0\n";
-                    outfile<< "    .align 2\n";
-                    outfile<< "    .text\n";
+                    std::cout << "0\n";
+                    std::cout<< "    .align 2\n";
+                    std::cout<< "    .text\n";
 
                     auto reg = Register_allocator();
-                    outfile<< "    la " << reg << ","<< lable<<"\n";
-                    outfile<< "    move "<< "$a0," << reg << "\n";
-                    outfile<<"    jal Lprints\n"; 
+                    std::cout<< "    la " << reg << ","<< lable<<"\n";
+                    std::cout<< "    move "<< "$a0," << reg << "\n";
+                    std::cout<<"    jal Lprints\n"; 
                     Register_free(reg);
                 }
                 // li $t0,1
@@ -605,12 +606,12 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                                 auto temp_reg = Register_allocator();
                                 auto node1_stab = Generator_AstStackLookup(a->AstStringval);
                                 if(node1_stab->isglobalVariable){
-                                    outfile<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
+                                    std::cout<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
                                 }else{
-                                    outfile<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+                                    std::cout<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
                                 }
                                 
-                                outfile<< "    move "<< "$a0," << temp_reg << "\n";
+                                std::cout<< "    move "<< "$a0," << temp_reg << "\n";
                                 Register_free(temp_reg);
                                 flag = true;
 
@@ -627,29 +628,29 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                         }
                     //----
                     if(!flag){
-                        outfile<< "    li " << reg << ","<< lable<<"\n";
-                        outfile<< "    move "<< "$a0," << reg << "\n";
+                        std::cout<< "    li " << reg << ","<< lable<<"\n";
+                        std::cout<< "    move "<< "$a0," << reg << "\n";
                     }
                     
                     
-                    outfile<< "    jal Lprintb\n"; 
+                    std::cout<< "    jal Lprintb\n"; 
                     Register_free(reg);
                 }
                 else if(function_decl_table->Identifier_Name == "getchar"){
-                    outfile<<"    jal Lgetchar\n";
+                    std::cout<<"    jal Lgetchar\n";
                 }
                 else if(function_decl_table->Identifier_Name == "printc"){
                     if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
                         auto temp_reg = Register_allocator();
                         auto node1_stab = Generator_AstStackLookup(node->ChildrenArray.at(1)->AstStringval);
                         if(node1_stab->isglobalVariable){
-                            outfile<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
+                            std::cout<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
                         }else{
-                            outfile<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+                            std::cout<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
                         }
                         
-                        outfile<< "    move "<< "$a0," << temp_reg << "\n";
-                        outfile<<"    jal Lprintc\n"; 
+                        std::cout<< "    move "<< "$a0," << temp_reg << "\n";
+                        std::cout<<"    jal Lprintc\n"; 
                         Register_free(temp_reg);
                     }
                 }
@@ -661,8 +662,8 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                     source_reg = temp_reg1;
                     Register_free(temp_reg1);
                     Register_free(source_reg);
-                    outfile<< "    move "<< "$a0," << source_reg << "\n";
-                    outfile<<"    jal Lprinti\n"; 
+                    std::cout<< "    move "<< "$a0," << source_reg << "\n";
+                    std::cout<<"    jal Lprinti\n"; 
                 }
             }else{
                 // li $t0,89
@@ -678,8 +679,8 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                     }
                     else if(a->AstNodeType == NodeType::NUMBEER){
                         auto temp_reg = Register_allocator();
-                        outfile << "    li " << temp_reg << ","<< a->AstIntval<<"\n";
-                        outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                        std::cout << "    li " << temp_reg << ","<< a->AstIntval<<"\n";
+                        std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
                         Register_free(temp_reg);
                     }
                     else if (a->AstNodeType == NodeType::ID){
@@ -687,25 +688,25 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                         auto identifier_nodestab = Generator_AstStackLookup(Identifiername);
                         auto temp_reg = Register_allocator();
                         if(identifier_nodestab->isglobalVariable){
-                            outfile << "    lw " << temp_reg << ","<< identifier_nodestab->Enterence_lable_Name<<"\n";
-                            outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                            std::cout << "    lw " << temp_reg << ","<< identifier_nodestab->Enterence_lable_Name<<"\n";
+                            std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
                         }else{
-                            outfile << "    lw " << temp_reg << ","<< identifier_nodestab->stack_Pointer_Location<<"($sp)\n";
-                            outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                            std::cout << "    lw " << temp_reg << ","<< identifier_nodestab->stack_Pointer_Location<<"($sp)\n";
+                            std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
                         
                         }
                         Register_free(temp_reg);
                     }
                     else if (a->AstNodeType == NodeType::FNC_INVOCATION){   //have to re implement this 
                         auto temp_reg = Register_allocator();
-                        outfile << "    move " << temp_reg << ","<< "$v0"<<"\n";
-                        outfile << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                        std::cout << "    move " << temp_reg << ","<< "$v0"<<"\n";
+                        std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
                         Register_free(temp_reg);
                     }
                     counter++;
                 }
 
-                outfile << "    jal "<<function_decl_table->Enterence_lable_Name<<"\n";
+                std::cout << "    jal "<<function_decl_table->Enterence_lable_Name<<"\n";
 
             }
             break;
@@ -714,7 +715,7 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
 
         default: break;
     }
-    outfile.close();
+    // std::cout.close();
 }
 
 void Third_iter(AstNode * Rootnode, std::string filename){
@@ -735,19 +736,19 @@ void Third_iter(AstNode * Rootnode, std::string filename){
 
 //This is the actual function that generates the code on a node enterence. 
 void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
-    std::ofstream outfile;
-    if(node->AstNodeType == NodeType::PROGRAM_START_NODE){
-        outfile.open(Out_file_name, std::ios_base::trunc);
-    }
-    else{
-        outfile.open(Out_file_name, std::ios_base::app);
-    }
+    // std::ofstream std::cout;
+    // if(node->AstNodeType == NodeType::PROGRAM_START_NODE){
+    //     std::cout.open(Out_file_name, std::ios_base::trunc);
+    // }
+    // else{
+    //     std::cout.open(Out_file_name, std::ios_base::app);
+    // }
 
     switch (node->AstNodeType)
     {
         case NodeType::PROGRAM_START_NODE: {
-            outfile <<   "    .text \n    .globl main \nmain: \n    jal Lable0 \n    li $v0,10 \n    syscall\n\n";
-            outfile.close();
+            std::cout <<   "    .text \n    .globl main \nmain: \n    jal Lable0 \n    li $v0,10 \n    syscall\n\n";
+            // std::cout.close();
             Global_Valriablehandler(node,Out_file_name);
         break;
         }
@@ -770,9 +771,9 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             main_symbol_table->Exit_lable_name = ExitLable_;
             main_symbol_table->memory_Size = memory_;
 
-            outfile << "Lable0 : \n    subu $sp,$sp,"<< std::to_string(memory_)<<"\n";
-            outfile << "    sw $ra,0($sp)\n";
-            outfile.close();
+            std::cout << "Lable0 : \n    subu $sp,$sp,"<< std::to_string(memory_)<<"\n";
+            std::cout << "    sw $ra,0($sp)\n";
+            // std::cout.close();
             break;
         }
     
@@ -794,9 +795,9 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             funct_symbol_table->Exit_lable_name = ExitLable_;
             funct_symbol_table->memory_Size = memory_;
 
-            outfile << funct_symbol_table->Enterence_lable_Name <<" : \n    subu $sp,$sp,"<< std::to_string(memory_)<<"\n";
-            outfile << "    sw $ra,0($sp)\n";
-            outfile.close();
+            std::cout << funct_symbol_table->Enterence_lable_Name <<" : \n    subu $sp,$sp,"<< std::to_string(memory_)<<"\n";
+            std::cout << "    sw $ra,0($sp)\n";
+            // std::cout.close();
             break;
         }
     
@@ -815,14 +816,14 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 }
                 // sw $a0,4($sp)
                 // sw $a1,8($sp)
-                outfile << "    sw $a"<< std::to_string(c) <<","<< VAriableStackLocation <<"($sp)\n";
+                std::cout << "    sw $a"<< std::to_string(c) <<","<< VAriableStackLocation <<"($sp)\n";
                 c++;
             }
             break;
         }
 
         case NodeType::RETURN:{
-            // outfile<<"return startes herer \n";
+            // std::cout<<"return startes herer \n";
             //My current function identifier is inside the global variable Current_function_identifier. 
             //Use this variable to lookup for the stack pointer to the function and use that for return. 
             
@@ -842,9 +843,9 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 source_reg = temp_reg1;
                 Register_free(temp_reg1);
                 Register_free(source_reg);
-                outfile<< "    move "<< "$v0," << source_reg << "\n";
+                std::cout<< "    move "<< "$v0," << source_reg << "\n";
             }
-            outfile<<"    j " << Function_Exit_lable<< "\n"; 
+            std::cout<<"    j " << Function_Exit_lable<< "\n"; 
             
 
             // to be implemented 
@@ -866,7 +867,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
                 assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
                 Register_free(temp_reg1);
-                outfile<< "    beqz "<< temp_reg1<<","<< if_statement_end_Lable<< "\n";
+                std::cout<< "    beqz "<< temp_reg1<<","<< if_statement_end_Lable<< "\n";
             }else{
                 auto if_statement_end_Lable = NewlableGenerator();
                 auto else_statement_end_lable = NewlableGenerator();
@@ -876,7 +877,7 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
                 assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
                 Register_free(temp_reg1);
-                outfile<< "    beqz "<< temp_reg1<<","<< else_statement_end_lable<< "\n";
+                std::cout<< "    beqz "<< temp_reg1<<","<< else_statement_end_lable<< "\n";
             }
             break;
         }
@@ -884,8 +885,8 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
         case NodeType::ELSE_STATEMENT:{
             auto if_exit_lable = if_statements_exit_lable_stack.back();
             auto else_exit_Lable = else_statement_lable_stack.back();
-            outfile<< "    j "<< if_exit_lable<< "\n";
-            outfile<< else_exit_Lable<<" :\n";
+            std::cout<< "    j "<< if_exit_lable<< "\n";
+            std::cout<< else_exit_Lable<<" :\n";
             if(!else_statement_lable_stack.empty()){
                 else_statement_lable_stack.pop_back();
             }
@@ -897,26 +898,26 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             auto while_statement_exit_lable = NewlableGenerator();
             while_statement_entry_lable_stack.push_back(while_statement_entry_Lable);
             while_statement_exit_lable_stack.push_back(while_statement_exit_lable);
-            outfile<<while_statement_entry_Lable<<" :\n";
-            outfile.close();
+            std::cout<<while_statement_entry_Lable<<" :\n";
+            // std::cout.close();
             auto temp_reg1 = Register_allocator(); 
             std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
             assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
             Register_free(temp_reg1);
-            outfile.open(Out_file_name, std::ios_base::app);
-            outfile<< "    beqz "<< temp_reg1<<","<< while_statement_exit_lable<< "\n";
+            // outfile.open(Out_file_name, std::ios_base::app);
+            std::cout<< "    beqz "<< temp_reg1<<","<< while_statement_exit_lable<< "\n";
             break;
         }
 
         case NodeType::BREAK: {
             auto while_break_lable = while_statement_exit_lable_stack.back();
-            outfile<< "    j "<< while_break_lable << "\n";
+            std::cout<< "    j "<< while_break_lable << "\n";
             break;
         }
 
         default: break;
     }
-    outfile.close();
+    // std::cout.close();
 }
 
 /**
@@ -953,22 +954,22 @@ void Second_iter(AstNode * Rootnode, std::string filename){
 }
 
 void function_lable_adder(std::string filename){
-    std::ofstream outfile;
-    outfile.open(filename, std::ios_base::app);
-    outfile<< "\nLprints: \n    li	$v0, 4\n    syscall\n    jr $ra\n\n" ;
-    outfile << "    .data\nLTrue : \n    .byte 116 ,114 ,117 ,101 ,0\n    .align 2\n    .text\n    .data\nLFalse : \n    .byte 102 ,97 ,108 ,115 ,101 ,0\n    .align 2\n    .text\nLprintb: \n    li $t0,0\n    li $t1,1\n    beq $a0,$t0,LFal\n    beq $a0,$t1,LTru\n    jr $ra\nLFal: \n    la $t0,LFalse\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra\nLTru: \n    la $t0,LTrue\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra \n\n";
-    outfile<< "Lprintc: \n    li	$v0, 11\n    syscall\n    jr $ra\n\n" ;
-    outfile<< "Lprinti: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;
-    outfile << "Lgetchar:\n    li $v0, 12\n    syscall\n    jr $ra\n\n";
-    outfile << "error:\n    li $v0, 4\n    syscall\n    li $v0, 10\n    syscall\n\n";
+    // std::ofstream std::cout;
+    // std::cout.open(filename, std::ios_base::app);
+    std::cout<< "\nLprints: \n    li	$v0, 4\n    syscall\n    jr $ra\n\n" ;
+    std::cout << "    .data\nLTrue : \n    .byte 116 ,114 ,117 ,101 ,0\n    .align 2\n    .text\n    .data\nLFalse : \n    .byte 102 ,97 ,108 ,115 ,101 ,0\n    .align 2\n    .text\nLprintb: \n    li $t0,0\n    li $t1,1\n    beq $a0,$t0,LFal\n    beq $a0,$t1,LTru\n    jr $ra\nLFal: \n    la $t0,LFalse\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra\nLTru: \n    la $t0,LTrue\n    move $a0,$t0\n    li	$v0, 4\n    syscall\n    jr $ra \n\n";
+    std::cout<< "Lprintc: \n    li	$v0, 11\n    syscall\n    jr $ra\n\n" ;
+    std::cout<< "Lprinti: \n    li	$v0, 1\n    syscall\n    jr $ra\n\n" ;
+    std::cout << "Lgetchar:\n    li $v0, 12\n    syscall\n    jr $ra\n\n";
+    std::cout << "error:\n    li $v0, 4\n    syscall\n    li $v0, 10\n    syscall\n\n";
 
-    outfile.close();
+    // std::cout.close();
 }
 
 // This is the deriver function that is called to do the code generation by the deriver. 
 void Code_generator::code_generator_driver(AstNode* RootNode){
-    std::cout<<"---------"<<std::endl; 
-    std::cout<<"number of Registers free initially : " <<Regester_Stack.size()<<std::endl;
+    // std::cout<<"---------"<<std::endl; 
+    // std::cout<<"number of Registers free initially : " <<Regester_Stack.size()<<std::endl;
     std::unordered_map<std::string, SymbolTable> Node_stab = {};
 
     SymbolTable getChar_table;
@@ -1025,5 +1026,5 @@ void Code_generator::code_generator_driver(AstNode* RootNode){
     Second_iter(RootNode,Out_file_name);
     function_lable_adder(Out_file_name);
 
-    std::cout<<"number of Registers free : " <<Regester_Stack.size()<<std::endl;
+    // std::cout<<"number of Registers free : " <<Regester_Stack.size()<<std::endl;
 }

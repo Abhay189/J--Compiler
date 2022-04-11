@@ -227,7 +227,7 @@ bool Driver::start(std::istream &in)
     
     if (!res) {
         SemanticCheck_Driver(RootNode);
-        this->AstIteratorFunction(Driver::RootNode,0);
+        // this->AstIteratorFunction(Driver::RootNode,0);   -> use this function to print the AST tree to std output.
         Code_generator CodeGen;
         CodeGen.code_generator_driver(Driver::RootNode);
     }
