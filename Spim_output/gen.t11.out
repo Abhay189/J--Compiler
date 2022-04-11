@@ -1,0 +1,11 @@
+Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+global int default value: 0
+global boolean default value: false
+
+(it's ok if the following aren't 0/false)
+	local int default value: 4194600
+	local boolean default value: 
+
+(it's ok if the following aren't 0/false)
+	local int default value: 4194604
+	local boolean default value: 
