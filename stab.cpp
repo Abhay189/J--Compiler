@@ -510,6 +510,14 @@ void Second_Iteration_Callback_Function(AstNode * Node, std::unordered_map<std::
                         }
                         break;
                     }
+                    case NodeType::FNC_INVOCATION:{
+                        auto sub_func_name = a->ChildrenArray.at(0)->AstStringval;
+                        // std::cout<<sub_func_name<<std::endl;
+                        auto sub_fnc_invocation = AstStackLookup(sub_func_name);
+                        auto sub_function_return_type = sub_fnc_invocation->ReturnType;
+                        Function_Invocation_table.Formals.push_back(sub_function_return_type); break;
+                    }
+                
                 }
                 count++;
             }

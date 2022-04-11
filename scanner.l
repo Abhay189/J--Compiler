@@ -33,7 +33,7 @@ ID              {alpha}({alpha}|{digit}|{underscore})*
 %% 
  /* Rules here */
 [ \t\r]+    ;          
-\n          loc->lines(); loc->step();
+\n          loc->lines();
 
 
 ">"         return Token::T_GT;
@@ -72,7 +72,7 @@ ID              {alpha}({alpha}|{digit}|{underscore})*
 {num}       {yylval->ival = std::stoll(yytext); return Token::T_NUM;}
 
 "\""                            {yymore();BEGIN(STRING);}
-<STRING>\n                      {std::cerr << "error: newline in string literal at or near line " << *loc -1<< std::endl;}
+<STRING>\n                      {std::cerr << "error: newline in string literal at or near line " << *loc -1<< std::endl;exit(EXIT_FAILURE);}
 <STRING>{alpha}|{digit}|[ ]     {yymore();}
 <STRING>\\b|\\f|\\t|\\r|\\n     {yymore();}
 <STRING>\0                      {yymore(); std::cout<<"\\ 0 detected in the string\n";}
@@ -85,9 +85,9 @@ ID              {alpha}({alpha}|{digit}|{underscore})*
 
 "//"             BEGIN(COMMENT);
 <COMMENT>.
-<COMMENT>\n     {BEGIN(INITIAL); std::cout << "Caught comment at line " << *loc << "\n"; loc->lines(); }
+<COMMENT>\n     {BEGIN(INITIAL); }
 
-.               std::cerr << "Illegal char at line " << *loc << std::endl;
+.               {std::cerr << "Illegal char at line " << *loc << std::endl;exit(EXIT_FAILURE);}
 
 
 %% 

@@ -822,18 +822,19 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
         }
 
         case NodeType::RETURN:{
-            for(auto a : node->ChildrenArray){
-                //My current function identifier is inside the global variable Current_function_identifier. 
-                //Use this variable to lookup for the stack pointer to the function and use that for return. 
-                
-                //This is the stab of the function that the return statement is inside.
-                auto Function_stab = Generator_Function_AstStackLookup(Current_function_identifier);
-                auto Function_Enterence_lable = Function_stab->Enterence_lable_Name;
-                auto Function_Exit_lable = Function_stab->Exit_lable_name;
+            // outfile<<"return startes herer \n";
+            //My current function identifier is inside the global variable Current_function_identifier. 
+            //Use this variable to lookup for the stack pointer to the function and use that for return. 
+            
+            //This is the stab of the function that the return statement is inside.
+            auto Function_stab = Generator_Function_AstStackLookup(Current_function_identifier);
+            auto Function_Enterence_lable = Function_stab->Enterence_lable_Name;
+            auto Function_Exit_lable = Function_stab->Exit_lable_name;
 
-                // li $t0,89
-                // move $v0,$t0
-                // j L2
+            // li $t0,89
+            // move $v0,$t0
+            // j L2
+            if(!node->ChildrenArray.empty()){
                 auto source_reg = Register_allocator();
                 auto temp_reg1 = Register_allocator(); 
                 std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
@@ -842,11 +843,12 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 Register_free(temp_reg1);
                 Register_free(source_reg);
                 outfile<< "    move "<< "$v0," << source_reg << "\n";
-                outfile<<"    j " << Function_Exit_lable<< "\n"; 
-                
-
-                // to be implemented 
             }
+            outfile<<"    j " << Function_Exit_lable<< "\n"; 
+            
+
+            // to be implemented 
+            
             break;
         }
 
