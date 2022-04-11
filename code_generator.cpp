@@ -11,7 +11,7 @@ std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t
 int stack_pointer = 0;
 int localVariables = 0;
 std::string Current_function_identifier = "";
-std::vector<std::string> if_statements_exit_lable_stack; 
+std::vector<std::string> if_statements_exit_lable_stack;
 std::vector<std::string> else_statement_lable_stack ;
 std::vector<std::string> while_statement_exit_lable_stack;
 std::vector<std::string> while_statement_entry_lable_stack;
@@ -183,6 +183,27 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
                 for(auto a : children_reg){
                     Register_free(a);
                 }
+            }
+            else if(node->AstStringval == "||"){
+                auto Node_exit_lable = NewlableGenerator();
+                outfile<< "    move "<< allocated_reg<<","<<children_reg.at(0)<<"\n" ;
+                outfile<< "    beqz "<< children_reg.at(1) << "," << Node_exit_lable << "\n";
+                outfile<< "    move "<< allocated_reg<<","<<children_reg.at(1)<<"\n" ;
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+                outfile<< Node_exit_lable <<" :\n";
+            }
+            else if(node->AstStringval == "&&"){
+                auto Node_exit_lable = NewlableGenerator();
+                outfile<< "    move "<< allocated_reg<<","<<children_reg.at(0)<<"\n" ;
+                outfile<< "    beqz "<< allocated_reg << "," << Node_exit_lable << "\n";
+                outfile<< "    move "<< allocated_reg<<","<<children_reg.at(1)<<"\n" ;
+                outfile<< "    beqz "<< allocated_reg << "," << Node_exit_lable << "\n";
+                for(auto a : children_reg){
+                    Register_free(a);
+                }
+                outfile<< Node_exit_lable <<" :\n";
             }
             
             break;
@@ -880,6 +901,12 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
             Register_free(temp_reg1);
             outfile.open(Out_file_name, std::ios_base::app);
             outfile<< "    beqz "<< temp_reg1<<","<< while_statement_exit_lable<< "\n";
+            break;
+        }
+
+        case NodeType::BREAK: {
+            auto while_break_lable = while_statement_exit_lable_stack.back();
+            outfile<< "    j "<< while_break_lable << "\n";
             break;
         }
 

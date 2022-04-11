@@ -1,9 +1,13 @@
 main(){
-        int gg;
-        gg = out();
 
-}
+        int i ;
+        i = 0;
+        while(i < 20){
+                printi(i);
+                if(i == 15){
+                        break;
+                }
+        i = i+1;
+        }
 
-int out(){
-        return 87;
 }
