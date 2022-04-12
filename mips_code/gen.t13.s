@@ -6,45 +6,37 @@ main:
     syscall
 
     .data
-Lable1 :
-    .word 0
-    .text
-    .data
 Lable2 :
     .word 0
     .text
+Lable1 : 
+    subu $sp,$sp,8
+    sw $ra,0($sp)
+    jal Lgetchar
+    move $s6,$v0
+    sw $s6,4($sp)
+    lw $s6,Lable2
+    lw $s5,4($sp)
+    sne $s7,$s5,$s6
+    beqz $s7,Lable4
+    jal Lable1
+    move $s7,$v0
+    lw $s5,4($sp)
+    move $a0,$s5
+    jal Lprintc
+Lable4 :
+Lable3 : 
+    lw $ra,0($sp)
+    addu $sp,$sp,8
+    jr $ra
 Lable0 : 
     subu $sp,$sp,4
     sw $ra,0($sp)
-    li $s7,12
-    sw $s7,Lable1
-    jal Lable3
-    li $s4,2
-    lw $s3,Lable2
-    subu $s5,$s3,$s4
-    lw $s3,Lable1
-    bnez $s5,Lable5
-    .data
-Lable6 :
-    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
-    .align 2
-    .text
-    la $a0,Lable6
-    j error
-Lable5 :
-    div $s6,$s3,$s5
-    move $a0,$s6
-    jal Lprinti
-Lable4 : 
-    lw $ra,0($sp)
-    addu $sp,$sp,4
-    jr $ra
-Lable3 : 
-    subu $sp,$sp,4
-    sw $ra,0($sp)
-    li $s6,2
-    sw $s6,Lable2
-Lable7 : 
+    li $s7,10
+    sw $s7,Lable2
+    jal Lable1
+    move $s7,$v0
+Lable5 : 
     lw $ra,0($sp)
     addu $sp,$sp,4
     jr $ra

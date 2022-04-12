@@ -1,0 +1,72 @@
+Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+if ((A && B) || C) {...} else {...}, with A=true B= C=
+evaluated C
+evaluated B
+evaluated A
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A= B= C=
+evaluated C
+evaluated B
+evaluated A
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A= B= C=
+evaluated C
+evaluated B
+evaluated A
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A= B= C=
+evaluated C
+evaluated B
+evaluated A
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A= B= C=
+evaluated C
+evaluated B
+evaluated A
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A= B= C=
+evaluated C
+evaluated B
+evaluated A
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A= B= C=
+evaluated C
+evaluated B
+evaluated A
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A= B= C=
+evaluated C
+evaluated B
+evaluated A
+if-part executed
+
+x = (A && !B) || C, with A= B= C=
+x=
+
+x = (A && !B) || C, with A= B= C=
+x=
+
+x = (A && !B) || C, with A= B= C=
+x=
+
+x = (A && !B) || C, with A= B= C=
+x=
+
+x = (A && !B) || C, with A= B= C=
+x=
+
+x = (A && !B) || C, with A= B= C=
+x=
+
+x = (A && !B) || C, with A= B= C=
+x=
+
+x = (A && !B) || C, with A= B= C=
+x=

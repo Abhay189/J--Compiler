@@ -7,5 +7,5 @@ global boolean default value: false
 	local boolean default value: 
 
 (it's ok if the following aren't 0/false)
-	local int default value: 4194604
+	local int default value: 4194608
 	local boolean default value: 

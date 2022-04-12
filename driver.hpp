@@ -7,6 +7,7 @@
 #include "scanner.hpp"
 #include "parser.hh"
 #include "ast.hpp"
+#include "code_generator.hpp"
 
 
 class Driver {

@@ -1,11 +1,11 @@
-gen.t1
+gen.t1 +
 gen.t5
-
+--slightly better then before 
 gen.t11
 gen.t12
 gen.t13
-14
-15
+gen.14
+gen.15
 
 gen.t22
 
@@ -13,7 +13,8 @@ gen.t22
 gen.t30
 gen.t31
 gen.t32
+gen.t33 ??
 
-
-gen.t38
+gen.t38 ??
 art-sieve.j--
+art-select.j-- ???

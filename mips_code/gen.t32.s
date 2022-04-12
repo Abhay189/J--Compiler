@@ -10,57 +10,64 @@ Lable0 :
     sw $ra,0($sp)
     li $s7,0
     sw $s7,4($sp)
-    li $s7,1000000
-    sw $s7,8($sp)
 Lable2 :
-    lw $s5,8($sp)
-    lw $s4,4($sp)
-    subu $s6,$s4,$s5
-    lw $s4,4($sp)
-    sgt $s7,$s4,$s6
+    li $s6,10
+    lw $s5,4($sp)
+    slt $s7,$s5,$s6
     beqz $s7,Lable3
-    lw $s6,8($sp)
-    lw $s5,4($sp)
-    addu $s4,$s5,$s6
-    sw $s4,4($sp)
-    j Lable2
-Lable3 :
-    lw $s5,8($sp)
-    lw $s6,4($sp)
-    subu $s4,$s6,$s5
-    sw $s4,4($sp)
-Lable4 :
-    li $s6,1
-    lw $s5,4($sp)
-    subu $s4,$s5,$s6
-    lw $s5,4($sp)
-    sgt $s7,$s5,$s4
-    beqz $s7,Lable5
-    li $s4,1
-    lw $s6,4($sp)
-    addu $s5,$s6,$s4
-    sw $s5,4($sp)
-    j Lable4
-Lable5 :
-    .data
-Lable6 :
-    .byte 109 ,105 ,110 ,105 ,110 ,116 ,32 ,105 ,115 ,32 ,0
-    .align 2
-    .text
-    la $s7,Lable6
-    move $a0,$s7
-    jal Lprints
     lw $s5,4($sp)
     move $a0,$s5
+    jal Lprinti
+    .data
+Lable4 :
+    .byte 10 ,0
+    .align 2
+    .text
+    la $s5,Lable4
+    move $a0,$s5
+    jal Lprints
+    li $s7,100
+    sw $s7,8($sp)
+Lable5 :
+    li $s5,110
+    lw $s6,8($sp)
+    slt $s7,$s6,$s5
+    beqz $s7,Lable6
+    lw $s6,8($sp)
+    move $a0,$s6
     jal Lprinti
     .data
 Lable7 :
     .byte 10 ,0
     .align 2
     .text
-    la $s5,Lable7
-    move $a0,$s5
+    la $s6,Lable7
+    move $a0,$s6
     jal Lprints
+    li $s6,105
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable8
+    j Lable6
+Lable8 :
+    li $s6,1
+    lw $s4,8($sp)
+    addu $s5,$s4,$s6
+    sw $s5,8($sp)
+    j Lable5
+Lable6 :
+    li $s5,5
+    lw $s4,4($sp)
+    seq $s7,$s4,$s5
+    beqz $s7,Lable9
+    j Lable3
+Lable9 :
+    li $s5,1
+    lw $s6,4($sp)
+    addu $s4,$s6,$s5
+    sw $s4,4($sp)
+    j Lable2
+Lable3 :
 Lable1 : 
     lw $ra,0($sp)
     addu $sp,$sp,12

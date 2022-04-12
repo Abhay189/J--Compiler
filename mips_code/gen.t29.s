@@ -25,8 +25,8 @@ Lable10 :
     .byte 101 ,118 ,97 ,108 ,117 ,97 ,116 ,101 ,100 ,32 ,65 ,10 ,0
     .align 2
     .text
-    la $s7,Lable10
-    move $a0,$s7
+    la $s6,Lable10
+    move $a0,$s6
     jal Lprints
     lw $s6,Lable1
     move $v0,$s6
@@ -91,8 +91,8 @@ Lable16 :
     la $s6,Lable16
     move $a0,$s6
     jal Lprints
-    lw $s6,Lable1
-    move $a0,$s6
+    lw $s5,Lable1
+    move $a0,$s5
     jal Lprintb
     .data
 Lable17 :
@@ -102,8 +102,8 @@ Lable17 :
     la $s6,Lable17
     move $a0,$s6
     jal Lprints
-    lw $s6,Lable2
-    move $a0,$s6
+    lw $s5,Lable2
+    move $a0,$s5
     jal Lprintb
     .data
 Lable18 :
@@ -113,8 +113,8 @@ Lable18 :
     la $s6,Lable18
     move $a0,$s6
     jal Lprints
-    lw $s6,Lable3
-    move $a0,$s6
+    lw $s5,Lable3
+    move $a0,$s5
     jal Lprintb
     .data
 Lable19 :
@@ -124,29 +124,32 @@ Lable19 :
     la $s6,Lable19
     move $a0,$s6
     jal Lprints
-a case not handled in arithmatic expressions  
-a case not handled in arithmatic expressions  
-a case not handled in arithmatic expressions  
-    move $s4,$s3
-    beqz $s4,Lable22
-    move $s4,$s1
-    beqz $s4,Lable22
+    move $s6,$v0
+    move $s4,$v0
+    move $s3,$v0
+    move $s5,$s4
+    beqz $s5,Lable22
+    move $s5,$s3
+    beqz $s5,Lable22
 Lable22 :
     move $s6,$s6
-    beqz $s4,Lable23
-    move $s6,$s4
+    beqz $s5,Lable23
+    move $s6,$s5
 Lable23 :
     beqz $s6,Lable21
     jal Lable6
+    move $s6,$v0
     jal Lable5
+    move $s6,$v0
     jal Lable4
+    move $s6,$v0
     .data
 Lable24 :
     .byte 105 ,102 ,45 ,112 ,97 ,114 ,116 ,32 ,101 ,120 ,101 ,99 ,117 ,116 ,101 ,100 ,10 ,0
     .align 2
     .text
-    la $s6,Lable24
-    move $a0,$s6
+    la $s5,Lable24
+    move $a0,$s5
     jal Lprints
     j Lable20
 Lable21 :
@@ -155,8 +158,8 @@ Lable25 :
     .byte 101 ,108 ,115 ,101 ,45 ,112 ,97 ,114 ,116 ,32 ,101 ,120 ,101 ,99 ,117 ,116 ,101 ,100 ,10 ,0
     .align 2
     .text
-    la $s6,Lable25
-    move $a0,$s6
+    la $s5,Lable25
+    move $a0,$s5
     jal Lprints
 Lable20 :
 Lable15 : 
@@ -169,88 +172,85 @@ Lable8 :
     sw $a0,4($sp)
     sw $a1,8($sp)
     sw $a2,12($sp)
-    lw $s4,4($sp)
-    sw $s4,Lable1
-    lw $s4,8($sp)
-    sw $s4,Lable2
-    lw $s4,12($sp)
-    sw $s4,Lable3
+    lw $s5,4($sp)
+    sw $s5,Lable1
+    lw $s5,8($sp)
+    sw $s5,Lable2
+    lw $s5,12($sp)
+    sw $s5,Lable3
     .data
 Lable27 :
     .byte 120 ,32 ,61 ,32 ,40 ,65 ,32 ,38 ,38 ,32 ,33 ,66 ,41 ,32 ,124 ,124 ,32 ,67 ,44 ,32 ,119 ,105 ,116 ,104 ,32 ,65 ,61 ,0
     .align 2
     .text
-    la $s6,Lable27
-    move $a0,$s6
+    la $s5,Lable27
+    move $a0,$s5
     jal Lprints
-    lw $s4,Lable1
-    move $a0,$s4
+    lw $s6,Lable1
+    move $a0,$s6
     jal Lprintb
     .data
 Lable28 :
     .byte 32 ,66 ,61 ,0
     .align 2
     .text
-    la $s6,Lable28
-    move $a0,$s6
+    la $s5,Lable28
+    move $a0,$s5
     jal Lprints
-    lw $s4,Lable2
-    move $a0,$s4
+    lw $s6,Lable2
+    move $a0,$s6
     jal Lprintb
     .data
 Lable29 :
     .byte 32 ,67 ,61 ,0
     .align 2
     .text
-    la $s6,Lable29
-    move $a0,$s6
+    la $s5,Lable29
+    move $a0,$s5
     jal Lprints
-    lw $s4,Lable3
-    move $a0,$s4
+    lw $s6,Lable3
+    move $a0,$s6
     jal Lprintb
     .data
 Lable30 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable30
-    move $a0,$s6
+    la $s5,Lable30
+    move $a0,$s5
     jal Lprints
-    jal Lable6
-    jal Lable5
-    jal Lable4
-a case not handled in arithmatic expressions  
-a case not handled in arithmatic expressions  
-    xori $t9,$t8,1
-a case not handled in arithmatic expressions  
-    move $s3,$t9
+    move $s6,$v0
+    move $s2,$v0
+    xori $s4,$s2,1
+    move $s2,$v0
+    move $s3,$s4
     beqz $s3,Lable31
-    move $s3,$t8
+    move $s3,$s2
     beqz $s3,Lable31
 Lable31 :
-    move $s4,$s6
+    move $s5,$s6
     beqz $s3,Lable32
-    move $s4,$s3
+    move $s5,$s3
 Lable32 :
-    sw $s4,16($sp)
+    sw $s5,16($sp)
     .data
 Lable33 :
     .byte 120 ,61 ,0
     .align 2
     .text
-    la $s6,Lable33
-    move $a0,$s6
+    la $s5,Lable33
+    move $a0,$s5
     jal Lprints
-    lw $s4,16($sp)
-    move $a0,$s4
+    lw $s3,16($sp)
+    move $a0,$s3
     jal Lprintb
     .data
 Lable34 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable34
-    move $a0,$s6
+    la $s5,Lable34
+    move $a0,$s5
     jal Lprints
 Lable26 : 
     lw $ra,0($sp)
@@ -260,141 +260,157 @@ Lable0 :
     subu $sp,$sp,4
     sw $ra,0($sp)
     jal Lable7
+    move $s6,$v0
     .data
 Lable36 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable36
-    move $a0,$s6
+    la $s5,Lable36
+    move $a0,$s5
     jal Lprints
     jal Lable7
+    move $s6,$v0
     .data
 Lable37 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable37
-    move $a0,$s6
+    la $s5,Lable37
+    move $a0,$s5
     jal Lprints
     jal Lable7
+    move $s6,$v0
     .data
 Lable38 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable38
-    move $a0,$s6
+    la $s5,Lable38
+    move $a0,$s5
     jal Lprints
     jal Lable7
+    move $s6,$v0
     .data
 Lable39 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable39
-    move $a0,$s6
+    la $s5,Lable39
+    move $a0,$s5
     jal Lprints
     jal Lable7
+    move $s6,$v0
     .data
 Lable40 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable40
-    move $a0,$s6
+    la $s5,Lable40
+    move $a0,$s5
     jal Lprints
     jal Lable7
+    move $s6,$v0
     .data
 Lable41 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable41
-    move $a0,$s6
+    la $s5,Lable41
+    move $a0,$s5
     jal Lprints
     jal Lable7
+    move $s6,$v0
     .data
 Lable42 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable42
-    move $a0,$s6
+    la $s5,Lable42
+    move $a0,$s5
     jal Lprints
     jal Lable7
+    move $s6,$v0
     .data
 Lable43 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable43
-    move $a0,$s6
+    la $s5,Lable43
+    move $a0,$s5
     jal Lprints
     jal Lable8
+    move $s6,$v0
     .data
 Lable44 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable44
-    move $a0,$s6
+    la $s5,Lable44
+    move $a0,$s5
     jal Lprints
     jal Lable8
+    move $s6,$v0
     .data
 Lable45 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable45
-    move $a0,$s6
+    la $s5,Lable45
+    move $a0,$s5
     jal Lprints
     jal Lable8
+    move $s6,$v0
     .data
 Lable46 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable46
-    move $a0,$s6
+    la $s5,Lable46
+    move $a0,$s5
     jal Lprints
     jal Lable8
+    move $s6,$v0
     .data
 Lable47 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable47
-    move $a0,$s6
+    la $s5,Lable47
+    move $a0,$s5
     jal Lprints
     jal Lable8
+    move $s6,$v0
     .data
 Lable48 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable48
-    move $a0,$s6
+    la $s5,Lable48
+    move $a0,$s5
     jal Lprints
     jal Lable8
+    move $s6,$v0
     .data
 Lable49 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable49
-    move $a0,$s6
+    la $s5,Lable49
+    move $a0,$s5
     jal Lprints
     jal Lable8
+    move $s6,$v0
     .data
 Lable50 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable50
-    move $a0,$s6
+    la $s5,Lable50
+    move $a0,$s5
     jal Lprints
     jal Lable8
+    move $s6,$v0
 Lable35 : 
     lw $ra,0($sp)
     addu $sp,$sp,4

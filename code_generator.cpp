@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 
+
 int counter = 1;
 std::vector<std::unordered_map<std::string, SymbolTable> *> generator_scopeStack;
 std::vector<std::string> Regester_Stack { "$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6" ,"$t7" ,"$t8", "$t9", "$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7"};
@@ -43,6 +44,7 @@ SymbolTable* Generator_Function_AstStackLookup(std::string identifier){
     }
     return nullptr;
 }
+void Function_invocation_treversal(AstNode * node, std::string outfile, std::string allocated_reg, std::vector<std::string> children_reg);
 
 //Lable0 will not be distributed through this function as that is fixed for the main function.
 std::string NewlableGenerator(){
@@ -85,9 +87,13 @@ void Global_Valriablehandler(AstNode * RootNode,std::string Out_file_name){
     }
 }
 
+
+
 void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::string allocated_reg, std::vector<std::string> children_reg){
     // std::ofstream std::cout;
     // std::cout.open(Out_file_name, std::ios_base::app);
+    // std::cout<<"number of Registers free in:: " <<Regester_Stack.size()<<std::endl;
+    
     switch(node->AstNodeType){
         case NodeType::NUMBEER:{
             std::cout << "    li "<< allocated_reg << "," <<node->AstIntval<<"\n";
@@ -237,8 +243,6 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
                     std::cout << "    lw "<< allocated_reg << "," <<node_stab->stack_Pointer_Location<<"($sp)"<<"\n";
                 }
             }
-            
-            
             break;
         }
         
@@ -251,11 +255,30 @@ void arithmaticExpressionHandler(AstNode * node, std::string Out_file_name,std::
             std::cout << "    li "<< allocated_reg << "," <<"0"<<"\n";
             break;
         }
+        case NodeType::FNC_INVOCATION:{
+            int cou = -1;
+            for(auto a : children_reg){
+                if(cou == -1){
+                    cou++;
+                    continue;
+                }
+                std::cout<< "    move " <<"$a"<<cou<<","<<a<<std::endl;
+                cou++;
+            }
+            for(auto a : children_reg){
+                Register_free(a);
+            }
+            std::cout<<"    move "<< allocated_reg<<","<<"$v0\n";
 
-
+            // std::cout<<"heere we are ->>>>>>>>>>>>>>>>>>>>>>>\n";
+            // std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+            // Function_invocation_treversal(node, Out_file_name, allocated_reg,children_reg);
+            break;
+        }
 
         default: std::cout<<"a case not handled in arithmatic expressions  \n";
     }
+    // std::cout<<"number of Registers free out :: " <<Regester_Stack.size()<<std::endl;
     // std::cout.close();
 }
 
@@ -269,9 +292,239 @@ void assignment_expression_treversal(AstNode * node, std::string outfile, std::s
         for(auto a : node->ChildrenArray){
             auto reg = Register_allocator();
             children_reg.push_back(reg);
+            // std::cout<<reg<<std::endl;
             assignment_expression_treversal(a, outfile, reg, children_reg);
-        }//free the regesters.
+        }
+        // std::cout<<"\n";
+        //the callback function automatically frees the children register. 
         arithmaticExpressionHandler(node,outfile,allocated_reg,children_reg);
+    }
+}
+
+void Function_invocation_handler(AstNode * node, std::string Out_file_name,std::string allocated_reg, std::vector<std::string> children_reg){
+    if(node->AstNodeType == NodeType::FNC_INVOCATION){
+        // std::cout<<"------------------\n";
+        // std::cout<<"inside funct handler \n";
+        std::string Function_Identifier = "";
+        
+        for(auto a : node->ChildrenArray){
+            if(a->AstNodeType == NodeType::ID){
+                Function_Identifier = a->AstStringval;
+                break;
+            }
+        }
+        
+        auto function_decl_table = Generator_Function_AstStackLookup(Function_Identifier);
+
+        // std::cout<<Function_Identifier << " ++++++++++++++++++++++++++++++\n";
+        if(function_decl_table->is_builtinFunction){
+            //this is the case when the function invocation is for the built in prints function. 
+            if(function_decl_table->Identifier_Name == "prints"){
+                //generate a lable for the function.
+                std::string lable = NewlableGenerator();
+                std::string printParam = "";
+                for(auto a : node->ChildrenArray){
+                    if(a->AstNodeType == NodeType::STRING){
+                        printParam = a->AstStringval;
+                        break;
+                    }
+                }
+                std::cout<< "    .data\n";
+                std::cout<< lable << " :\n";
+                std::cout<< "    .byte ";
+                int stringlen = printParam.size();
+                int counter = 1;
+                for (int i = 0; i < printParam.size(); i++){
+                    auto a = printParam[i];
+                    if(counter != stringlen && counter != 1){
+                        if(a == '\\'){
+                            i++;
+                            counter++;
+                            auto b = printParam[i];
+                            switch(b){
+                                case 'b': std::cout<< int('\b')<< " ,"; break; 
+                                case 'f': std::cout<< int('\f')<< " ,"; break; 
+                                case 't': std::cout<< int('\t')<< " ,"; break; 
+                                case 'r': std::cout<< int('\r')<< " ,"; break; 
+                                case 'n': std::cout<< int('\n')<< " ,"; break; 
+                                case '\'': std::cout<< int('\'')<< " ,"; break; 
+                                case '\"': std::cout<< int('\"')<< " ,"; break; 
+                                case '\\': std::cout<< int('\\')<< " ,"; break; 
+                                default: std::cout<< int(b)<< " ,"; break;
+                            }
+                        }else{
+                            std::cout<< int(a)<< " ,";
+                        }
+                        
+                    }
+                    counter++;
+                }
+                std::cout << "0\n";
+                std::cout<< "    .align 2\n";
+                std::cout<< "    .text\n";
+
+                auto reg = Register_allocator();
+                std::cout<< "    la " << reg << ","<< lable<<"\n";
+                std::cout<< "    move "<< "$a0," << reg << "\n";
+                std::cout<<"    jal Lprints\n"; 
+                Register_free(reg);
+            }
+            else if(function_decl_table->Identifier_Name == "printb"){
+                auto reg = Register_allocator();
+                // auto lable = boolean_exp_handler();          //Will be done like this later on. 
+                //----Temporary code
+                    std::string lable = "";
+                    bool flag = false;
+                    int cou = 0; 
+                    for(auto a : node->ChildrenArray){
+                        if(cou == 0){
+                            cou++;
+                            continue;
+                        }
+                        if(a->AstNodeType == NodeType::ID){
+                            auto temp_reg = Register_allocator();
+                            auto node1_stab = Generator_AstStackLookup(a->AstStringval);
+                            if(node1_stab->isglobalVariable){
+                                std::cout<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
+                            }else{
+                                std::cout<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+                            }
+                            
+                            std::cout<< "    move "<< "$a0," << temp_reg << "\n";
+                            Register_free(temp_reg);
+                            flag = true;
+
+                        }
+                        if(a->AstNodeType == NodeType::TRUE){
+                            lable = "1";
+                            break;
+                        }
+                        if(a->AstNodeType == NodeType::FALSE){
+                            lable = "0";
+                            break;
+                        }
+                        cou++;
+                    }
+                //----
+                if(!flag){
+                    std::cout<< "    li " << reg << ","<< lable<<"\n";
+                    std::cout<< "    move "<< "$a0," << reg << "\n";
+                }
+                
+                
+                std::cout<< "    jal Lprintb\n"; 
+                Register_free(reg);
+            }
+            else if(function_decl_table->Identifier_Name == "getchar"){
+                std::cout<<"    jal Lgetchar\n";
+            }
+            else if(function_decl_table->Identifier_Name == "printc"){
+                if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
+                    auto temp_reg = Register_allocator();
+                    auto node1_stab = Generator_AstStackLookup(node->ChildrenArray.at(1)->AstStringval);
+                    if(node1_stab->isglobalVariable){
+                        std::cout<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
+                    }else{
+                        std::cout<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+                    }
+                    
+                    std::cout<< "    move "<< "$a0," << temp_reg << "\n";
+                    std::cout<<"    jal Lprintc\n"; 
+                    Register_free(temp_reg);
+                }
+            }
+            else if(function_decl_table->Identifier_Name == "printi"){
+                if(node->ChildrenArray.at(1)->AstNodeType == NodeType::FNC_INVOCATION){
+                    // auto temp_reg = Register_allocator();
+                    // std::cout<<"here \n";
+                    std::cout << "    move " << allocated_reg << ","<< children_reg[0] <<"\n";
+                    // std::cout<<"here \n";
+                    // std::cout <<"---------------------------? " <<children_reg[0]<<std::endl;
+                    std::cout<< "    move "<< "$a0," << allocated_reg << "\n";
+                    std::cout<<"    jal Lprinti\n"; 
+                    // Register_free(temp_reg);
+                }else{
+                    auto source_reg = Register_allocator();
+                    std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                    assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, source_reg,children_reg);
+                    Register_free(source_reg);
+                    std::cout<< "    move "<< "$a0," << source_reg << "\n";
+                    std::cout<<"    jal Lprinti\n"; 
+                }
+                
+            }
+        }else{
+            // li $t0,89
+            // move $a0,$t0
+            // jal L1
+            // move $t0,$v0
+            int counter = -1;
+            int con = 0;
+            for(auto a : node->ChildrenArray){
+                if(counter == -1){
+                    counter++;
+                    continue;
+                }
+                else if(a->AstNodeType == NodeType::NUMBEER){
+                    auto temp_reg = Register_allocator();
+                    std::cout << "    li " << temp_reg << ","<< a->AstIntval<<"\n";
+                    std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                    Register_free(temp_reg);
+                }
+                else if (a->AstNodeType == NodeType::ID){
+                    // std::cout<<"inside identifier\n --------------";
+                    auto Identifiername = a->AstStringval;
+                    auto identifier_nodestab = Generator_AstStackLookup(Identifiername);
+                    auto temp_reg = Register_allocator();
+                    if(identifier_nodestab->isglobalVariable){
+                        std::cout << "    lw " << temp_reg << ","<< identifier_nodestab->Enterence_lable_Name<<"\n";
+                        std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                    }else{
+                        std::cout << "    lw " << temp_reg << ","<< identifier_nodestab->stack_Pointer_Location<<"($sp)\n";
+                        std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                    
+                    }
+                    Register_free(temp_reg);
+                }
+                else if (a->AstNodeType == NodeType::FNC_INVOCATION){   //have to re implement this 
+                    auto temp_reg = Register_allocator();
+                    // std::cout<<"here \n";
+                    std::cout << "    move " << temp_reg << ","<< children_reg[con] <<"\n";
+                    // std::cout<<"here \n";
+                    std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+                    Register_free(temp_reg);
+                }
+                con++;
+                counter++;
+            }
+
+            std::cout << "    jal "<<function_decl_table->Enterence_lable_Name<<"\n";
+            std::cout << "    move " << allocated_reg << ","<< "$v0"<<"\n";
+
+        }
+        // std::cout<<"-89-----------------\n";
+    }
+    for(auto a : children_reg){
+        Register_free(a);
+    }
+    
+}
+
+void Function_invocation_treversal(AstNode * node, std::string outfile, std::string allocated_reg, std::vector<std::string> children_reg){
+    if(node->ChildrenArray.empty()){
+        Function_invocation_handler(node,outfile,allocated_reg,children_reg);
+        return;
+    }
+    else{
+        std::vector<std::string> children_reg;
+        for(auto a : node->ChildrenArray){
+            if(a->AstNodeType == NodeType::FNC_INVOCATION){
+                auto reg = Register_allocator();
+                children_reg.push_back(reg);
+                Function_invocation_treversal(a, outfile, reg, children_reg);
+            }
+        }///the callback function automatically frees the children register. 
+        Function_invocation_handler(node,outfile,allocated_reg,children_reg);
     }
 }
 
@@ -485,6 +738,11 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
                         // move $t0,$v0
                         // sw $t0,4($sp)
                         auto local_Var = Register_allocator();
+                        auto temp_reg= Register_allocator();
+                        std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+                        Function_invocation_treversal(a, Out_file_name, temp_reg,children_reg);
+                        Register_free(temp_reg);
+
                         std::cout << "    move " << local_Var << ","<<"$v0\n";
                         if(is_global){
                             std::cout << "    sw " << variable_symbol_table->Enterence_lable_Name << ","<<"$v0\n";
@@ -522,196 +780,196 @@ void Third_iter_callbackfunc(AstNode * node, std::string Out_file_name){
             break;
         }
         
-        case NodeType::FNC_INVOCATION:{
-            std::string Function_Identifier = "";
+        // case NodeType::FNC_INVOCATION:{
+        //     std::string Function_Identifier = "";
             
             
-            for(auto a : node->ChildrenArray){
-                if(a->AstNodeType == NodeType::ID){
-                    Function_Identifier = a->AstStringval;
-                    break;
-                }
-            }
+        //     for(auto a : node->ChildrenArray){
+        //         if(a->AstNodeType == NodeType::ID){
+        //             Function_Identifier = a->AstStringval;
+        //             break;
+        //         }
+        //     }
             
-            auto function_decl_table = Generator_AstStackLookup(Function_Identifier);
+        //     auto function_decl_table = Generator_AstStackLookup(Function_Identifier);
 
-            if(function_decl_table->is_builtinFunction){
-                //this is the case when the function invocation is for the built in prints function. 
-                if(function_decl_table->Identifier_Name == "prints"){
-                    //generate a lable for the function.
-                    std::string lable = NewlableGenerator();
-                    std::string printParam = "";
-                    for(auto a : node->ChildrenArray){
-                        if(a->AstNodeType == NodeType::STRING){
-                            printParam = a->AstStringval;
-                            break;
-                        }
-                    }
-                    std::cout<< "    .data\n";
-                    std::cout<< lable << " :\n";
-                    std::cout<< "    .byte ";
-                    int stringlen = printParam.size();
-                    int counter = 1;
-                    for (int i = 0; i < printParam.size(); i++){
-                        auto a = printParam[i];
-                        if(counter != stringlen && counter != 1){
-                            if(a == '\\'){
-                                i++;
-                                counter++;
-                                auto b = printParam[i];
-                                switch(b){
-                                    case 'b': std::cout<< int('\b')<< " ,"; break; 
-                                    case 'f': std::cout<< int('\f')<< " ,"; break; 
-                                    case 't': std::cout<< int('\t')<< " ,"; break; 
-                                    case 'r': std::cout<< int('\r')<< " ,"; break; 
-                                    case 'n': std::cout<< int('\n')<< " ,"; break; 
-                                    case '\'': std::cout<< int('\'')<< " ,"; break; 
-                                    case '\"': std::cout<< int('\"')<< " ,"; break; 
-                                    case '\\': std::cout<< int('\\')<< " ,"; break; 
-                                    default: std::cout<< int(b)<< " ,"; break;
-                                }
-                            }else{
-                                std::cout<< int(a)<< " ,";
-                            }
+        //     if(function_decl_table->is_builtinFunction){
+        //         //this is the case when the function invocation is for the built in prints function. 
+        //         if(function_decl_table->Identifier_Name == "prints"){
+        //             //generate a lable for the function.
+        //             std::string lable = NewlableGenerator();
+        //             std::string printParam = "";
+        //             for(auto a : node->ChildrenArray){
+        //                 if(a->AstNodeType == NodeType::STRING){
+        //                     printParam = a->AstStringval;
+        //                     break;
+        //                 }
+        //             }
+        //             std::cout<< "    .data\n";
+        //             std::cout<< lable << " :\n";
+        //             std::cout<< "    .byte ";
+        //             int stringlen = printParam.size();
+        //             int counter = 1;
+        //             for (int i = 0; i < printParam.size(); i++){
+        //                 auto a = printParam[i];
+        //                 if(counter != stringlen && counter != 1){
+        //                     if(a == '\\'){
+        //                         i++;
+        //                         counter++;
+        //                         auto b = printParam[i];
+        //                         switch(b){
+        //                             case 'b': std::cout<< int('\b')<< " ,"; break; 
+        //                             case 'f': std::cout<< int('\f')<< " ,"; break; 
+        //                             case 't': std::cout<< int('\t')<< " ,"; break; 
+        //                             case 'r': std::cout<< int('\r')<< " ,"; break; 
+        //                             case 'n': std::cout<< int('\n')<< " ,"; break; 
+        //                             case '\'': std::cout<< int('\'')<< " ,"; break; 
+        //                             case '\"': std::cout<< int('\"')<< " ,"; break; 
+        //                             case '\\': std::cout<< int('\\')<< " ,"; break; 
+        //                             default: std::cout<< int(b)<< " ,"; break;
+        //                         }
+        //                     }else{
+        //                         std::cout<< int(a)<< " ,";
+        //                     }
                             
-                        }
-                        counter++;
-                    }
-                    std::cout << "0\n";
-                    std::cout<< "    .align 2\n";
-                    std::cout<< "    .text\n";
+        //                 }
+        //                 counter++;
+        //             }
+        //             std::cout << "0\n";
+        //             std::cout<< "    .align 2\n";
+        //             std::cout<< "    .text\n";
 
-                    auto reg = Register_allocator();
-                    std::cout<< "    la " << reg << ","<< lable<<"\n";
-                    std::cout<< "    move "<< "$a0," << reg << "\n";
-                    std::cout<<"    jal Lprints\n"; 
-                    Register_free(reg);
-                }
-                // li $t0,1
-                // move $a0,$t0
-                // jal Lprintb
-                else if(function_decl_table->Identifier_Name == "printb"){
-                    auto reg = Register_allocator();
-                    // auto lable = boolean_exp_handler();          //Will be done like this later on. 
-                    //----Temporary code
-                        std::string lable = "";
-                        bool flag = false;
-                        int cou = 0; 
-                        for(auto a : node->ChildrenArray){
-                            if(cou == 0){
-                                cou++;
-                                continue;
-                            }
-                            if(a->AstNodeType == NodeType::ID){
-                                auto temp_reg = Register_allocator();
-                                auto node1_stab = Generator_AstStackLookup(a->AstStringval);
-                                if(node1_stab->isglobalVariable){
-                                    std::cout<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
-                                }else{
-                                    std::cout<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
-                                }
+        //             auto reg = Register_allocator();
+        //             std::cout<< "    la " << reg << ","<< lable<<"\n";
+        //             std::cout<< "    move "<< "$a0," << reg << "\n";
+        //             std::cout<<"    jal Lprints\n"; 
+        //             Register_free(reg);
+        //         }
+        //         // li $t0,1
+        //         // move $a0,$t0
+        //         // jal Lprintb
+        //         else if(function_decl_table->Identifier_Name == "printb"){
+        //             auto reg = Register_allocator();
+        //             // auto lable = boolean_exp_handler();          //Will be done like this later on. 
+        //             //----Temporary code
+        //                 std::string lable = "";
+        //                 bool flag = false;
+        //                 int cou = 0; 
+        //                 for(auto a : node->ChildrenArray){
+        //                     if(cou == 0){
+        //                         cou++;
+        //                         continue;
+        //                     }
+        //                     if(a->AstNodeType == NodeType::ID){
+        //                         auto temp_reg = Register_allocator();
+        //                         auto node1_stab = Generator_AstStackLookup(a->AstStringval);
+        //                         if(node1_stab->isglobalVariable){
+        //                             std::cout<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
+        //                         }else{
+        //                             std::cout<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+        //                         }
                                 
-                                std::cout<< "    move "<< "$a0," << temp_reg << "\n";
-                                Register_free(temp_reg);
-                                flag = true;
+        //                         std::cout<< "    move "<< "$a0," << temp_reg << "\n";
+        //                         Register_free(temp_reg);
+        //                         flag = true;
 
-                            }
-                            if(a->AstNodeType == NodeType::TRUE){
-                                lable = "1";
-                                break;
-                            }
-                            if(a->AstNodeType == NodeType::FALSE){
-                                lable = "0";
-                                break;
-                            }
-                            cou++;
-                        }
-                    //----
-                    if(!flag){
-                        std::cout<< "    li " << reg << ","<< lable<<"\n";
-                        std::cout<< "    move "<< "$a0," << reg << "\n";
-                    }
+        //                     }
+        //                     if(a->AstNodeType == NodeType::TRUE){
+        //                         lable = "1";
+        //                         break;
+        //                     }
+        //                     if(a->AstNodeType == NodeType::FALSE){
+        //                         lable = "0";
+        //                         break;
+        //                     }
+        //                     cou++;
+        //                 }
+        //             //----
+        //             if(!flag){
+        //                 std::cout<< "    li " << reg << ","<< lable<<"\n";
+        //                 std::cout<< "    move "<< "$a0," << reg << "\n";
+        //             }
                     
                     
-                    std::cout<< "    jal Lprintb\n"; 
-                    Register_free(reg);
-                }
-                else if(function_decl_table->Identifier_Name == "getchar"){
-                    std::cout<<"    jal Lgetchar\n";
-                }
-                else if(function_decl_table->Identifier_Name == "printc"){
-                    if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
-                        auto temp_reg = Register_allocator();
-                        auto node1_stab = Generator_AstStackLookup(node->ChildrenArray.at(1)->AstStringval);
-                        if(node1_stab->isglobalVariable){
-                            std::cout<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
-                        }else{
-                            std::cout<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
-                        }
+        //             std::cout<< "    jal Lprintb\n"; 
+        //             Register_free(reg);
+        //         }
+        //         else if(function_decl_table->Identifier_Name == "getchar"){
+        //             std::cout<<"    jal Lgetchar\n";
+        //         }
+        //         else if(function_decl_table->Identifier_Name == "printc"){
+        //             if(node->ChildrenArray.at(1)->AstNodeType == NodeType::ID){
+        //                 auto temp_reg = Register_allocator();
+        //                 auto node1_stab = Generator_AstStackLookup(node->ChildrenArray.at(1)->AstStringval);
+        //                 if(node1_stab->isglobalVariable){
+        //                     std::cout<< "    lw " << temp_reg << "," << node1_stab->Enterence_lable_Name<<"\n";
+        //                 }else{
+        //                     std::cout<< "    lw " << temp_reg << "," << node1_stab->stack_Pointer_Location<<"($sp)"<<"\n";
+        //                 }
                         
-                        std::cout<< "    move "<< "$a0," << temp_reg << "\n";
-                        std::cout<<"    jal Lprintc\n"; 
-                        Register_free(temp_reg);
-                    }
-                }
-                else if(function_decl_table->Identifier_Name == "printi"){
-                    auto source_reg = Register_allocator();
-                    auto temp_reg1 = Register_allocator(); 
-                    std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
-                    assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, temp_reg1,children_reg);
-                    source_reg = temp_reg1;
-                    Register_free(temp_reg1);
-                    Register_free(source_reg);
-                    std::cout<< "    move "<< "$a0," << source_reg << "\n";
-                    std::cout<<"    jal Lprinti\n"; 
-                }
-            }else{
-                // li $t0,89
-                // move $a0,$t0
-                // jal L1
-                // move $t0,$v0
-                int counter = -1;
+        //                 std::cout<< "    move "<< "$a0," << temp_reg << "\n";
+        //                 std::cout<<"    jal Lprintc\n"; 
+        //                 Register_free(temp_reg);
+        //             }
+        //         }
+        //         else if(function_decl_table->Identifier_Name == "printi"){
+        //             auto source_reg = Register_allocator();
+        //             auto temp_reg1 = Register_allocator(); 
+        //             std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+        //             assignment_expression_treversal(node->ChildrenArray.at(1), Out_file_name, temp_reg1,children_reg);
+        //             source_reg = temp_reg1;
+        //             Register_free(temp_reg1);
+        //             Register_free(source_reg);
+        //             std::cout<< "    move "<< "$a0," << source_reg << "\n";
+        //             std::cout<<"    jal Lprinti\n"; 
+        //         }
+        //     }else{
+        //         // li $t0,89
+        //         // move $a0,$t0
+        //         // jal L1
+        //         // move $t0,$v0
+        //         int counter = -1;
 
-                for(auto a : node->ChildrenArray){
-                    if(counter == -1){
-                        counter++;
-                        continue;
-                    }
-                    else if(a->AstNodeType == NodeType::NUMBEER){
-                        auto temp_reg = Register_allocator();
-                        std::cout << "    li " << temp_reg << ","<< a->AstIntval<<"\n";
-                        std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
-                        Register_free(temp_reg);
-                    }
-                    else if (a->AstNodeType == NodeType::ID){
-                        auto Identifiername = a->AstStringval;
-                        auto identifier_nodestab = Generator_AstStackLookup(Identifiername);
-                        auto temp_reg = Register_allocator();
-                        if(identifier_nodestab->isglobalVariable){
-                            std::cout << "    lw " << temp_reg << ","<< identifier_nodestab->Enterence_lable_Name<<"\n";
-                            std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
-                        }else{
-                            std::cout << "    lw " << temp_reg << ","<< identifier_nodestab->stack_Pointer_Location<<"($sp)\n";
-                            std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+        //         for(auto a : node->ChildrenArray){
+        //             if(counter == -1){
+        //                 counter++;
+        //                 continue;
+        //             }
+        //             else if(a->AstNodeType == NodeType::NUMBEER){
+        //                 auto temp_reg = Register_allocator();
+        //                 std::cout << "    li " << temp_reg << ","<< a->AstIntval<<"\n";
+        //                 std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+        //                 Register_free(temp_reg);
+        //             }
+        //             else if (a->AstNodeType == NodeType::ID){
+        //                 auto Identifiername = a->AstStringval;
+        //                 auto identifier_nodestab = Generator_AstStackLookup(Identifiername);
+        //                 auto temp_reg = Register_allocator();
+        //                 if(identifier_nodestab->isglobalVariable){
+        //                     std::cout << "    lw " << temp_reg << ","<< identifier_nodestab->Enterence_lable_Name<<"\n";
+        //                     std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+        //                 }else{
+        //                     std::cout << "    lw " << temp_reg << ","<< identifier_nodestab->stack_Pointer_Location<<"($sp)\n";
+        //                     std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
                         
-                        }
-                        Register_free(temp_reg);
-                    }
-                    else if (a->AstNodeType == NodeType::FNC_INVOCATION){   //have to re implement this 
-                        auto temp_reg = Register_allocator();
-                        std::cout << "    move " << temp_reg << ","<< "$v0"<<"\n";
-                        std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
-                        Register_free(temp_reg);
-                    }
-                    counter++;
-                }
+        //                 }
+        //                 Register_free(temp_reg);
+        //             }
+        //             else if (a->AstNodeType == NodeType::FNC_INVOCATION){   //have to re implement this 
+        //                 auto temp_reg = Register_allocator();
+        //                 std::cout << "    move " << temp_reg << ","<< "$v0"<<"\n";
+        //                 std::cout << "    move " << "$a"<< counter << ","<<temp_reg << "\n";
+        //                 Register_free(temp_reg);
+        //             }
+        //             counter++;
+        //         }
 
-                std::cout << "    jal "<<function_decl_table->Enterence_lable_Name<<"\n";
+        //         std::cout << "    jal "<<function_decl_table->Enterence_lable_Name<<"\n";
 
-            }
-            break;
+        //     }
+        //     break;
             
-        }
+        // }
 
         default: break;
     }
@@ -839,7 +1097,13 @@ void Second_Iter_Calc_NodeEnterence(AstNode * node, std::string Out_file_name){
                 auto source_reg = Register_allocator();
                 auto temp_reg1 = Register_allocator(); 
                 std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
-                assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
+                if(node->ChildrenArray.at(0)->AstNodeType == NodeType::FNC_INVOCATION){
+                    std::cout<<"yes it is \n";
+                    Function_invocation_treversal(node->ChildrenArray.at(0),Out_file_name, temp_reg1, children_reg);
+                }else{
+                    assignment_expression_treversal(node->ChildrenArray.at(0), Out_file_name, temp_reg1,children_reg);
+                }
+                
                 source_reg = temp_reg1;
                 Register_free(temp_reg1);
                 Register_free(source_reg);
@@ -937,7 +1201,12 @@ void Second_iter(AstNode * Rootnode, std::string filename){
             //Do nothing for children. they will be handled...
         }
         else if(Rootnode->AstNodeType == NodeType::FNC_INVOCATION){
-            Third_iter(Rootnode,filename);
+            // std::cout<<" here 1\n";
+            auto temp_reg1 = Register_allocator(); 
+            std::vector<std::string> children_reg;  //this is just to pass inside the function, it does not do anything.
+            Function_invocation_treversal(Rootnode, filename, temp_reg1,children_reg);
+            Register_free(temp_reg1);
+            // std::cout<<" here 2\n";
         }
         else{
             Second_Iter_Calc_NodeEnterence(Rootnode,filename);

@@ -6,46 +6,64 @@ main:
     syscall
 
 Lable0 : 
-    subu $sp,$sp,4
+    subu $sp,$sp,12
     sw $ra,0($sp)
-    .data
+    li $s7,0
+    sw $s7,4($sp)
+    li $s7,1000000
+    sw $s7,8($sp)
 Lable2 :
-    .byte 97 ,115 ,100 ,102 ,0
-    .align 2
-    .text
-    la $s7,Lable2
-    move $a0,$s7
-    jal Lprints
-    .data
+    lw $s5,8($sp)
+    lw $s4,4($sp)
+    subu $s6,$s4,$s5
+    lw $s4,4($sp)
+    sgt $s7,$s4,$s6
+    beqz $s7,Lable3
+    lw $s6,8($sp)
+    lw $s5,4($sp)
+    addu $s4,$s5,$s6
+    sw $s4,4($sp)
+    j Lable2
 Lable3 :
-    .byte 8 ,9 ,10 ,12 ,13 ,34 ,39 ,92 ,0
-    .align 2
-    .text
-    la $s7,Lable3
-    move $a0,$s7
-    jal Lprints
-    .data
+    lw $s5,8($sp)
+    lw $s6,4($sp)
+    subu $s4,$s6,$s5
+    sw $s4,4($sp)
 Lable4 :
-    .byte 1 ,26 ,0
-    .align 2
-    .text
-    la $s7,Lable4
-    move $a0,$s7
-    jal Lprints
-    li $s7,1
+    li $s6,1
+    lw $s5,4($sp)
+    subu $s4,$s5,$s6
+    lw $s5,4($sp)
+    sgt $s7,$s5,$s4
     beqz $s7,Lable5
+    li $s4,1
+    lw $s6,4($sp)
+    addu $s5,$s6,$s4
+    sw $s5,4($sp)
+    j Lable4
+Lable5 :
     .data
 Lable6 :
-    .byte 32 ,97 ,115 ,100 ,102 ,0
+    .byte 109 ,105 ,110 ,105 ,110 ,116 ,32 ,105 ,115 ,32 ,0
     .align 2
     .text
-    la $s7,Lable6
-    move $a0,$s7
+    la $s5,Lable6
+    move $a0,$s5
     jal Lprints
-Lable5 :
+    lw $s5,4($sp)
+    move $a0,$s5
+    jal Lprinti
+    .data
+Lable7 :
+    .byte 10 ,0
+    .align 2
+    .text
+    la $s5,Lable7
+    move $a0,$s5
+    jal Lprints
 Lable1 : 
     lw $ra,0($sp)
-    addu $sp,$sp,4
+    addu $sp,$sp,12
     jr $ra
 
 Lprints: 

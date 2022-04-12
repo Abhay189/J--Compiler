@@ -1,0 +1,6626 @@
+    .text 
+    .globl main 
+main: 
+    jal Lable0 
+    li $v0,10 
+    syscall
+
+    .data
+Lable1 :
+    .word 0
+    .text
+    .data
+Lable2 :
+    .word 0
+    .text
+    .data
+Lable3 :
+    .word 0
+    .text
+    .data
+Lable4 :
+    .word 0
+    .text
+    .data
+Lable5 :
+    .word 0
+    .text
+    .data
+Lable6 :
+    .word 0
+    .text
+    .data
+Lable7 :
+    .word 0
+    .text
+    .data
+Lable8 :
+    .word 0
+    .text
+    .data
+Lable9 :
+    .word 0
+    .text
+    .data
+Lable10 :
+    .word 0
+    .text
+    .data
+Lable11 :
+    .word 0
+    .text
+    .data
+Lable12 :
+    .word 0
+    .text
+    .data
+Lable13 :
+    .word 0
+    .text
+    .data
+Lable14 :
+    .word 0
+    .text
+    .data
+Lable15 :
+    .word 0
+    .text
+    .data
+Lable16 :
+    .word 0
+    .text
+    .data
+Lable18 :
+    .word 0
+    .text
+Lable0 : 
+    subu $sp,$sp,20
+    sw $ra,0($sp)
+    li $s6,1
+    move $a0,$s6
+    jal Lable19
+    move $s7,$v0
+    li $s7,0
+    sw $s7,4($sp)
+Lable22 :
+    li $s6,14
+    lw $s5,4($sp)
+    sle $s7,$s5,$s6
+    beqz $s7,Lable23
+    li $s5,0
+    lw $s6,4($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable25
+    li $s5,100
+    move $s4,$v0
+    bnez $s5,Lable26
+    .data
+Lable27 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable27
+    j error
+Lable26 :
+    rem $s6,$s4,$s5
+    sw $s6,Lable1
+    j Lable24
+Lable25 :
+    li $s6,1
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable29
+    li $s6,100
+    move $s5,$v0
+    bnez $s6,Lable30
+    .data
+Lable31 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable31
+    j error
+Lable30 :
+    rem $s4,$s5,$s6
+    sw $s4,Lable2
+    j Lable28
+Lable29 :
+    li $s4,2
+    lw $s5,4($sp)
+    seq $s7,$s5,$s4
+    beqz $s7,Lable33
+    li $s4,100
+    move $s6,$v0
+    bnez $s4,Lable34
+    .data
+Lable35 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable35
+    j error
+Lable34 :
+    rem $s5,$s6,$s4
+    sw $s5,Lable3
+    j Lable32
+Lable33 :
+    li $s5,3
+    lw $s6,4($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable37
+    li $s5,100
+    move $s4,$v0
+    bnez $s5,Lable38
+    .data
+Lable39 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable39
+    j error
+Lable38 :
+    rem $s6,$s4,$s5
+    sw $s6,Lable4
+    j Lable36
+Lable37 :
+    li $s6,4
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable41
+    li $s6,100
+    move $s5,$v0
+    bnez $s6,Lable42
+    .data
+Lable43 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable43
+    j error
+Lable42 :
+    rem $s4,$s5,$s6
+    sw $s4,Lable5
+    j Lable40
+Lable41 :
+    li $s4,5
+    lw $s5,4($sp)
+    seq $s7,$s5,$s4
+    beqz $s7,Lable45
+    li $s4,100
+    move $s6,$v0
+    bnez $s4,Lable46
+    .data
+Lable47 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable47
+    j error
+Lable46 :
+    rem $s5,$s6,$s4
+    sw $s5,Lable6
+    j Lable44
+Lable45 :
+    li $s5,6
+    lw $s6,4($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable49
+    li $s5,100
+    move $s4,$v0
+    bnez $s5,Lable50
+    .data
+Lable51 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable51
+    j error
+Lable50 :
+    rem $s6,$s4,$s5
+    sw $s6,Lable7
+    j Lable48
+Lable49 :
+    li $s6,7
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable53
+    li $s6,100
+    move $s5,$v0
+    bnez $s6,Lable54
+    .data
+Lable55 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable55
+    j error
+Lable54 :
+    rem $s4,$s5,$s6
+    sw $s4,Lable8
+    j Lable52
+Lable53 :
+    li $s4,8
+    lw $s5,4($sp)
+    seq $s7,$s5,$s4
+    beqz $s7,Lable57
+    li $s4,100
+    move $s6,$v0
+    bnez $s4,Lable58
+    .data
+Lable59 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable59
+    j error
+Lable58 :
+    rem $s5,$s6,$s4
+    sw $s5,Lable9
+    j Lable56
+Lable57 :
+    li $s5,9
+    lw $s6,4($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable61
+    li $s5,100
+    move $s4,$v0
+    bnez $s5,Lable62
+    .data
+Lable63 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable63
+    j error
+Lable62 :
+    rem $s6,$s4,$s5
+    sw $s6,Lable10
+    j Lable60
+Lable61 :
+    li $s6,10
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable65
+    li $s6,100
+    move $s5,$v0
+    bnez $s6,Lable66
+    .data
+Lable67 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable67
+    j error
+Lable66 :
+    rem $s4,$s5,$s6
+    sw $s4,Lable11
+    j Lable64
+Lable65 :
+    li $s4,11
+    lw $s5,4($sp)
+    seq $s7,$s5,$s4
+    beqz $s7,Lable69
+    li $s4,100
+    move $s6,$v0
+    bnez $s4,Lable70
+    .data
+Lable71 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable71
+    j error
+Lable70 :
+    rem $s5,$s6,$s4
+    sw $s5,Lable12
+    j Lable68
+Lable69 :
+    li $s5,12
+    lw $s6,4($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable73
+    li $s5,100
+    move $s4,$v0
+    bnez $s5,Lable74
+    .data
+Lable75 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable75
+    j error
+Lable74 :
+    rem $s6,$s4,$s5
+    sw $s6,Lable13
+    j Lable72
+Lable73 :
+    li $s6,13
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable77
+    li $s6,100
+    move $s5,$v0
+    bnez $s6,Lable78
+    .data
+Lable79 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable79
+    j error
+Lable78 :
+    rem $s4,$s5,$s6
+    sw $s4,Lable14
+    j Lable76
+Lable77 :
+    li $s4,14
+    lw $s5,4($sp)
+    seq $s7,$s5,$s4
+    beqz $s7,Lable80
+    li $s4,100
+    move $s6,$v0
+    bnez $s4,Lable81
+    .data
+Lable82 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable82
+    j error
+Lable81 :
+    rem $s5,$s6,$s4
+    sw $s5,Lable15
+Lable80 :
+Lable76 :
+Lable72 :
+Lable68 :
+Lable64 :
+Lable60 :
+Lable56 :
+Lable52 :
+Lable48 :
+Lable44 :
+Lable40 :
+Lable36 :
+Lable32 :
+Lable28 :
+Lable24 :
+    li $s6,1
+    lw $s4,4($sp)
+    addu $s5,$s4,$s6
+    sw $s5,4($sp)
+    j Lable22
+Lable23 :
+    jal Lable17
+    move $s7,$v0
+    li $s7,0
+    sw $s7,4($sp)
+Lable83 :
+    li $s5,13
+    lw $s4,4($sp)
+    sle $s7,$s4,$s5
+    beqz $s7,Lable84
+    lw $s4,4($sp)
+    sw $s4,8($sp)
+    li $s5,1
+    lw $s6,4($sp)
+    addu $s4,$s6,$s5
+    sw $s4,12($sp)
+Lable85 :
+    li $s4,14
+    lw $s6,12($sp)
+    sle $s7,$s6,$s4
+    beqz $s7,Lable86
+    li $s6,1
+    lw $s4,12($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable88
+    li $s4,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable90
+    lw $s6,Lable1
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable91
+    li $s7,1
+    sw $s7,8($sp)
+Lable91 :
+    j Lable89
+Lable90 :
+    li $s4,1
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable93
+    lw $s6,Lable2
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable94
+    li $s7,1
+    sw $s7,8($sp)
+Lable94 :
+    j Lable92
+Lable93 :
+    li $s4,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable96
+    lw $s6,Lable3
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable97
+    li $s7,1
+    sw $s7,8($sp)
+Lable97 :
+    j Lable95
+Lable96 :
+    li $s4,3
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable99
+    lw $s6,Lable4
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable100
+    li $s7,1
+    sw $s7,8($sp)
+Lable100 :
+    j Lable98
+Lable99 :
+    li $s4,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable102
+    lw $s6,Lable5
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable103
+    li $s7,1
+    sw $s7,8($sp)
+Lable103 :
+    j Lable101
+Lable102 :
+    li $s4,5
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable105
+    lw $s6,Lable6
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable106
+    li $s7,1
+    sw $s7,8($sp)
+Lable106 :
+    j Lable104
+Lable105 :
+    li $s4,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable108
+    lw $s6,Lable7
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable109
+    li $s7,1
+    sw $s7,8($sp)
+Lable109 :
+    j Lable107
+Lable108 :
+    li $s4,7
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable111
+    lw $s6,Lable8
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable112
+    li $s7,1
+    sw $s7,8($sp)
+Lable112 :
+    j Lable110
+Lable111 :
+    li $s4,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable114
+    lw $s6,Lable9
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable115
+    li $s7,1
+    sw $s7,8($sp)
+Lable115 :
+    j Lable113
+Lable114 :
+    li $s4,9
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable117
+    lw $s6,Lable10
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable118
+    li $s7,1
+    sw $s7,8($sp)
+Lable118 :
+    j Lable116
+Lable117 :
+    li $s4,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable120
+    lw $s6,Lable11
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable121
+    li $s7,1
+    sw $s7,8($sp)
+Lable121 :
+    j Lable119
+Lable120 :
+    li $s4,11
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable123
+    lw $s6,Lable12
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable124
+    li $s7,1
+    sw $s7,8($sp)
+Lable124 :
+    j Lable122
+Lable123 :
+    li $s4,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable126
+    lw $s6,Lable13
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable127
+    li $s7,1
+    sw $s7,8($sp)
+Lable127 :
+    j Lable125
+Lable126 :
+    li $s4,13
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable129
+    lw $s6,Lable14
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable130
+    li $s7,1
+    sw $s7,8($sp)
+Lable130 :
+    j Lable128
+Lable129 :
+    li $s4,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable131
+    lw $s6,Lable15
+    lw $s4,Lable2
+    slt $s7,$s4,$s6
+    beqz $s7,Lable132
+    li $s7,1
+    sw $s7,8($sp)
+Lable132 :
+Lable131 :
+Lable128 :
+Lable125 :
+Lable122 :
+Lable119 :
+Lable116 :
+Lable113 :
+Lable110 :
+Lable107 :
+Lable104 :
+Lable101 :
+Lable98 :
+Lable95 :
+Lable92 :
+Lable89 :
+    j Lable87
+Lable88 :
+    li $s4,2
+    lw $s6,12($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable134
+    li $s6,0
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable136
+    lw $s4,Lable1
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable137
+    li $s7,2
+    sw $s7,8($sp)
+Lable137 :
+    j Lable135
+Lable136 :
+    li $s6,1
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable139
+    lw $s4,Lable2
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable140
+    li $s7,2
+    sw $s7,8($sp)
+Lable140 :
+    j Lable138
+Lable139 :
+    li $s6,2
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable142
+    lw $s4,Lable3
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable143
+    li $s7,2
+    sw $s7,8($sp)
+Lable143 :
+    j Lable141
+Lable142 :
+    li $s6,3
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable145
+    lw $s4,Lable4
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable146
+    li $s7,2
+    sw $s7,8($sp)
+Lable146 :
+    j Lable144
+Lable145 :
+    li $s6,4
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable148
+    lw $s4,Lable5
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable149
+    li $s7,2
+    sw $s7,8($sp)
+Lable149 :
+    j Lable147
+Lable148 :
+    li $s6,5
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable151
+    lw $s4,Lable6
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable152
+    li $s7,2
+    sw $s7,8($sp)
+Lable152 :
+    j Lable150
+Lable151 :
+    li $s6,6
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable154
+    lw $s4,Lable7
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable155
+    li $s7,2
+    sw $s7,8($sp)
+Lable155 :
+    j Lable153
+Lable154 :
+    li $s6,7
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable157
+    lw $s4,Lable8
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable158
+    li $s7,2
+    sw $s7,8($sp)
+Lable158 :
+    j Lable156
+Lable157 :
+    li $s6,8
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable160
+    lw $s4,Lable9
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable161
+    li $s7,2
+    sw $s7,8($sp)
+Lable161 :
+    j Lable159
+Lable160 :
+    li $s6,9
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable163
+    lw $s4,Lable10
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable164
+    li $s7,2
+    sw $s7,8($sp)
+Lable164 :
+    j Lable162
+Lable163 :
+    li $s6,10
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable166
+    lw $s4,Lable11
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable167
+    li $s7,2
+    sw $s7,8($sp)
+Lable167 :
+    j Lable165
+Lable166 :
+    li $s6,11
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable169
+    lw $s4,Lable12
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable170
+    li $s7,2
+    sw $s7,8($sp)
+Lable170 :
+    j Lable168
+Lable169 :
+    li $s6,12
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable172
+    lw $s4,Lable13
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable173
+    li $s7,2
+    sw $s7,8($sp)
+Lable173 :
+    j Lable171
+Lable172 :
+    li $s6,13
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable175
+    lw $s4,Lable14
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable176
+    li $s7,2
+    sw $s7,8($sp)
+Lable176 :
+    j Lable174
+Lable175 :
+    li $s6,14
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable177
+    lw $s4,Lable15
+    lw $s6,Lable3
+    slt $s7,$s6,$s4
+    beqz $s7,Lable178
+    li $s7,2
+    sw $s7,8($sp)
+Lable178 :
+Lable177 :
+Lable174 :
+Lable171 :
+Lable168 :
+Lable165 :
+Lable162 :
+Lable159 :
+Lable156 :
+Lable153 :
+Lable150 :
+Lable147 :
+Lable144 :
+Lable141 :
+Lable138 :
+Lable135 :
+    j Lable133
+Lable134 :
+    li $s6,3
+    lw $s4,12($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable180
+    li $s4,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable182
+    lw $s6,Lable1
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable183
+    li $s7,3
+    sw $s7,8($sp)
+Lable183 :
+    j Lable181
+Lable182 :
+    li $s4,1
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable185
+    lw $s6,Lable2
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable186
+    li $s7,3
+    sw $s7,8($sp)
+Lable186 :
+    j Lable184
+Lable185 :
+    li $s4,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable188
+    lw $s6,Lable3
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable189
+    li $s7,3
+    sw $s7,8($sp)
+Lable189 :
+    j Lable187
+Lable188 :
+    li $s4,3
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable191
+    lw $s6,Lable4
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable192
+    li $s7,3
+    sw $s7,8($sp)
+Lable192 :
+    j Lable190
+Lable191 :
+    li $s4,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable194
+    lw $s6,Lable5
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable195
+    li $s7,3
+    sw $s7,8($sp)
+Lable195 :
+    j Lable193
+Lable194 :
+    li $s4,5
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable197
+    lw $s6,Lable6
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable198
+    li $s7,3
+    sw $s7,8($sp)
+Lable198 :
+    j Lable196
+Lable197 :
+    li $s4,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable200
+    lw $s6,Lable7
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable201
+    li $s7,3
+    sw $s7,8($sp)
+Lable201 :
+    j Lable199
+Lable200 :
+    li $s4,7
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable203
+    lw $s6,Lable8
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable204
+    li $s7,3
+    sw $s7,8($sp)
+Lable204 :
+    j Lable202
+Lable203 :
+    li $s4,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable206
+    lw $s6,Lable9
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable207
+    li $s7,3
+    sw $s7,8($sp)
+Lable207 :
+    j Lable205
+Lable206 :
+    li $s4,9
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable209
+    lw $s6,Lable10
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable210
+    li $s7,3
+    sw $s7,8($sp)
+Lable210 :
+    j Lable208
+Lable209 :
+    li $s4,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable212
+    lw $s6,Lable11
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable213
+    li $s7,3
+    sw $s7,8($sp)
+Lable213 :
+    j Lable211
+Lable212 :
+    li $s4,11
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable215
+    lw $s6,Lable12
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable216
+    li $s7,3
+    sw $s7,8($sp)
+Lable216 :
+    j Lable214
+Lable215 :
+    li $s4,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable218
+    lw $s6,Lable13
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable219
+    li $s7,3
+    sw $s7,8($sp)
+Lable219 :
+    j Lable217
+Lable218 :
+    li $s4,13
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable221
+    lw $s6,Lable14
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable222
+    li $s7,3
+    sw $s7,8($sp)
+Lable222 :
+    j Lable220
+Lable221 :
+    li $s4,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable223
+    lw $s6,Lable15
+    lw $s4,Lable4
+    slt $s7,$s4,$s6
+    beqz $s7,Lable224
+    li $s7,3
+    sw $s7,8($sp)
+Lable224 :
+Lable223 :
+Lable220 :
+Lable217 :
+Lable214 :
+Lable211 :
+Lable208 :
+Lable205 :
+Lable202 :
+Lable199 :
+Lable196 :
+Lable193 :
+Lable190 :
+Lable187 :
+Lable184 :
+Lable181 :
+    j Lable179
+Lable180 :
+    li $s4,4
+    lw $s6,12($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable226
+    li $s6,0
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable228
+    lw $s4,Lable1
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable229
+    li $s7,4
+    sw $s7,8($sp)
+Lable229 :
+    j Lable227
+Lable228 :
+    li $s6,1
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable231
+    lw $s4,Lable2
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable232
+    li $s7,4
+    sw $s7,8($sp)
+Lable232 :
+    j Lable230
+Lable231 :
+    li $s6,2
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable234
+    lw $s4,Lable3
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable235
+    li $s7,4
+    sw $s7,8($sp)
+Lable235 :
+    j Lable233
+Lable234 :
+    li $s6,3
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable237
+    lw $s4,Lable4
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable238
+    li $s7,4
+    sw $s7,8($sp)
+Lable238 :
+    j Lable236
+Lable237 :
+    li $s6,4
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable240
+    lw $s4,Lable5
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable241
+    li $s7,4
+    sw $s7,8($sp)
+Lable241 :
+    j Lable239
+Lable240 :
+    li $s6,5
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable243
+    lw $s4,Lable6
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable244
+    li $s7,4
+    sw $s7,8($sp)
+Lable244 :
+    j Lable242
+Lable243 :
+    li $s6,6
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable246
+    lw $s4,Lable7
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable247
+    li $s7,4
+    sw $s7,8($sp)
+Lable247 :
+    j Lable245
+Lable246 :
+    li $s6,7
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable249
+    lw $s4,Lable8
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable250
+    li $s7,4
+    sw $s7,8($sp)
+Lable250 :
+    j Lable248
+Lable249 :
+    li $s6,8
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable252
+    lw $s4,Lable9
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable253
+    li $s7,4
+    sw $s7,8($sp)
+Lable253 :
+    j Lable251
+Lable252 :
+    li $s6,9
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable255
+    lw $s4,Lable10
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable256
+    li $s7,4
+    sw $s7,8($sp)
+Lable256 :
+    j Lable254
+Lable255 :
+    li $s6,10
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable258
+    lw $s4,Lable11
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable259
+    li $s7,4
+    sw $s7,8($sp)
+Lable259 :
+    j Lable257
+Lable258 :
+    li $s6,11
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable261
+    lw $s4,Lable12
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable262
+    li $s7,4
+    sw $s7,8($sp)
+Lable262 :
+    j Lable260
+Lable261 :
+    li $s6,12
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable264
+    lw $s4,Lable13
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable265
+    li $s7,4
+    sw $s7,8($sp)
+Lable265 :
+    j Lable263
+Lable264 :
+    li $s6,13
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable267
+    lw $s4,Lable14
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable268
+    li $s7,4
+    sw $s7,8($sp)
+Lable268 :
+    j Lable266
+Lable267 :
+    li $s6,14
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable269
+    lw $s4,Lable15
+    lw $s6,Lable5
+    slt $s7,$s6,$s4
+    beqz $s7,Lable270
+    li $s7,4
+    sw $s7,8($sp)
+Lable270 :
+Lable269 :
+Lable266 :
+Lable263 :
+Lable260 :
+Lable257 :
+Lable254 :
+Lable251 :
+Lable248 :
+Lable245 :
+Lable242 :
+Lable239 :
+Lable236 :
+Lable233 :
+Lable230 :
+Lable227 :
+    j Lable225
+Lable226 :
+    li $s6,5
+    lw $s4,12($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable272
+    li $s4,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable274
+    lw $s6,Lable1
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable275
+    li $s7,5
+    sw $s7,8($sp)
+Lable275 :
+    j Lable273
+Lable274 :
+    li $s4,1
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable277
+    lw $s6,Lable2
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable278
+    li $s7,5
+    sw $s7,8($sp)
+Lable278 :
+    j Lable276
+Lable277 :
+    li $s4,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable280
+    lw $s6,Lable3
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable281
+    li $s7,5
+    sw $s7,8($sp)
+Lable281 :
+    j Lable279
+Lable280 :
+    li $s4,3
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable283
+    lw $s6,Lable4
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable284
+    li $s7,5
+    sw $s7,8($sp)
+Lable284 :
+    j Lable282
+Lable283 :
+    li $s4,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable286
+    lw $s6,Lable5
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable287
+    li $s7,5
+    sw $s7,8($sp)
+Lable287 :
+    j Lable285
+Lable286 :
+    li $s4,5
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable289
+    lw $s6,Lable6
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable290
+    li $s7,5
+    sw $s7,8($sp)
+Lable290 :
+    j Lable288
+Lable289 :
+    li $s4,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable292
+    lw $s6,Lable7
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable293
+    li $s7,5
+    sw $s7,8($sp)
+Lable293 :
+    j Lable291
+Lable292 :
+    li $s4,7
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable295
+    lw $s6,Lable8
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable296
+    li $s7,5
+    sw $s7,8($sp)
+Lable296 :
+    j Lable294
+Lable295 :
+    li $s4,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable298
+    lw $s6,Lable9
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable299
+    li $s7,5
+    sw $s7,8($sp)
+Lable299 :
+    j Lable297
+Lable298 :
+    li $s4,9
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable301
+    lw $s6,Lable10
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable302
+    li $s7,5
+    sw $s7,8($sp)
+Lable302 :
+    j Lable300
+Lable301 :
+    li $s4,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable304
+    lw $s6,Lable11
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable305
+    li $s7,5
+    sw $s7,8($sp)
+Lable305 :
+    j Lable303
+Lable304 :
+    li $s4,11
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable307
+    lw $s6,Lable12
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable308
+    li $s7,5
+    sw $s7,8($sp)
+Lable308 :
+    j Lable306
+Lable307 :
+    li $s4,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable310
+    lw $s6,Lable13
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable311
+    li $s7,5
+    sw $s7,8($sp)
+Lable311 :
+    j Lable309
+Lable310 :
+    li $s4,13
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable313
+    lw $s6,Lable14
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable314
+    li $s7,5
+    sw $s7,8($sp)
+Lable314 :
+    j Lable312
+Lable313 :
+    li $s4,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable315
+    lw $s6,Lable15
+    lw $s4,Lable6
+    slt $s7,$s4,$s6
+    beqz $s7,Lable316
+    li $s7,5
+    sw $s7,8($sp)
+Lable316 :
+Lable315 :
+Lable312 :
+Lable309 :
+Lable306 :
+Lable303 :
+Lable300 :
+Lable297 :
+Lable294 :
+Lable291 :
+Lable288 :
+Lable285 :
+Lable282 :
+Lable279 :
+Lable276 :
+Lable273 :
+    j Lable271
+Lable272 :
+    li $s4,6
+    lw $s6,12($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable318
+    li $s6,0
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable320
+    lw $s4,Lable1
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable321
+    li $s7,6
+    sw $s7,8($sp)
+Lable321 :
+    j Lable319
+Lable320 :
+    li $s6,1
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable323
+    lw $s4,Lable2
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable324
+    li $s7,6
+    sw $s7,8($sp)
+Lable324 :
+    j Lable322
+Lable323 :
+    li $s6,2
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable326
+    lw $s4,Lable3
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable327
+    li $s7,6
+    sw $s7,8($sp)
+Lable327 :
+    j Lable325
+Lable326 :
+    li $s6,3
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable329
+    lw $s4,Lable4
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable330
+    li $s7,6
+    sw $s7,8($sp)
+Lable330 :
+    j Lable328
+Lable329 :
+    li $s6,4
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable332
+    lw $s4,Lable5
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable333
+    li $s7,6
+    sw $s7,8($sp)
+Lable333 :
+    j Lable331
+Lable332 :
+    li $s6,5
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable335
+    lw $s4,Lable6
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable336
+    li $s7,6
+    sw $s7,8($sp)
+Lable336 :
+    j Lable334
+Lable335 :
+    li $s6,6
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable338
+    lw $s4,Lable7
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable339
+    li $s7,6
+    sw $s7,8($sp)
+Lable339 :
+    j Lable337
+Lable338 :
+    li $s6,7
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable341
+    lw $s4,Lable8
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable342
+    li $s7,6
+    sw $s7,8($sp)
+Lable342 :
+    j Lable340
+Lable341 :
+    li $s6,8
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable344
+    lw $s4,Lable9
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable345
+    li $s7,6
+    sw $s7,8($sp)
+Lable345 :
+    j Lable343
+Lable344 :
+    li $s6,9
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable347
+    lw $s4,Lable10
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable348
+    li $s7,6
+    sw $s7,8($sp)
+Lable348 :
+    j Lable346
+Lable347 :
+    li $s6,10
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable350
+    lw $s4,Lable11
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable351
+    li $s7,6
+    sw $s7,8($sp)
+Lable351 :
+    j Lable349
+Lable350 :
+    li $s6,11
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable353
+    lw $s4,Lable12
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable354
+    li $s7,6
+    sw $s7,8($sp)
+Lable354 :
+    j Lable352
+Lable353 :
+    li $s6,12
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable356
+    lw $s4,Lable13
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable357
+    li $s7,6
+    sw $s7,8($sp)
+Lable357 :
+    j Lable355
+Lable356 :
+    li $s6,13
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable359
+    lw $s4,Lable14
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable360
+    li $s7,6
+    sw $s7,8($sp)
+Lable360 :
+    j Lable358
+Lable359 :
+    li $s6,14
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable361
+    lw $s4,Lable15
+    lw $s6,Lable7
+    slt $s7,$s6,$s4
+    beqz $s7,Lable362
+    li $s7,6
+    sw $s7,8($sp)
+Lable362 :
+Lable361 :
+Lable358 :
+Lable355 :
+Lable352 :
+Lable349 :
+Lable346 :
+Lable343 :
+Lable340 :
+Lable337 :
+Lable334 :
+Lable331 :
+Lable328 :
+Lable325 :
+Lable322 :
+Lable319 :
+    j Lable317
+Lable318 :
+    li $s6,7
+    lw $s4,12($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable364
+    li $s4,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable366
+    lw $s6,Lable1
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable367
+    li $s7,7
+    sw $s7,8($sp)
+Lable367 :
+    j Lable365
+Lable366 :
+    li $s4,1
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable369
+    lw $s6,Lable2
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable370
+    li $s7,7
+    sw $s7,8($sp)
+Lable370 :
+    j Lable368
+Lable369 :
+    li $s4,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable372
+    lw $s6,Lable3
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable373
+    li $s7,7
+    sw $s7,8($sp)
+Lable373 :
+    j Lable371
+Lable372 :
+    li $s4,3
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable375
+    lw $s6,Lable4
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable376
+    li $s7,7
+    sw $s7,8($sp)
+Lable376 :
+    j Lable374
+Lable375 :
+    li $s4,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable378
+    lw $s6,Lable5
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable379
+    li $s7,7
+    sw $s7,8($sp)
+Lable379 :
+    j Lable377
+Lable378 :
+    li $s4,5
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable381
+    lw $s6,Lable6
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable382
+    li $s7,7
+    sw $s7,8($sp)
+Lable382 :
+    j Lable380
+Lable381 :
+    li $s4,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable384
+    lw $s6,Lable7
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable385
+    li $s7,7
+    sw $s7,8($sp)
+Lable385 :
+    j Lable383
+Lable384 :
+    li $s4,7
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable387
+    lw $s6,Lable8
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable388
+    li $s7,7
+    sw $s7,8($sp)
+Lable388 :
+    j Lable386
+Lable387 :
+    li $s4,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable390
+    lw $s6,Lable9
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable391
+    li $s7,7
+    sw $s7,8($sp)
+Lable391 :
+    j Lable389
+Lable390 :
+    li $s4,9
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable393
+    lw $s6,Lable10
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable394
+    li $s7,7
+    sw $s7,8($sp)
+Lable394 :
+    j Lable392
+Lable393 :
+    li $s4,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable396
+    lw $s6,Lable11
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable397
+    li $s7,7
+    sw $s7,8($sp)
+Lable397 :
+    j Lable395
+Lable396 :
+    li $s4,11
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable399
+    lw $s6,Lable12
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable400
+    li $s7,7
+    sw $s7,8($sp)
+Lable400 :
+    j Lable398
+Lable399 :
+    li $s4,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable402
+    lw $s6,Lable13
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable403
+    li $s7,7
+    sw $s7,8($sp)
+Lable403 :
+    j Lable401
+Lable402 :
+    li $s4,13
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable405
+    lw $s6,Lable14
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable406
+    li $s7,7
+    sw $s7,8($sp)
+Lable406 :
+    j Lable404
+Lable405 :
+    li $s4,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable407
+    lw $s6,Lable15
+    lw $s4,Lable8
+    slt $s7,$s4,$s6
+    beqz $s7,Lable408
+    li $s7,7
+    sw $s7,8($sp)
+Lable408 :
+Lable407 :
+Lable404 :
+Lable401 :
+Lable398 :
+Lable395 :
+Lable392 :
+Lable389 :
+Lable386 :
+Lable383 :
+Lable380 :
+Lable377 :
+Lable374 :
+Lable371 :
+Lable368 :
+Lable365 :
+    j Lable363
+Lable364 :
+    li $s4,8
+    lw $s6,12($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable410
+    li $s6,0
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable412
+    lw $s4,Lable1
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable413
+    li $s7,8
+    sw $s7,8($sp)
+Lable413 :
+    j Lable411
+Lable412 :
+    li $s6,1
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable415
+    lw $s4,Lable2
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable416
+    li $s7,8
+    sw $s7,8($sp)
+Lable416 :
+    j Lable414
+Lable415 :
+    li $s6,2
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable418
+    lw $s4,Lable3
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable419
+    li $s7,8
+    sw $s7,8($sp)
+Lable419 :
+    j Lable417
+Lable418 :
+    li $s6,3
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable421
+    lw $s4,Lable4
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable422
+    li $s7,8
+    sw $s7,8($sp)
+Lable422 :
+    j Lable420
+Lable421 :
+    li $s6,4
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable424
+    lw $s4,Lable5
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable425
+    li $s7,8
+    sw $s7,8($sp)
+Lable425 :
+    j Lable423
+Lable424 :
+    li $s6,5
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable427
+    lw $s4,Lable6
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable428
+    li $s7,8
+    sw $s7,8($sp)
+Lable428 :
+    j Lable426
+Lable427 :
+    li $s6,6
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable430
+    lw $s4,Lable7
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable431
+    li $s7,8
+    sw $s7,8($sp)
+Lable431 :
+    j Lable429
+Lable430 :
+    li $s6,7
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable433
+    lw $s4,Lable8
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable434
+    li $s7,8
+    sw $s7,8($sp)
+Lable434 :
+    j Lable432
+Lable433 :
+    li $s6,8
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable436
+    lw $s4,Lable9
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable437
+    li $s7,8
+    sw $s7,8($sp)
+Lable437 :
+    j Lable435
+Lable436 :
+    li $s6,9
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable439
+    lw $s4,Lable10
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable440
+    li $s7,8
+    sw $s7,8($sp)
+Lable440 :
+    j Lable438
+Lable439 :
+    li $s6,10
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable442
+    lw $s4,Lable11
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable443
+    li $s7,8
+    sw $s7,8($sp)
+Lable443 :
+    j Lable441
+Lable442 :
+    li $s6,11
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable445
+    lw $s4,Lable12
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable446
+    li $s7,8
+    sw $s7,8($sp)
+Lable446 :
+    j Lable444
+Lable445 :
+    li $s6,12
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable448
+    lw $s4,Lable13
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable449
+    li $s7,8
+    sw $s7,8($sp)
+Lable449 :
+    j Lable447
+Lable448 :
+    li $s6,13
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable451
+    lw $s4,Lable14
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable452
+    li $s7,8
+    sw $s7,8($sp)
+Lable452 :
+    j Lable450
+Lable451 :
+    li $s6,14
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable453
+    lw $s4,Lable15
+    lw $s6,Lable9
+    slt $s7,$s6,$s4
+    beqz $s7,Lable454
+    li $s7,8
+    sw $s7,8($sp)
+Lable454 :
+Lable453 :
+Lable450 :
+Lable447 :
+Lable444 :
+Lable441 :
+Lable438 :
+Lable435 :
+Lable432 :
+Lable429 :
+Lable426 :
+Lable423 :
+Lable420 :
+Lable417 :
+Lable414 :
+Lable411 :
+    j Lable409
+Lable410 :
+    li $s6,9
+    lw $s4,12($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable456
+    li $s4,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable458
+    lw $s6,Lable1
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable459
+    li $s7,9
+    sw $s7,8($sp)
+Lable459 :
+    j Lable457
+Lable458 :
+    li $s4,1
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable461
+    lw $s6,Lable2
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable462
+    li $s7,9
+    sw $s7,8($sp)
+Lable462 :
+    j Lable460
+Lable461 :
+    li $s4,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable464
+    lw $s6,Lable3
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable465
+    li $s7,9
+    sw $s7,8($sp)
+Lable465 :
+    j Lable463
+Lable464 :
+    li $s4,3
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable467
+    lw $s6,Lable4
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable468
+    li $s7,9
+    sw $s7,8($sp)
+Lable468 :
+    j Lable466
+Lable467 :
+    li $s4,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable470
+    lw $s6,Lable5
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable471
+    li $s7,9
+    sw $s7,8($sp)
+Lable471 :
+    j Lable469
+Lable470 :
+    li $s4,5
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable473
+    lw $s6,Lable6
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable474
+    li $s7,9
+    sw $s7,8($sp)
+Lable474 :
+    j Lable472
+Lable473 :
+    li $s4,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable476
+    lw $s6,Lable7
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable477
+    li $s7,9
+    sw $s7,8($sp)
+Lable477 :
+    j Lable475
+Lable476 :
+    li $s4,7
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable479
+    lw $s6,Lable8
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable480
+    li $s7,9
+    sw $s7,8($sp)
+Lable480 :
+    j Lable478
+Lable479 :
+    li $s4,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable482
+    lw $s6,Lable9
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable483
+    li $s7,9
+    sw $s7,8($sp)
+Lable483 :
+    j Lable481
+Lable482 :
+    li $s4,9
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable485
+    lw $s6,Lable10
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable486
+    li $s7,9
+    sw $s7,8($sp)
+Lable486 :
+    j Lable484
+Lable485 :
+    li $s4,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable488
+    lw $s6,Lable11
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable489
+    li $s7,9
+    sw $s7,8($sp)
+Lable489 :
+    j Lable487
+Lable488 :
+    li $s4,11
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable491
+    lw $s6,Lable12
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable492
+    li $s7,9
+    sw $s7,8($sp)
+Lable492 :
+    j Lable490
+Lable491 :
+    li $s4,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable494
+    lw $s6,Lable13
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable495
+    li $s7,9
+    sw $s7,8($sp)
+Lable495 :
+    j Lable493
+Lable494 :
+    li $s4,13
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable497
+    lw $s6,Lable14
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable498
+    li $s7,9
+    sw $s7,8($sp)
+Lable498 :
+    j Lable496
+Lable497 :
+    li $s4,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable499
+    lw $s6,Lable15
+    lw $s4,Lable10
+    slt $s7,$s4,$s6
+    beqz $s7,Lable500
+    li $s7,9
+    sw $s7,8($sp)
+Lable500 :
+Lable499 :
+Lable496 :
+Lable493 :
+Lable490 :
+Lable487 :
+Lable484 :
+Lable481 :
+Lable478 :
+Lable475 :
+Lable472 :
+Lable469 :
+Lable466 :
+Lable463 :
+Lable460 :
+Lable457 :
+    j Lable455
+Lable456 :
+    li $s4,10
+    lw $s6,12($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable502
+    li $s6,0
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable504
+    lw $s4,Lable1
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable505
+    li $s7,10
+    sw $s7,8($sp)
+Lable505 :
+    j Lable503
+Lable504 :
+    li $s6,1
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable507
+    lw $s4,Lable2
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable508
+    li $s7,10
+    sw $s7,8($sp)
+Lable508 :
+    j Lable506
+Lable507 :
+    li $s6,2
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable510
+    lw $s4,Lable3
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable511
+    li $s7,10
+    sw $s7,8($sp)
+Lable511 :
+    j Lable509
+Lable510 :
+    li $s6,3
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable513
+    lw $s4,Lable4
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable514
+    li $s7,10
+    sw $s7,8($sp)
+Lable514 :
+    j Lable512
+Lable513 :
+    li $s6,4
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable516
+    lw $s4,Lable5
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable517
+    li $s7,10
+    sw $s7,8($sp)
+Lable517 :
+    j Lable515
+Lable516 :
+    li $s6,5
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable519
+    lw $s4,Lable6
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable520
+    li $s7,10
+    sw $s7,8($sp)
+Lable520 :
+    j Lable518
+Lable519 :
+    li $s6,6
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable522
+    lw $s4,Lable7
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable523
+    li $s7,10
+    sw $s7,8($sp)
+Lable523 :
+    j Lable521
+Lable522 :
+    li $s6,7
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable525
+    lw $s4,Lable8
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable526
+    li $s7,10
+    sw $s7,8($sp)
+Lable526 :
+    j Lable524
+Lable525 :
+    li $s6,8
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable528
+    lw $s4,Lable9
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable529
+    li $s7,10
+    sw $s7,8($sp)
+Lable529 :
+    j Lable527
+Lable528 :
+    li $s6,9
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable531
+    lw $s4,Lable10
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable532
+    li $s7,10
+    sw $s7,8($sp)
+Lable532 :
+    j Lable530
+Lable531 :
+    li $s6,10
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable534
+    lw $s4,Lable11
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable535
+    li $s7,10
+    sw $s7,8($sp)
+Lable535 :
+    j Lable533
+Lable534 :
+    li $s6,11
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable537
+    lw $s4,Lable12
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable538
+    li $s7,10
+    sw $s7,8($sp)
+Lable538 :
+    j Lable536
+Lable537 :
+    li $s6,12
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable540
+    lw $s4,Lable13
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable541
+    li $s7,10
+    sw $s7,8($sp)
+Lable541 :
+    j Lable539
+Lable540 :
+    li $s6,13
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable543
+    lw $s4,Lable14
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable544
+    li $s7,10
+    sw $s7,8($sp)
+Lable544 :
+    j Lable542
+Lable543 :
+    li $s6,14
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable545
+    lw $s4,Lable15
+    lw $s6,Lable11
+    slt $s7,$s6,$s4
+    beqz $s7,Lable546
+    li $s7,10
+    sw $s7,8($sp)
+Lable546 :
+Lable545 :
+Lable542 :
+Lable539 :
+Lable536 :
+Lable533 :
+Lable530 :
+Lable527 :
+Lable524 :
+Lable521 :
+Lable518 :
+Lable515 :
+Lable512 :
+Lable509 :
+Lable506 :
+Lable503 :
+    j Lable501
+Lable502 :
+    li $s6,11
+    lw $s4,12($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable548
+    li $s4,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable550
+    lw $s6,Lable1
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable551
+    li $s7,11
+    sw $s7,8($sp)
+Lable551 :
+    j Lable549
+Lable550 :
+    li $s4,1
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable553
+    lw $s6,Lable2
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable554
+    li $s7,11
+    sw $s7,8($sp)
+Lable554 :
+    j Lable552
+Lable553 :
+    li $s4,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable556
+    lw $s6,Lable3
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable557
+    li $s7,11
+    sw $s7,8($sp)
+Lable557 :
+    j Lable555
+Lable556 :
+    li $s4,3
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable559
+    lw $s6,Lable4
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable560
+    li $s7,11
+    sw $s7,8($sp)
+Lable560 :
+    j Lable558
+Lable559 :
+    li $s4,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable562
+    lw $s6,Lable5
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable563
+    li $s7,11
+    sw $s7,8($sp)
+Lable563 :
+    j Lable561
+Lable562 :
+    li $s4,5
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable565
+    lw $s6,Lable6
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable566
+    li $s7,11
+    sw $s7,8($sp)
+Lable566 :
+    j Lable564
+Lable565 :
+    li $s4,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable568
+    lw $s6,Lable7
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable569
+    li $s7,11
+    sw $s7,8($sp)
+Lable569 :
+    j Lable567
+Lable568 :
+    li $s4,7
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable571
+    lw $s6,Lable8
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable572
+    li $s7,11
+    sw $s7,8($sp)
+Lable572 :
+    j Lable570
+Lable571 :
+    li $s4,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable574
+    lw $s6,Lable9
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable575
+    li $s7,11
+    sw $s7,8($sp)
+Lable575 :
+    j Lable573
+Lable574 :
+    li $s4,9
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable577
+    lw $s6,Lable10
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable578
+    li $s7,11
+    sw $s7,8($sp)
+Lable578 :
+    j Lable576
+Lable577 :
+    li $s4,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable580
+    lw $s6,Lable11
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable581
+    li $s7,11
+    sw $s7,8($sp)
+Lable581 :
+    j Lable579
+Lable580 :
+    li $s4,11
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable583
+    lw $s6,Lable12
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable584
+    li $s7,11
+    sw $s7,8($sp)
+Lable584 :
+    j Lable582
+Lable583 :
+    li $s4,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable586
+    lw $s6,Lable13
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable587
+    li $s7,11
+    sw $s7,8($sp)
+Lable587 :
+    j Lable585
+Lable586 :
+    li $s4,13
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable589
+    lw $s6,Lable14
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable590
+    li $s7,11
+    sw $s7,8($sp)
+Lable590 :
+    j Lable588
+Lable589 :
+    li $s4,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable591
+    lw $s6,Lable15
+    lw $s4,Lable12
+    slt $s7,$s4,$s6
+    beqz $s7,Lable592
+    li $s7,11
+    sw $s7,8($sp)
+Lable592 :
+Lable591 :
+Lable588 :
+Lable585 :
+Lable582 :
+Lable579 :
+Lable576 :
+Lable573 :
+Lable570 :
+Lable567 :
+Lable564 :
+Lable561 :
+Lable558 :
+Lable555 :
+Lable552 :
+Lable549 :
+    j Lable547
+Lable548 :
+    li $s4,12
+    lw $s6,12($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable594
+    li $s6,0
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable596
+    lw $s4,Lable1
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable597
+    li $s7,12
+    sw $s7,8($sp)
+Lable597 :
+    j Lable595
+Lable596 :
+    li $s6,1
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable599
+    lw $s4,Lable2
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable600
+    li $s7,12
+    sw $s7,8($sp)
+Lable600 :
+    j Lable598
+Lable599 :
+    li $s6,2
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable602
+    lw $s4,Lable3
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable603
+    li $s7,12
+    sw $s7,8($sp)
+Lable603 :
+    j Lable601
+Lable602 :
+    li $s6,3
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable605
+    lw $s4,Lable4
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable606
+    li $s7,12
+    sw $s7,8($sp)
+Lable606 :
+    j Lable604
+Lable605 :
+    li $s6,4
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable608
+    lw $s4,Lable5
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable609
+    li $s7,12
+    sw $s7,8($sp)
+Lable609 :
+    j Lable607
+Lable608 :
+    li $s6,5
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable611
+    lw $s4,Lable6
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable612
+    li $s7,12
+    sw $s7,8($sp)
+Lable612 :
+    j Lable610
+Lable611 :
+    li $s6,6
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable614
+    lw $s4,Lable7
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable615
+    li $s7,12
+    sw $s7,8($sp)
+Lable615 :
+    j Lable613
+Lable614 :
+    li $s6,7
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable617
+    lw $s4,Lable8
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable618
+    li $s7,12
+    sw $s7,8($sp)
+Lable618 :
+    j Lable616
+Lable617 :
+    li $s6,8
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable620
+    lw $s4,Lable9
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable621
+    li $s7,12
+    sw $s7,8($sp)
+Lable621 :
+    j Lable619
+Lable620 :
+    li $s6,9
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable623
+    lw $s4,Lable10
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable624
+    li $s7,12
+    sw $s7,8($sp)
+Lable624 :
+    j Lable622
+Lable623 :
+    li $s6,10
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable626
+    lw $s4,Lable11
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable627
+    li $s7,12
+    sw $s7,8($sp)
+Lable627 :
+    j Lable625
+Lable626 :
+    li $s6,11
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable629
+    lw $s4,Lable12
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable630
+    li $s7,12
+    sw $s7,8($sp)
+Lable630 :
+    j Lable628
+Lable629 :
+    li $s6,12
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable632
+    lw $s4,Lable13
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable633
+    li $s7,12
+    sw $s7,8($sp)
+Lable633 :
+    j Lable631
+Lable632 :
+    li $s6,13
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable635
+    lw $s4,Lable14
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable636
+    li $s7,12
+    sw $s7,8($sp)
+Lable636 :
+    j Lable634
+Lable635 :
+    li $s6,14
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable637
+    lw $s4,Lable15
+    lw $s6,Lable13
+    slt $s7,$s6,$s4
+    beqz $s7,Lable638
+    li $s7,12
+    sw $s7,8($sp)
+Lable638 :
+Lable637 :
+Lable634 :
+Lable631 :
+Lable628 :
+Lable625 :
+Lable622 :
+Lable619 :
+Lable616 :
+Lable613 :
+Lable610 :
+Lable607 :
+Lable604 :
+Lable601 :
+Lable598 :
+Lable595 :
+    j Lable593
+Lable594 :
+    li $s6,13
+    lw $s4,12($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable640
+    li $s4,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable642
+    lw $s6,Lable1
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable643
+    li $s7,13
+    sw $s7,8($sp)
+Lable643 :
+    j Lable641
+Lable642 :
+    li $s4,1
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable645
+    lw $s6,Lable2
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable646
+    li $s7,13
+    sw $s7,8($sp)
+Lable646 :
+    j Lable644
+Lable645 :
+    li $s4,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable648
+    lw $s6,Lable3
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable649
+    li $s7,13
+    sw $s7,8($sp)
+Lable649 :
+    j Lable647
+Lable648 :
+    li $s4,3
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable651
+    lw $s6,Lable4
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable652
+    li $s7,13
+    sw $s7,8($sp)
+Lable652 :
+    j Lable650
+Lable651 :
+    li $s4,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable654
+    lw $s6,Lable5
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable655
+    li $s7,13
+    sw $s7,8($sp)
+Lable655 :
+    j Lable653
+Lable654 :
+    li $s4,5
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable657
+    lw $s6,Lable6
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable658
+    li $s7,13
+    sw $s7,8($sp)
+Lable658 :
+    j Lable656
+Lable657 :
+    li $s4,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable660
+    lw $s6,Lable7
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable661
+    li $s7,13
+    sw $s7,8($sp)
+Lable661 :
+    j Lable659
+Lable660 :
+    li $s4,7
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable663
+    lw $s6,Lable8
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable664
+    li $s7,13
+    sw $s7,8($sp)
+Lable664 :
+    j Lable662
+Lable663 :
+    li $s4,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable666
+    lw $s6,Lable9
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable667
+    li $s7,13
+    sw $s7,8($sp)
+Lable667 :
+    j Lable665
+Lable666 :
+    li $s4,9
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable669
+    lw $s6,Lable10
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable670
+    li $s7,13
+    sw $s7,8($sp)
+Lable670 :
+    j Lable668
+Lable669 :
+    li $s4,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable672
+    lw $s6,Lable11
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable673
+    li $s7,13
+    sw $s7,8($sp)
+Lable673 :
+    j Lable671
+Lable672 :
+    li $s4,11
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable675
+    lw $s6,Lable12
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable676
+    li $s7,13
+    sw $s7,8($sp)
+Lable676 :
+    j Lable674
+Lable675 :
+    li $s4,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable678
+    lw $s6,Lable13
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable679
+    li $s7,13
+    sw $s7,8($sp)
+Lable679 :
+    j Lable677
+Lable678 :
+    li $s4,13
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable681
+    lw $s6,Lable14
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable682
+    li $s7,13
+    sw $s7,8($sp)
+Lable682 :
+    j Lable680
+Lable681 :
+    li $s4,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable683
+    lw $s6,Lable15
+    lw $s4,Lable14
+    slt $s7,$s4,$s6
+    beqz $s7,Lable684
+    li $s7,13
+    sw $s7,8($sp)
+Lable684 :
+Lable683 :
+Lable680 :
+Lable677 :
+Lable674 :
+Lable671 :
+Lable668 :
+Lable665 :
+Lable662 :
+Lable659 :
+Lable656 :
+Lable653 :
+Lable650 :
+Lable647 :
+Lable644 :
+Lable641 :
+    j Lable639
+Lable640 :
+    li $s4,14
+    lw $s6,12($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable685
+    li $s6,0
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable687
+    lw $s4,Lable1
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable688
+    li $s7,14
+    sw $s7,8($sp)
+Lable688 :
+    j Lable686
+Lable687 :
+    li $s6,1
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable690
+    lw $s4,Lable2
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable691
+    li $s7,14
+    sw $s7,8($sp)
+Lable691 :
+    j Lable689
+Lable690 :
+    li $s6,2
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable693
+    lw $s4,Lable3
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable694
+    li $s7,14
+    sw $s7,8($sp)
+Lable694 :
+    j Lable692
+Lable693 :
+    li $s6,3
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable696
+    lw $s4,Lable4
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable697
+    li $s7,14
+    sw $s7,8($sp)
+Lable697 :
+    j Lable695
+Lable696 :
+    li $s6,4
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable699
+    lw $s4,Lable5
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable700
+    li $s7,14
+    sw $s7,8($sp)
+Lable700 :
+    j Lable698
+Lable699 :
+    li $s6,5
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable702
+    lw $s4,Lable6
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable703
+    li $s7,14
+    sw $s7,8($sp)
+Lable703 :
+    j Lable701
+Lable702 :
+    li $s6,6
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable705
+    lw $s4,Lable7
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable706
+    li $s7,14
+    sw $s7,8($sp)
+Lable706 :
+    j Lable704
+Lable705 :
+    li $s6,7
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable708
+    lw $s4,Lable8
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable709
+    li $s7,14
+    sw $s7,8($sp)
+Lable709 :
+    j Lable707
+Lable708 :
+    li $s6,8
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable711
+    lw $s4,Lable9
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable712
+    li $s7,14
+    sw $s7,8($sp)
+Lable712 :
+    j Lable710
+Lable711 :
+    li $s6,9
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable714
+    lw $s4,Lable10
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable715
+    li $s7,14
+    sw $s7,8($sp)
+Lable715 :
+    j Lable713
+Lable714 :
+    li $s6,10
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable717
+    lw $s4,Lable11
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable718
+    li $s7,14
+    sw $s7,8($sp)
+Lable718 :
+    j Lable716
+Lable717 :
+    li $s6,11
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable720
+    lw $s4,Lable12
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable721
+    li $s7,14
+    sw $s7,8($sp)
+Lable721 :
+    j Lable719
+Lable720 :
+    li $s6,12
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable723
+    lw $s4,Lable13
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable724
+    li $s7,14
+    sw $s7,8($sp)
+Lable724 :
+    j Lable722
+Lable723 :
+    li $s6,13
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable726
+    lw $s4,Lable14
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable727
+    li $s7,14
+    sw $s7,8($sp)
+Lable727 :
+    j Lable725
+Lable726 :
+    li $s6,14
+    lw $s4,8($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable728
+    lw $s4,Lable15
+    lw $s6,Lable15
+    slt $s7,$s6,$s4
+    beqz $s7,Lable729
+    li $s7,14
+    sw $s7,8($sp)
+Lable729 :
+Lable728 :
+Lable725 :
+Lable722 :
+Lable719 :
+Lable716 :
+Lable713 :
+Lable710 :
+Lable707 :
+Lable704 :
+Lable701 :
+Lable698 :
+Lable695 :
+Lable692 :
+Lable689 :
+Lable686 :
+Lable685 :
+Lable639 :
+Lable593 :
+Lable547 :
+Lable501 :
+Lable455 :
+Lable409 :
+Lable363 :
+Lable317 :
+Lable271 :
+Lable225 :
+Lable179 :
+Lable133 :
+Lable87 :
+    li $s4,1
+    lw $s5,12($sp)
+    addu $s6,$s5,$s4
+    sw $s6,12($sp)
+    j Lable85
+Lable86 :
+    li $s6,0
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable731
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable733
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable1
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable1
+    j Lable732
+Lable733 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable735
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable1
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable1
+    j Lable734
+Lable735 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable737
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable1
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable1
+    j Lable736
+Lable737 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable739
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable1
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable1
+    j Lable738
+Lable739 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable741
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable1
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable1
+    j Lable740
+Lable741 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable743
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable1
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable1
+    j Lable742
+Lable743 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable745
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable1
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable1
+    j Lable744
+Lable745 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable747
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable1
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable1
+    j Lable746
+Lable747 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable749
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable1
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable1
+    j Lable748
+Lable749 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable751
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable1
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable1
+    j Lable750
+Lable751 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable753
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable1
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable1
+    j Lable752
+Lable753 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable755
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable1
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable1
+    j Lable754
+Lable755 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable757
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable1
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable1
+    j Lable756
+Lable757 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable759
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable1
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable1
+    j Lable758
+Lable759 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable760
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable1
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable1
+Lable760 :
+Lable758 :
+Lable756 :
+Lable754 :
+Lable752 :
+Lable750 :
+Lable748 :
+Lable746 :
+Lable744 :
+Lable742 :
+Lable740 :
+Lable738 :
+Lable736 :
+Lable734 :
+Lable732 :
+    j Lable730
+Lable731 :
+    li $s6,1
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable762
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable764
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable2
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable2
+    j Lable763
+Lable764 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable766
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable2
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable2
+    j Lable765
+Lable766 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable768
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable2
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable2
+    j Lable767
+Lable768 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable770
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable2
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable2
+    j Lable769
+Lable770 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable772
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable2
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable2
+    j Lable771
+Lable772 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable774
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable2
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable2
+    j Lable773
+Lable774 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable776
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable2
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable2
+    j Lable775
+Lable776 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable778
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable2
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable2
+    j Lable777
+Lable778 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable780
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable2
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable2
+    j Lable779
+Lable780 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable782
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable2
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable2
+    j Lable781
+Lable782 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable784
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable2
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable2
+    j Lable783
+Lable784 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable786
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable2
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable2
+    j Lable785
+Lable786 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable788
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable2
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable2
+    j Lable787
+Lable788 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable790
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable2
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable2
+    j Lable789
+Lable790 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable791
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable2
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable2
+Lable791 :
+Lable789 :
+Lable787 :
+Lable785 :
+Lable783 :
+Lable781 :
+Lable779 :
+Lable777 :
+Lable775 :
+Lable773 :
+Lable771 :
+Lable769 :
+Lable767 :
+Lable765 :
+Lable763 :
+    j Lable761
+Lable762 :
+    li $s6,2
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable793
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable795
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable3
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable3
+    j Lable794
+Lable795 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable797
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable3
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable3
+    j Lable796
+Lable797 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable799
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable3
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable3
+    j Lable798
+Lable799 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable801
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable3
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable3
+    j Lable800
+Lable801 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable803
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable3
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable3
+    j Lable802
+Lable803 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable805
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable3
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable3
+    j Lable804
+Lable805 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable807
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable3
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable3
+    j Lable806
+Lable807 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable809
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable3
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable3
+    j Lable808
+Lable809 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable811
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable3
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable3
+    j Lable810
+Lable811 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable813
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable3
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable3
+    j Lable812
+Lable813 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable815
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable3
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable3
+    j Lable814
+Lable815 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable817
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable3
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable3
+    j Lable816
+Lable817 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable819
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable3
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable3
+    j Lable818
+Lable819 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable821
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable3
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable3
+    j Lable820
+Lable821 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable822
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable3
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable3
+Lable822 :
+Lable820 :
+Lable818 :
+Lable816 :
+Lable814 :
+Lable812 :
+Lable810 :
+Lable808 :
+Lable806 :
+Lable804 :
+Lable802 :
+Lable800 :
+Lable798 :
+Lable796 :
+Lable794 :
+    j Lable792
+Lable793 :
+    li $s6,3
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable824
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable826
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable4
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable4
+    j Lable825
+Lable826 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable828
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable4
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable4
+    j Lable827
+Lable828 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable830
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable4
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable4
+    j Lable829
+Lable830 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable832
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable4
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable4
+    j Lable831
+Lable832 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable834
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable4
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable4
+    j Lable833
+Lable834 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable836
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable4
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable4
+    j Lable835
+Lable836 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable838
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable4
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable4
+    j Lable837
+Lable838 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable840
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable4
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable4
+    j Lable839
+Lable840 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable842
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable4
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable4
+    j Lable841
+Lable842 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable844
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable4
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable4
+    j Lable843
+Lable844 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable846
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable4
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable4
+    j Lable845
+Lable846 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable848
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable4
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable4
+    j Lable847
+Lable848 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable850
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable4
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable4
+    j Lable849
+Lable850 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable852
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable4
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable4
+    j Lable851
+Lable852 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable853
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable4
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable4
+Lable853 :
+Lable851 :
+Lable849 :
+Lable847 :
+Lable845 :
+Lable843 :
+Lable841 :
+Lable839 :
+Lable837 :
+Lable835 :
+Lable833 :
+Lable831 :
+Lable829 :
+Lable827 :
+Lable825 :
+    j Lable823
+Lable824 :
+    li $s6,4
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable855
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable857
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable5
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable5
+    j Lable856
+Lable857 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable859
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable5
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable5
+    j Lable858
+Lable859 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable861
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable5
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable5
+    j Lable860
+Lable861 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable863
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable5
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable5
+    j Lable862
+Lable863 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable865
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable5
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable5
+    j Lable864
+Lable865 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable867
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable5
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable5
+    j Lable866
+Lable867 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable869
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable5
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable5
+    j Lable868
+Lable869 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable871
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable5
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable5
+    j Lable870
+Lable871 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable873
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable5
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable5
+    j Lable872
+Lable873 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable875
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable5
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable5
+    j Lable874
+Lable875 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable877
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable5
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable5
+    j Lable876
+Lable877 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable879
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable5
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable5
+    j Lable878
+Lable879 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable881
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable5
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable5
+    j Lable880
+Lable881 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable883
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable5
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable5
+    j Lable882
+Lable883 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable884
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable5
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable5
+Lable884 :
+Lable882 :
+Lable880 :
+Lable878 :
+Lable876 :
+Lable874 :
+Lable872 :
+Lable870 :
+Lable868 :
+Lable866 :
+Lable864 :
+Lable862 :
+Lable860 :
+Lable858 :
+Lable856 :
+    j Lable854
+Lable855 :
+    li $s6,5
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable886
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable888
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable6
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable6
+    j Lable887
+Lable888 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable890
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable6
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable6
+    j Lable889
+Lable890 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable892
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable6
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable6
+    j Lable891
+Lable892 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable894
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable6
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable6
+    j Lable893
+Lable894 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable896
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable6
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable6
+    j Lable895
+Lable896 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable898
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable6
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable6
+    j Lable897
+Lable898 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable900
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable6
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable6
+    j Lable899
+Lable900 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable902
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable6
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable6
+    j Lable901
+Lable902 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable904
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable6
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable6
+    j Lable903
+Lable904 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable906
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable6
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable6
+    j Lable905
+Lable906 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable908
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable6
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable6
+    j Lable907
+Lable908 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable910
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable6
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable6
+    j Lable909
+Lable910 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable912
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable6
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable6
+    j Lable911
+Lable912 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable914
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable6
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable6
+    j Lable913
+Lable914 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable915
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable6
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable6
+Lable915 :
+Lable913 :
+Lable911 :
+Lable909 :
+Lable907 :
+Lable905 :
+Lable903 :
+Lable901 :
+Lable899 :
+Lable897 :
+Lable895 :
+Lable893 :
+Lable891 :
+Lable889 :
+Lable887 :
+    j Lable885
+Lable886 :
+    li $s6,6
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable917
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable919
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable7
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable7
+    j Lable918
+Lable919 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable921
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable7
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable7
+    j Lable920
+Lable921 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable923
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable7
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable7
+    j Lable922
+Lable923 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable925
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable7
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable7
+    j Lable924
+Lable925 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable927
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable7
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable7
+    j Lable926
+Lable927 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable929
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable7
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable7
+    j Lable928
+Lable929 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable931
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable7
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable7
+    j Lable930
+Lable931 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable933
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable7
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable7
+    j Lable932
+Lable933 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable935
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable7
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable7
+    j Lable934
+Lable935 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable937
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable7
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable7
+    j Lable936
+Lable937 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable939
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable7
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable7
+    j Lable938
+Lable939 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable941
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable7
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable7
+    j Lable940
+Lable941 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable943
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable7
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable7
+    j Lable942
+Lable943 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable945
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable7
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable7
+    j Lable944
+Lable945 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable946
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable7
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable7
+Lable946 :
+Lable944 :
+Lable942 :
+Lable940 :
+Lable938 :
+Lable936 :
+Lable934 :
+Lable932 :
+Lable930 :
+Lable928 :
+Lable926 :
+Lable924 :
+Lable922 :
+Lable920 :
+Lable918 :
+    j Lable916
+Lable917 :
+    li $s6,7
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable948
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable950
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable8
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable8
+    j Lable949
+Lable950 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable952
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable8
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable8
+    j Lable951
+Lable952 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable954
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable8
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable8
+    j Lable953
+Lable954 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable956
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable8
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable8
+    j Lable955
+Lable956 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable958
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable8
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable8
+    j Lable957
+Lable958 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable960
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable8
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable8
+    j Lable959
+Lable960 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable962
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable8
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable8
+    j Lable961
+Lable962 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable964
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable8
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable8
+    j Lable963
+Lable964 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable966
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable8
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable8
+    j Lable965
+Lable966 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable968
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable8
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable8
+    j Lable967
+Lable968 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable970
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable8
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable8
+    j Lable969
+Lable970 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable972
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable8
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable8
+    j Lable971
+Lable972 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable974
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable8
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable8
+    j Lable973
+Lable974 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable976
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable8
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable8
+    j Lable975
+Lable976 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable977
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable8
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable8
+Lable977 :
+Lable975 :
+Lable973 :
+Lable971 :
+Lable969 :
+Lable967 :
+Lable965 :
+Lable963 :
+Lable961 :
+Lable959 :
+Lable957 :
+Lable955 :
+Lable953 :
+Lable951 :
+Lable949 :
+    j Lable947
+Lable948 :
+    li $s6,8
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable979
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable981
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable9
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable9
+    j Lable980
+Lable981 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable983
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable9
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable9
+    j Lable982
+Lable983 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable985
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable9
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable9
+    j Lable984
+Lable985 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable987
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable9
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable9
+    j Lable986
+Lable987 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable989
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable9
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable9
+    j Lable988
+Lable989 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable991
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable9
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable9
+    j Lable990
+Lable991 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable993
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable9
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable9
+    j Lable992
+Lable993 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable995
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable9
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable9
+    j Lable994
+Lable995 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable997
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable9
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable9
+    j Lable996
+Lable997 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable999
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable9
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable9
+    j Lable998
+Lable999 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1001
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable9
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable9
+    j Lable1000
+Lable1001 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1003
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable9
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable9
+    j Lable1002
+Lable1003 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1005
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable9
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable9
+    j Lable1004
+Lable1005 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1007
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable9
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable9
+    j Lable1006
+Lable1007 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1008
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable9
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable9
+Lable1008 :
+Lable1006 :
+Lable1004 :
+Lable1002 :
+Lable1000 :
+Lable998 :
+Lable996 :
+Lable994 :
+Lable992 :
+Lable990 :
+Lable988 :
+Lable986 :
+Lable984 :
+Lable982 :
+Lable980 :
+    j Lable978
+Lable979 :
+    li $s6,9
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1010
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1012
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable10
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable10
+    j Lable1011
+Lable1012 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1014
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable10
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable10
+    j Lable1013
+Lable1014 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1016
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable10
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable10
+    j Lable1015
+Lable1016 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1018
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable10
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable10
+    j Lable1017
+Lable1018 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1020
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable10
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable10
+    j Lable1019
+Lable1020 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1022
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable10
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable10
+    j Lable1021
+Lable1022 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1024
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable10
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable10
+    j Lable1023
+Lable1024 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1026
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable10
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable10
+    j Lable1025
+Lable1026 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1028
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable10
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable10
+    j Lable1027
+Lable1028 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1030
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable10
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable10
+    j Lable1029
+Lable1030 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1032
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable10
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable10
+    j Lable1031
+Lable1032 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1034
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable10
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable10
+    j Lable1033
+Lable1034 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1036
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable10
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable10
+    j Lable1035
+Lable1036 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1038
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable10
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable10
+    j Lable1037
+Lable1038 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1039
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable10
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable10
+Lable1039 :
+Lable1037 :
+Lable1035 :
+Lable1033 :
+Lable1031 :
+Lable1029 :
+Lable1027 :
+Lable1025 :
+Lable1023 :
+Lable1021 :
+Lable1019 :
+Lable1017 :
+Lable1015 :
+Lable1013 :
+Lable1011 :
+    j Lable1009
+Lable1010 :
+    li $s6,10
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1041
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1043
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable11
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable11
+    j Lable1042
+Lable1043 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1045
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable11
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable11
+    j Lable1044
+Lable1045 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1047
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable11
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable11
+    j Lable1046
+Lable1047 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1049
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable11
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable11
+    j Lable1048
+Lable1049 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1051
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable11
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable11
+    j Lable1050
+Lable1051 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1053
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable11
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable11
+    j Lable1052
+Lable1053 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1055
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable11
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable11
+    j Lable1054
+Lable1055 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1057
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable11
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable11
+    j Lable1056
+Lable1057 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1059
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable11
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable11
+    j Lable1058
+Lable1059 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1061
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable11
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable11
+    j Lable1060
+Lable1061 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1063
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable11
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable11
+    j Lable1062
+Lable1063 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1065
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable11
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable11
+    j Lable1064
+Lable1065 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1067
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable11
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable11
+    j Lable1066
+Lable1067 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1069
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable11
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable11
+    j Lable1068
+Lable1069 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1070
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable11
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable11
+Lable1070 :
+Lable1068 :
+Lable1066 :
+Lable1064 :
+Lable1062 :
+Lable1060 :
+Lable1058 :
+Lable1056 :
+Lable1054 :
+Lable1052 :
+Lable1050 :
+Lable1048 :
+Lable1046 :
+Lable1044 :
+Lable1042 :
+    j Lable1040
+Lable1041 :
+    li $s6,11
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1072
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1074
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable12
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable12
+    j Lable1073
+Lable1074 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1076
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable12
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable12
+    j Lable1075
+Lable1076 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1078
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable12
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable12
+    j Lable1077
+Lable1078 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1080
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable12
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable12
+    j Lable1079
+Lable1080 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1082
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable12
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable12
+    j Lable1081
+Lable1082 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1084
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable12
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable12
+    j Lable1083
+Lable1084 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1086
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable12
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable12
+    j Lable1085
+Lable1086 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1088
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable12
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable12
+    j Lable1087
+Lable1088 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1090
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable12
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable12
+    j Lable1089
+Lable1090 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1092
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable12
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable12
+    j Lable1091
+Lable1092 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1094
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable12
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable12
+    j Lable1093
+Lable1094 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1096
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable12
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable12
+    j Lable1095
+Lable1096 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1098
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable12
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable12
+    j Lable1097
+Lable1098 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1100
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable12
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable12
+    j Lable1099
+Lable1100 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1101
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable12
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable12
+Lable1101 :
+Lable1099 :
+Lable1097 :
+Lable1095 :
+Lable1093 :
+Lable1091 :
+Lable1089 :
+Lable1087 :
+Lable1085 :
+Lable1083 :
+Lable1081 :
+Lable1079 :
+Lable1077 :
+Lable1075 :
+Lable1073 :
+    j Lable1071
+Lable1072 :
+    li $s6,12
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1103
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1105
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable13
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable13
+    j Lable1104
+Lable1105 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1107
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable13
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable13
+    j Lable1106
+Lable1107 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1109
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable13
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable13
+    j Lable1108
+Lable1109 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1111
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable13
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable13
+    j Lable1110
+Lable1111 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1113
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable13
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable13
+    j Lable1112
+Lable1113 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1115
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable13
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable13
+    j Lable1114
+Lable1115 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1117
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable13
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable13
+    j Lable1116
+Lable1117 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1119
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable13
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable13
+    j Lable1118
+Lable1119 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1121
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable13
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable13
+    j Lable1120
+Lable1121 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1123
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable13
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable13
+    j Lable1122
+Lable1123 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1125
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable13
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable13
+    j Lable1124
+Lable1125 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1127
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable13
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable13
+    j Lable1126
+Lable1127 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1129
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable13
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable13
+    j Lable1128
+Lable1129 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1131
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable13
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable13
+    j Lable1130
+Lable1131 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1132
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable13
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable13
+Lable1132 :
+Lable1130 :
+Lable1128 :
+Lable1126 :
+Lable1124 :
+Lable1122 :
+Lable1120 :
+Lable1118 :
+Lable1116 :
+Lable1114 :
+Lable1112 :
+Lable1110 :
+Lable1108 :
+Lable1106 :
+Lable1104 :
+    j Lable1102
+Lable1103 :
+    li $s6,13
+    lw $s5,4($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1133
+    li $s5,0
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1135
+    lw $s6,Lable1
+    sw $s6,16($sp)
+    lw $s6,Lable14
+    sw $s6,Lable1
+    lw $s6,16($sp)
+    sw $s6,Lable14
+    j Lable1134
+Lable1135 :
+    li $s6,1
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1137
+    lw $s5,Lable2
+    sw $s5,16($sp)
+    lw $s5,Lable14
+    sw $s5,Lable2
+    lw $s5,16($sp)
+    sw $s5,Lable14
+    j Lable1136
+Lable1137 :
+    li $s5,2
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1139
+    lw $s6,Lable3
+    sw $s6,16($sp)
+    lw $s6,Lable14
+    sw $s6,Lable3
+    lw $s6,16($sp)
+    sw $s6,Lable14
+    j Lable1138
+Lable1139 :
+    li $s6,3
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1141
+    lw $s5,Lable4
+    sw $s5,16($sp)
+    lw $s5,Lable14
+    sw $s5,Lable4
+    lw $s5,16($sp)
+    sw $s5,Lable14
+    j Lable1140
+Lable1141 :
+    li $s5,4
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1143
+    lw $s6,Lable5
+    sw $s6,16($sp)
+    lw $s6,Lable14
+    sw $s6,Lable5
+    lw $s6,16($sp)
+    sw $s6,Lable14
+    j Lable1142
+Lable1143 :
+    li $s6,5
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1145
+    lw $s5,Lable6
+    sw $s5,16($sp)
+    lw $s5,Lable14
+    sw $s5,Lable6
+    lw $s5,16($sp)
+    sw $s5,Lable14
+    j Lable1144
+Lable1145 :
+    li $s5,6
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1147
+    lw $s6,Lable7
+    sw $s6,16($sp)
+    lw $s6,Lable14
+    sw $s6,Lable7
+    lw $s6,16($sp)
+    sw $s6,Lable14
+    j Lable1146
+Lable1147 :
+    li $s6,7
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1149
+    lw $s5,Lable8
+    sw $s5,16($sp)
+    lw $s5,Lable14
+    sw $s5,Lable8
+    lw $s5,16($sp)
+    sw $s5,Lable14
+    j Lable1148
+Lable1149 :
+    li $s5,8
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1151
+    lw $s6,Lable9
+    sw $s6,16($sp)
+    lw $s6,Lable14
+    sw $s6,Lable9
+    lw $s6,16($sp)
+    sw $s6,Lable14
+    j Lable1150
+Lable1151 :
+    li $s6,9
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1153
+    lw $s5,Lable10
+    sw $s5,16($sp)
+    lw $s5,Lable14
+    sw $s5,Lable10
+    lw $s5,16($sp)
+    sw $s5,Lable14
+    j Lable1152
+Lable1153 :
+    li $s5,10
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1155
+    lw $s6,Lable11
+    sw $s6,16($sp)
+    lw $s6,Lable14
+    sw $s6,Lable11
+    lw $s6,16($sp)
+    sw $s6,Lable14
+    j Lable1154
+Lable1155 :
+    li $s6,11
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1157
+    lw $s5,Lable12
+    sw $s5,16($sp)
+    lw $s5,Lable14
+    sw $s5,Lable12
+    lw $s5,16($sp)
+    sw $s5,Lable14
+    j Lable1156
+Lable1157 :
+    li $s5,12
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1159
+    lw $s6,Lable13
+    sw $s6,16($sp)
+    lw $s6,Lable14
+    sw $s6,Lable13
+    lw $s6,16($sp)
+    sw $s6,Lable14
+    j Lable1158
+Lable1159 :
+    li $s6,13
+    lw $s5,8($sp)
+    seq $s7,$s5,$s6
+    beqz $s7,Lable1161
+    lw $s5,Lable14
+    sw $s5,16($sp)
+    lw $s5,Lable14
+    sw $s5,Lable14
+    lw $s5,16($sp)
+    sw $s5,Lable14
+    j Lable1160
+Lable1161 :
+    li $s5,14
+    lw $s6,8($sp)
+    seq $s7,$s6,$s5
+    beqz $s7,Lable1162
+    lw $s6,Lable15
+    sw $s6,16($sp)
+    lw $s6,Lable14
+    sw $s6,Lable15
+    lw $s6,16($sp)
+    sw $s6,Lable14
+Lable1162 :
+Lable1160 :
+Lable1158 :
+Lable1156 :
+Lable1154 :
+Lable1152 :
+Lable1150 :
+Lable1148 :
+Lable1146 :
+Lable1144 :
+Lable1142 :
+Lable1140 :
+Lable1138 :
+Lable1136 :
+Lable1134 :
+Lable1133 :
+Lable1102 :
+Lable1071 :
+Lable1040 :
+Lable1009 :
+Lable978 :
+Lable947 :
+Lable916 :
+Lable885 :
+Lable854 :
+Lable823 :
+Lable792 :
+Lable761 :
+Lable730 :
+    jal Lable17
+    move $s7,$v0
+    li $s5,1
+    lw $s4,4($sp)
+    addu $s6,$s4,$s5
+    sw $s6,4($sp)
+    j Lable83
+Lable84 :
+Lable21 : 
+    lw $ra,0($sp)
+    addu $sp,$sp,20
+    jr $ra
+Lable17 : 
+    subu $sp,$sp,8
+    sw $ra,0($sp)
+    li $s7,0
+    sw $s7,4($sp)
+Lable1164 :
+    li $s6,14
+    lw $s4,4($sp)
+    sle $s7,$s4,$s6
+    beqz $s7,Lable1165
+    li $s4,0
+    lw $s6,4($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable1167
+    lw $s6,Lable1
+    move $a0,$s6
+    jal Lprinti
+    .data
+Lable1168 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s6,Lable1168
+    move $a0,$s6
+    jal Lprints
+    j Lable1166
+Lable1167 :
+    li $s6,1
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable1170
+    lw $s4,Lable2
+    move $a0,$s4
+    jal Lprinti
+    .data
+Lable1171 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s4,Lable1171
+    move $a0,$s4
+    jal Lprints
+    j Lable1169
+Lable1170 :
+    li $s4,2
+    lw $s6,4($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable1173
+    lw $s6,Lable3
+    move $a0,$s6
+    jal Lprinti
+    .data
+Lable1174 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s6,Lable1174
+    move $a0,$s6
+    jal Lprints
+    j Lable1172
+Lable1173 :
+    li $s6,3
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable1176
+    lw $s4,Lable4
+    move $a0,$s4
+    jal Lprinti
+    .data
+Lable1177 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s4,Lable1177
+    move $a0,$s4
+    jal Lprints
+    j Lable1175
+Lable1176 :
+    li $s4,4
+    lw $s6,4($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable1179
+    lw $s6,Lable5
+    move $a0,$s6
+    jal Lprinti
+    .data
+Lable1180 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s6,Lable1180
+    move $a0,$s6
+    jal Lprints
+    j Lable1178
+Lable1179 :
+    li $s6,5
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable1182
+    lw $s4,Lable6
+    move $a0,$s4
+    jal Lprinti
+    .data
+Lable1183 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s4,Lable1183
+    move $a0,$s4
+    jal Lprints
+    j Lable1181
+Lable1182 :
+    li $s4,6
+    lw $s6,4($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable1185
+    lw $s6,Lable7
+    move $a0,$s6
+    jal Lprinti
+    .data
+Lable1186 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s6,Lable1186
+    move $a0,$s6
+    jal Lprints
+    j Lable1184
+Lable1185 :
+    li $s6,7
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable1188
+    lw $s4,Lable8
+    move $a0,$s4
+    jal Lprinti
+    .data
+Lable1189 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s4,Lable1189
+    move $a0,$s4
+    jal Lprints
+    j Lable1187
+Lable1188 :
+    li $s4,8
+    lw $s6,4($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable1191
+    lw $s6,Lable9
+    move $a0,$s6
+    jal Lprinti
+    .data
+Lable1192 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s6,Lable1192
+    move $a0,$s6
+    jal Lprints
+    j Lable1190
+Lable1191 :
+    li $s6,9
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable1194
+    lw $s4,Lable10
+    move $a0,$s4
+    jal Lprinti
+    .data
+Lable1195 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s4,Lable1195
+    move $a0,$s4
+    jal Lprints
+    j Lable1193
+Lable1194 :
+    li $s4,10
+    lw $s6,4($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable1197
+    lw $s6,Lable11
+    move $a0,$s6
+    jal Lprinti
+    .data
+Lable1198 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s6,Lable1198
+    move $a0,$s6
+    jal Lprints
+    j Lable1196
+Lable1197 :
+    li $s6,11
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable1200
+    lw $s4,Lable12
+    move $a0,$s4
+    jal Lprinti
+    .data
+Lable1201 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s4,Lable1201
+    move $a0,$s4
+    jal Lprints
+    j Lable1199
+Lable1200 :
+    li $s4,12
+    lw $s6,4($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable1203
+    lw $s6,Lable13
+    move $a0,$s6
+    jal Lprinti
+    .data
+Lable1204 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s6,Lable1204
+    move $a0,$s6
+    jal Lprints
+    j Lable1202
+Lable1203 :
+    li $s6,13
+    lw $s4,4($sp)
+    seq $s7,$s4,$s6
+    beqz $s7,Lable1206
+    lw $s4,Lable14
+    move $a0,$s4
+    jal Lprinti
+    .data
+Lable1207 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s4,Lable1207
+    move $a0,$s4
+    jal Lprints
+    j Lable1205
+Lable1206 :
+    li $s4,14
+    lw $s6,4($sp)
+    seq $s7,$s6,$s4
+    beqz $s7,Lable1208
+    lw $s6,Lable15
+    move $a0,$s6
+    jal Lprinti
+    .data
+Lable1209 :
+    .byte 32 ,0
+    .align 2
+    .text
+    la $s6,Lable1209
+    move $a0,$s6
+    jal Lprints
+Lable1208 :
+Lable1205 :
+Lable1202 :
+Lable1199 :
+Lable1196 :
+Lable1193 :
+Lable1190 :
+Lable1187 :
+Lable1184 :
+Lable1181 :
+Lable1178 :
+Lable1175 :
+Lable1172 :
+Lable1169 :
+Lable1166 :
+    li $s4,1
+    lw $s5,4($sp)
+    addu $s6,$s5,$s4
+    sw $s6,4($sp)
+    j Lable1164
+Lable1165 :
+    .data
+Lable1210 :
+    .byte 10 ,0
+    .align 2
+    .text
+    la $s6,Lable1210
+    move $a0,$s6
+    jal Lprints
+Lable1163 : 
+    lw $ra,0($sp)
+    addu $sp,$sp,8
+    jr $ra
+Lable19 : 
+    subu $sp,$sp,8
+    sw $ra,0($sp)
+    sw $a0,4($sp)
+    lw $s6,4($sp)
+    sw $s6,Lable18
+Lable1211 : 
+    lw $ra,0($sp)
+    addu $sp,$sp,8
+    jr $ra
+Lable20 : 
+    subu $sp,$sp,4
+    sw $ra,0($sp)
+    li $s5,32768
+    li $s3,13
+    lw $s1,Lable18
+    li $s0,17
+    mul $s2,$s0,$s1
+    addu $s4,$s2,$s3
+    bnez $s5,Lable1213
+    .data
+Lable1214 :
+    .byte  100 , 105 , 118 , 105 , 115 , 105 , 111 , 110 , 32 , 98 , 121 , 32 , 122 , 101 , 114 , 111 , 0
+    .align 2
+    .text
+    la $a0,Lable1214
+    j error
+Lable1213 :
+    rem $s6,$s4,$s5
+    sw $s6,Lable18
+    lw $s6,Lable18
+    move $v0,$s6
+    j Lable1212
+Lable1212 : 
+    lw $ra,0($sp)
+    addu $sp,$sp,4
+    jr $ra
+
+Lprints: 
+    li	$v0, 4
+    syscall
+    jr $ra
+
+    .data
+LTrue : 
+    .byte 116 ,114 ,117 ,101 ,0
+    .align 2
+    .text
+    .data
+LFalse : 
+    .byte 102 ,97 ,108 ,115 ,101 ,0
+    .align 2
+    .text
+Lprintb: 
+    li $t0,0
+    li $t1,1
+    beq $a0,$t0,LFal
+    beq $a0,$t1,LTru
+    jr $ra
+LFal: 
+    la $t0,LFalse
+    move $a0,$t0
+    li	$v0, 4
+    syscall
+    jr $ra
+LTru: 
+    la $t0,LTrue
+    move $a0,$t0
+    li	$v0, 4
+    syscall
+    jr $ra 
+
+Lprintc: 
+    li	$v0, 11
+    syscall
+    jr $ra
+
+Lprinti: 
+    li	$v0, 1
+    syscall
+    jr $ra
+
+Lgetchar:
+    li $v0, 12
+    syscall
+    jr $ra
+
+error:
+    li $v0, 4
+    syscall
+    li $v0, 10
+    syscall
+

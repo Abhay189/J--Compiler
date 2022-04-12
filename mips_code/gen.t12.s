@@ -6,71 +6,82 @@ main:
     syscall
 
 Lable0 : 
-    subu $sp,$sp,12
+    subu $sp,$sp,20
     sw $ra,0($sp)
-    li $s7,0
+    li $s7,2
     sw $s7,4($sp)
-Lable2 :
-    li $s6,10
-    lw $s5,4($sp)
-    slt $s7,$s5,$s6
-    beqz $s7,Lable3
-    lw $s5,4($sp)
-    move $a0,$s5
-    jal Lprinti
+    li $s7,1
+    sw $s7,8($sp)
+    li $s7,0
+    sw $s7,12($sp)
     .data
-Lable4 :
-    .byte 10 ,0
+Lable2 :
+    .byte 102 ,105 ,98 ,40 ,48 ,41 ,32 ,61 ,32 ,48 ,10 ,0
     .align 2
     .text
-    la $s5,Lable4
+    la $s6,Lable2
+    move $a0,$s6
+    jal Lprints
+    .data
+Lable3 :
+    .byte 102 ,105 ,98 ,40 ,49 ,41 ,32 ,61 ,32 ,49 ,10 ,0
+    .align 2
+    .text
+    la $s6,Lable3
+    move $a0,$s6
+    jal Lprints
+Lable4 :
+    li $s6,47
+    lw $s5,4($sp)
+    slt $s7,$s5,$s6
+    beqz $s7,Lable5
+    .data
+Lable6 :
+    .byte 102 ,105 ,98 ,40 ,0
+    .align 2
+    .text
+    la $s5,Lable6
     move $a0,$s5
     jal Lprints
-    li $s5,100
-    sw $s5,8($sp)
-Lable5 :
-    li $s5,110
-    lw $s6,8($sp)
-    slt $s5,$s6,$s5
-    beqz $s5,Lable6
-    lw $s6,8($sp)
-    move $a0,$s6
+    lw $s5,4($sp)
+    move $a0,$s5
     jal Lprinti
     .data
 Lable7 :
+    .byte 41 ,32 ,61 ,32 ,0
+    .align 2
+    .text
+    la $s5,Lable7
+    move $a0,$s5
+    jal Lprints
+    lw $s6,12($sp)
+    lw $s4,8($sp)
+    addu $s5,$s4,$s6
+    sw $s5,16($sp)
+    lw $s5,16($sp)
+    move $a0,$s5
+    jal Lprinti
+    lw $s5,8($sp)
+    sw $s5,12($sp)
+    lw $s5,16($sp)
+    sw $s5,8($sp)
+    .data
+Lable8 :
     .byte 10 ,0
     .align 2
     .text
-    la $s6,Lable7
-    move $a0,$s6
+    la $s5,Lable8
+    move $a0,$s5
     jal Lprints
-    li $s6,105
-    lw $s5,8($sp)
-    seq $s6,$s5,$s6
-    beqz $s6,Lable8
-    j Lable6
-Lable8 :
-    li $s6,1
-    lw $s4,8($sp)
-    addu $s5,$s4,$s6
-    sw $s5,8($sp)
-    j Lable5
-Lable6 :
-    li $s5,5
-    lw $s4,4($sp)
-    seq $s6,$s4,$s5
-    beqz $s6,Lable9
-    j Lable3
-Lable9 :
-    li $s5,1
+    li $s4,1
     lw $s6,4($sp)
-    addu $s4,$s6,$s5
-    sw $s4,4($sp)
-    j Lable2
-Lable3 :
+    addu $s5,$s6,$s4
+    sw $s5,4($sp)
+    j Lable4
+Lable5 :
 Lable1 : 
     lw $ra,0($sp)
-    addu $sp,$sp,12
+    addu $sp,$sp,20
     jr $ra
 
 Lprints: 

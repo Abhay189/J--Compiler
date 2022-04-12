@@ -2647,8 +2647,8 @@ Lable509 :
     .byte 50 ,10 ,0
     .align 2
     .text
-    la $s7,Lable509
-    move $a0,$s7
+    la $s6,Lable509
+    move $a0,$s6
     jal Lprints
     li $s7,3
     sw $s7,4($sp)
@@ -2685,12 +2685,12 @@ Lable514 :
 Lable513 :
     li $s5,4
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable517
+    seq $s7,$s4,$s5
+    beqz $s7,Lable517
     li $s4,0
     lw $s5,Lable5
-    seq $s5,$s5,$s4
-    beqz $s5,Lable518
+    seq $s7,$s5,$s4
+    beqz $s7,Lable518
     li $s5,4
     move $a0,$s5
     jal Lprinti
@@ -2711,12 +2711,12 @@ Lable518 :
 Lable517 :
     li $s5,5
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable521
+    seq $s7,$s6,$s5
+    beqz $s7,Lable521
     li $s6,0
     lw $s5,Lable6
-    seq $s5,$s5,$s6
-    beqz $s5,Lable522
+    seq $s7,$s5,$s6
+    beqz $s7,Lable522
     li $s5,5
     move $a0,$s5
     jal Lprinti
@@ -2737,12 +2737,12 @@ Lable522 :
 Lable521 :
     li $s5,6
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable525
+    seq $s7,$s4,$s5
+    beqz $s7,Lable525
     li $s4,0
     lw $s5,Lable7
-    seq $s5,$s5,$s4
-    beqz $s5,Lable526
+    seq $s7,$s5,$s4
+    beqz $s7,Lable526
     li $s5,6
     move $a0,$s5
     jal Lprinti
@@ -2763,12 +2763,12 @@ Lable526 :
 Lable525 :
     li $s5,7
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable529
+    seq $s7,$s6,$s5
+    beqz $s7,Lable529
     li $s6,0
     lw $s5,Lable8
-    seq $s5,$s5,$s6
-    beqz $s5,Lable530
+    seq $s7,$s5,$s6
+    beqz $s7,Lable530
     li $s5,7
     move $a0,$s5
     jal Lprinti
@@ -2789,12 +2789,12 @@ Lable530 :
 Lable529 :
     li $s5,8
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable533
+    seq $s7,$s4,$s5
+    beqz $s7,Lable533
     li $s4,0
     lw $s5,Lable9
-    seq $s5,$s5,$s4
-    beqz $s5,Lable534
+    seq $s7,$s5,$s4
+    beqz $s7,Lable534
     li $s5,8
     move $a0,$s5
     jal Lprinti
@@ -2815,12 +2815,12 @@ Lable534 :
 Lable533 :
     li $s5,9
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable537
+    seq $s7,$s6,$s5
+    beqz $s7,Lable537
     li $s6,0
     lw $s5,Lable10
-    seq $s5,$s5,$s6
-    beqz $s5,Lable538
+    seq $s7,$s5,$s6
+    beqz $s7,Lable538
     li $s5,9
     move $a0,$s5
     jal Lprinti
@@ -2841,12 +2841,12 @@ Lable538 :
 Lable537 :
     li $s5,10
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable541
+    seq $s7,$s4,$s5
+    beqz $s7,Lable541
     li $s4,0
     lw $s5,Lable11
-    seq $s5,$s5,$s4
-    beqz $s5,Lable542
+    seq $s7,$s5,$s4
+    beqz $s7,Lable542
     li $s5,10
     move $a0,$s5
     jal Lprinti
@@ -2867,12 +2867,12 @@ Lable542 :
 Lable541 :
     li $s5,11
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable545
+    seq $s7,$s6,$s5
+    beqz $s7,Lable545
     li $s6,0
     lw $s5,Lable12
-    seq $s5,$s5,$s6
-    beqz $s5,Lable546
+    seq $s7,$s5,$s6
+    beqz $s7,Lable546
     li $s5,11
     move $a0,$s5
     jal Lprinti
@@ -2893,12 +2893,12 @@ Lable546 :
 Lable545 :
     li $s5,12
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable549
+    seq $s7,$s4,$s5
+    beqz $s7,Lable549
     li $s4,0
     lw $s5,Lable13
-    seq $s5,$s5,$s4
-    beqz $s5,Lable550
+    seq $s7,$s5,$s4
+    beqz $s7,Lable550
     li $s5,12
     move $a0,$s5
     jal Lprinti
@@ -2919,12 +2919,12 @@ Lable550 :
 Lable549 :
     li $s5,13
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable553
+    seq $s7,$s6,$s5
+    beqz $s7,Lable553
     li $s6,0
     lw $s5,Lable14
-    seq $s5,$s5,$s6
-    beqz $s5,Lable554
+    seq $s7,$s5,$s6
+    beqz $s7,Lable554
     li $s5,13
     move $a0,$s5
     jal Lprinti
@@ -2945,12 +2945,12 @@ Lable554 :
 Lable553 :
     li $s5,14
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable557
+    seq $s7,$s4,$s5
+    beqz $s7,Lable557
     li $s4,0
     lw $s5,Lable15
-    seq $s5,$s5,$s4
-    beqz $s5,Lable558
+    seq $s7,$s5,$s4
+    beqz $s7,Lable558
     li $s5,14
     move $a0,$s5
     jal Lprinti
@@ -2971,12 +2971,12 @@ Lable558 :
 Lable557 :
     li $s5,15
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable561
+    seq $s7,$s6,$s5
+    beqz $s7,Lable561
     li $s6,0
     lw $s5,Lable16
-    seq $s5,$s5,$s6
-    beqz $s5,Lable562
+    seq $s7,$s5,$s6
+    beqz $s7,Lable562
     li $s5,15
     move $a0,$s5
     jal Lprinti
@@ -2997,12 +2997,12 @@ Lable562 :
 Lable561 :
     li $s5,16
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable565
+    seq $s7,$s4,$s5
+    beqz $s7,Lable565
     li $s4,0
     lw $s5,Lable17
-    seq $s5,$s5,$s4
-    beqz $s5,Lable566
+    seq $s7,$s5,$s4
+    beqz $s7,Lable566
     li $s5,16
     move $a0,$s5
     jal Lprinti
@@ -3023,12 +3023,12 @@ Lable566 :
 Lable565 :
     li $s5,17
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable569
+    seq $s7,$s6,$s5
+    beqz $s7,Lable569
     li $s6,0
     lw $s5,Lable18
-    seq $s5,$s5,$s6
-    beqz $s5,Lable570
+    seq $s7,$s5,$s6
+    beqz $s7,Lable570
     li $s5,17
     move $a0,$s5
     jal Lprinti
@@ -3049,12 +3049,12 @@ Lable570 :
 Lable569 :
     li $s5,18
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable573
+    seq $s7,$s4,$s5
+    beqz $s7,Lable573
     li $s4,0
     lw $s5,Lable19
-    seq $s5,$s5,$s4
-    beqz $s5,Lable574
+    seq $s7,$s5,$s4
+    beqz $s7,Lable574
     li $s5,18
     move $a0,$s5
     jal Lprinti
@@ -3075,12 +3075,12 @@ Lable574 :
 Lable573 :
     li $s5,19
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable577
+    seq $s7,$s6,$s5
+    beqz $s7,Lable577
     li $s6,0
     lw $s5,Lable20
-    seq $s5,$s5,$s6
-    beqz $s5,Lable578
+    seq $s7,$s5,$s6
+    beqz $s7,Lable578
     li $s5,19
     move $a0,$s5
     jal Lprinti
@@ -3101,12 +3101,12 @@ Lable578 :
 Lable577 :
     li $s5,20
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable581
+    seq $s7,$s4,$s5
+    beqz $s7,Lable581
     li $s4,0
     lw $s5,Lable21
-    seq $s5,$s5,$s4
-    beqz $s5,Lable582
+    seq $s7,$s5,$s4
+    beqz $s7,Lable582
     li $s5,20
     move $a0,$s5
     jal Lprinti
@@ -3127,12 +3127,12 @@ Lable582 :
 Lable581 :
     li $s5,21
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable585
+    seq $s7,$s6,$s5
+    beqz $s7,Lable585
     li $s6,0
     lw $s5,Lable22
-    seq $s5,$s5,$s6
-    beqz $s5,Lable586
+    seq $s7,$s5,$s6
+    beqz $s7,Lable586
     li $s5,21
     move $a0,$s5
     jal Lprinti
@@ -3153,12 +3153,12 @@ Lable586 :
 Lable585 :
     li $s5,22
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable589
+    seq $s7,$s4,$s5
+    beqz $s7,Lable589
     li $s4,0
     lw $s5,Lable23
-    seq $s5,$s5,$s4
-    beqz $s5,Lable590
+    seq $s7,$s5,$s4
+    beqz $s7,Lable590
     li $s5,22
     move $a0,$s5
     jal Lprinti
@@ -3179,12 +3179,12 @@ Lable590 :
 Lable589 :
     li $s5,23
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable593
+    seq $s7,$s6,$s5
+    beqz $s7,Lable593
     li $s6,0
     lw $s5,Lable24
-    seq $s5,$s5,$s6
-    beqz $s5,Lable594
+    seq $s7,$s5,$s6
+    beqz $s7,Lable594
     li $s5,23
     move $a0,$s5
     jal Lprinti
@@ -3205,12 +3205,12 @@ Lable594 :
 Lable593 :
     li $s5,24
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable597
+    seq $s7,$s4,$s5
+    beqz $s7,Lable597
     li $s4,0
     lw $s5,Lable25
-    seq $s5,$s5,$s4
-    beqz $s5,Lable598
+    seq $s7,$s5,$s4
+    beqz $s7,Lable598
     li $s5,24
     move $a0,$s5
     jal Lprinti
@@ -3231,12 +3231,12 @@ Lable598 :
 Lable597 :
     li $s5,25
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable601
+    seq $s7,$s6,$s5
+    beqz $s7,Lable601
     li $s6,0
     lw $s5,Lable26
-    seq $s5,$s5,$s6
-    beqz $s5,Lable602
+    seq $s7,$s5,$s6
+    beqz $s7,Lable602
     li $s5,25
     move $a0,$s5
     jal Lprinti
@@ -3257,12 +3257,12 @@ Lable602 :
 Lable601 :
     li $s5,26
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable605
+    seq $s7,$s4,$s5
+    beqz $s7,Lable605
     li $s4,0
     lw $s5,Lable27
-    seq $s5,$s5,$s4
-    beqz $s5,Lable606
+    seq $s7,$s5,$s4
+    beqz $s7,Lable606
     li $s5,26
     move $a0,$s5
     jal Lprinti
@@ -3283,12 +3283,12 @@ Lable606 :
 Lable605 :
     li $s5,27
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable609
+    seq $s7,$s6,$s5
+    beqz $s7,Lable609
     li $s6,0
     lw $s5,Lable28
-    seq $s5,$s5,$s6
-    beqz $s5,Lable610
+    seq $s7,$s5,$s6
+    beqz $s7,Lable610
     li $s5,27
     move $a0,$s5
     jal Lprinti
@@ -3309,12 +3309,12 @@ Lable610 :
 Lable609 :
     li $s5,28
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable613
+    seq $s7,$s4,$s5
+    beqz $s7,Lable613
     li $s4,0
     lw $s5,Lable29
-    seq $s5,$s5,$s4
-    beqz $s5,Lable614
+    seq $s7,$s5,$s4
+    beqz $s7,Lable614
     li $s5,28
     move $a0,$s5
     jal Lprinti
@@ -3335,12 +3335,12 @@ Lable614 :
 Lable613 :
     li $s5,29
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable617
+    seq $s7,$s6,$s5
+    beqz $s7,Lable617
     li $s6,0
     lw $s5,Lable30
-    seq $s5,$s5,$s6
-    beqz $s5,Lable618
+    seq $s7,$s5,$s6
+    beqz $s7,Lable618
     li $s5,29
     move $a0,$s5
     jal Lprinti
@@ -3361,12 +3361,12 @@ Lable618 :
 Lable617 :
     li $s5,30
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable621
+    seq $s7,$s4,$s5
+    beqz $s7,Lable621
     li $s4,0
     lw $s5,Lable31
-    seq $s5,$s5,$s4
-    beqz $s5,Lable622
+    seq $s7,$s5,$s4
+    beqz $s7,Lable622
     li $s5,30
     move $a0,$s5
     jal Lprinti
@@ -3387,12 +3387,12 @@ Lable622 :
 Lable621 :
     li $s5,31
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable625
+    seq $s7,$s6,$s5
+    beqz $s7,Lable625
     li $s6,0
     lw $s5,Lable32
-    seq $s5,$s5,$s6
-    beqz $s5,Lable626
+    seq $s7,$s5,$s6
+    beqz $s7,Lable626
     li $s5,31
     move $a0,$s5
     jal Lprinti
@@ -3413,12 +3413,12 @@ Lable626 :
 Lable625 :
     li $s5,32
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable629
+    seq $s7,$s4,$s5
+    beqz $s7,Lable629
     li $s4,0
     lw $s5,Lable33
-    seq $s5,$s5,$s4
-    beqz $s5,Lable630
+    seq $s7,$s5,$s4
+    beqz $s7,Lable630
     li $s5,32
     move $a0,$s5
     jal Lprinti
@@ -3439,12 +3439,12 @@ Lable630 :
 Lable629 :
     li $s5,33
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable633
+    seq $s7,$s6,$s5
+    beqz $s7,Lable633
     li $s6,0
     lw $s5,Lable34
-    seq $s5,$s5,$s6
-    beqz $s5,Lable634
+    seq $s7,$s5,$s6
+    beqz $s7,Lable634
     li $s5,33
     move $a0,$s5
     jal Lprinti
@@ -3465,12 +3465,12 @@ Lable634 :
 Lable633 :
     li $s5,34
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable637
+    seq $s7,$s4,$s5
+    beqz $s7,Lable637
     li $s4,0
     lw $s5,Lable35
-    seq $s5,$s5,$s4
-    beqz $s5,Lable638
+    seq $s7,$s5,$s4
+    beqz $s7,Lable638
     li $s5,34
     move $a0,$s5
     jal Lprinti
@@ -3491,12 +3491,12 @@ Lable638 :
 Lable637 :
     li $s5,35
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable641
+    seq $s7,$s6,$s5
+    beqz $s7,Lable641
     li $s6,0
     lw $s5,Lable36
-    seq $s5,$s5,$s6
-    beqz $s5,Lable642
+    seq $s7,$s5,$s6
+    beqz $s7,Lable642
     li $s5,35
     move $a0,$s5
     jal Lprinti
@@ -3517,12 +3517,12 @@ Lable642 :
 Lable641 :
     li $s5,36
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable645
+    seq $s7,$s4,$s5
+    beqz $s7,Lable645
     li $s4,0
     lw $s5,Lable37
-    seq $s5,$s5,$s4
-    beqz $s5,Lable646
+    seq $s7,$s5,$s4
+    beqz $s7,Lable646
     li $s5,36
     move $a0,$s5
     jal Lprinti
@@ -3543,12 +3543,12 @@ Lable646 :
 Lable645 :
     li $s5,37
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable649
+    seq $s7,$s6,$s5
+    beqz $s7,Lable649
     li $s6,0
     lw $s5,Lable38
-    seq $s5,$s5,$s6
-    beqz $s5,Lable650
+    seq $s7,$s5,$s6
+    beqz $s7,Lable650
     li $s5,37
     move $a0,$s5
     jal Lprinti
@@ -3569,12 +3569,12 @@ Lable650 :
 Lable649 :
     li $s5,38
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable653
+    seq $s7,$s4,$s5
+    beqz $s7,Lable653
     li $s4,0
     lw $s5,Lable39
-    seq $s5,$s5,$s4
-    beqz $s5,Lable654
+    seq $s7,$s5,$s4
+    beqz $s7,Lable654
     li $s5,38
     move $a0,$s5
     jal Lprinti
@@ -3595,12 +3595,12 @@ Lable654 :
 Lable653 :
     li $s5,39
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable657
+    seq $s7,$s6,$s5
+    beqz $s7,Lable657
     li $s6,0
     lw $s5,Lable40
-    seq $s5,$s5,$s6
-    beqz $s5,Lable658
+    seq $s7,$s5,$s6
+    beqz $s7,Lable658
     li $s5,39
     move $a0,$s5
     jal Lprinti
@@ -3621,12 +3621,12 @@ Lable658 :
 Lable657 :
     li $s5,40
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable661
+    seq $s7,$s4,$s5
+    beqz $s7,Lable661
     li $s4,0
     lw $s5,Lable41
-    seq $s5,$s5,$s4
-    beqz $s5,Lable662
+    seq $s7,$s5,$s4
+    beqz $s7,Lable662
     li $s5,40
     move $a0,$s5
     jal Lprinti
@@ -3647,12 +3647,12 @@ Lable662 :
 Lable661 :
     li $s5,41
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable665
+    seq $s7,$s6,$s5
+    beqz $s7,Lable665
     li $s6,0
     lw $s5,Lable42
-    seq $s5,$s5,$s6
-    beqz $s5,Lable666
+    seq $s7,$s5,$s6
+    beqz $s7,Lable666
     li $s5,41
     move $a0,$s5
     jal Lprinti
@@ -3673,12 +3673,12 @@ Lable666 :
 Lable665 :
     li $s5,42
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable669
+    seq $s7,$s4,$s5
+    beqz $s7,Lable669
     li $s4,0
     lw $s5,Lable43
-    seq $s5,$s5,$s4
-    beqz $s5,Lable670
+    seq $s7,$s5,$s4
+    beqz $s7,Lable670
     li $s5,42
     move $a0,$s5
     jal Lprinti
@@ -3699,12 +3699,12 @@ Lable670 :
 Lable669 :
     li $s5,43
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable673
+    seq $s7,$s6,$s5
+    beqz $s7,Lable673
     li $s6,0
     lw $s5,Lable44
-    seq $s5,$s5,$s6
-    beqz $s5,Lable674
+    seq $s7,$s5,$s6
+    beqz $s7,Lable674
     li $s5,43
     move $a0,$s5
     jal Lprinti
@@ -3725,12 +3725,12 @@ Lable674 :
 Lable673 :
     li $s5,44
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable677
+    seq $s7,$s4,$s5
+    beqz $s7,Lable677
     li $s4,0
     lw $s5,Lable45
-    seq $s5,$s5,$s4
-    beqz $s5,Lable678
+    seq $s7,$s5,$s4
+    beqz $s7,Lable678
     li $s5,44
     move $a0,$s5
     jal Lprinti
@@ -3751,12 +3751,12 @@ Lable678 :
 Lable677 :
     li $s5,45
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable681
+    seq $s7,$s6,$s5
+    beqz $s7,Lable681
     li $s6,0
     lw $s5,Lable46
-    seq $s5,$s5,$s6
-    beqz $s5,Lable682
+    seq $s7,$s5,$s6
+    beqz $s7,Lable682
     li $s5,45
     move $a0,$s5
     jal Lprinti
@@ -3777,12 +3777,12 @@ Lable682 :
 Lable681 :
     li $s5,46
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable685
+    seq $s7,$s4,$s5
+    beqz $s7,Lable685
     li $s4,0
     lw $s5,Lable47
-    seq $s5,$s5,$s4
-    beqz $s5,Lable686
+    seq $s7,$s5,$s4
+    beqz $s7,Lable686
     li $s5,46
     move $a0,$s5
     jal Lprinti
@@ -3803,12 +3803,12 @@ Lable686 :
 Lable685 :
     li $s5,47
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable689
+    seq $s7,$s6,$s5
+    beqz $s7,Lable689
     li $s6,0
     lw $s5,Lable48
-    seq $s5,$s5,$s6
-    beqz $s5,Lable690
+    seq $s7,$s5,$s6
+    beqz $s7,Lable690
     li $s5,47
     move $a0,$s5
     jal Lprinti
@@ -3829,12 +3829,12 @@ Lable690 :
 Lable689 :
     li $s5,48
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable693
+    seq $s7,$s4,$s5
+    beqz $s7,Lable693
     li $s4,0
     lw $s5,Lable49
-    seq $s5,$s5,$s4
-    beqz $s5,Lable694
+    seq $s7,$s5,$s4
+    beqz $s7,Lable694
     li $s5,48
     move $a0,$s5
     jal Lprinti
@@ -3855,12 +3855,12 @@ Lable694 :
 Lable693 :
     li $s5,49
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable697
+    seq $s7,$s6,$s5
+    beqz $s7,Lable697
     li $s6,0
     lw $s5,Lable50
-    seq $s5,$s5,$s6
-    beqz $s5,Lable698
+    seq $s7,$s5,$s6
+    beqz $s7,Lable698
     li $s5,49
     move $a0,$s5
     jal Lprinti
@@ -3881,12 +3881,12 @@ Lable698 :
 Lable697 :
     li $s5,50
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable701
+    seq $s7,$s4,$s5
+    beqz $s7,Lable701
     li $s4,0
     lw $s5,Lable51
-    seq $s5,$s5,$s4
-    beqz $s5,Lable702
+    seq $s7,$s5,$s4
+    beqz $s7,Lable702
     li $s5,50
     move $a0,$s5
     jal Lprinti
@@ -3907,12 +3907,12 @@ Lable702 :
 Lable701 :
     li $s5,51
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable705
+    seq $s7,$s6,$s5
+    beqz $s7,Lable705
     li $s6,0
     lw $s5,Lable52
-    seq $s5,$s5,$s6
-    beqz $s5,Lable706
+    seq $s7,$s5,$s6
+    beqz $s7,Lable706
     li $s5,51
     move $a0,$s5
     jal Lprinti
@@ -3933,12 +3933,12 @@ Lable706 :
 Lable705 :
     li $s5,52
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable709
+    seq $s7,$s4,$s5
+    beqz $s7,Lable709
     li $s4,0
     lw $s5,Lable53
-    seq $s5,$s5,$s4
-    beqz $s5,Lable710
+    seq $s7,$s5,$s4
+    beqz $s7,Lable710
     li $s5,52
     move $a0,$s5
     jal Lprinti
@@ -3959,12 +3959,12 @@ Lable710 :
 Lable709 :
     li $s5,53
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable713
+    seq $s7,$s6,$s5
+    beqz $s7,Lable713
     li $s6,0
     lw $s5,Lable54
-    seq $s5,$s5,$s6
-    beqz $s5,Lable714
+    seq $s7,$s5,$s6
+    beqz $s7,Lable714
     li $s5,53
     move $a0,$s5
     jal Lprinti
@@ -3985,12 +3985,12 @@ Lable714 :
 Lable713 :
     li $s5,54
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable717
+    seq $s7,$s4,$s5
+    beqz $s7,Lable717
     li $s4,0
     lw $s5,Lable55
-    seq $s5,$s5,$s4
-    beqz $s5,Lable718
+    seq $s7,$s5,$s4
+    beqz $s7,Lable718
     li $s5,54
     move $a0,$s5
     jal Lprinti
@@ -4011,12 +4011,12 @@ Lable718 :
 Lable717 :
     li $s5,55
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable721
+    seq $s7,$s6,$s5
+    beqz $s7,Lable721
     li $s6,0
     lw $s5,Lable56
-    seq $s5,$s5,$s6
-    beqz $s5,Lable722
+    seq $s7,$s5,$s6
+    beqz $s7,Lable722
     li $s5,55
     move $a0,$s5
     jal Lprinti
@@ -4037,12 +4037,12 @@ Lable722 :
 Lable721 :
     li $s5,56
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable725
+    seq $s7,$s4,$s5
+    beqz $s7,Lable725
     li $s4,0
     lw $s5,Lable57
-    seq $s5,$s5,$s4
-    beqz $s5,Lable726
+    seq $s7,$s5,$s4
+    beqz $s7,Lable726
     li $s5,56
     move $a0,$s5
     jal Lprinti
@@ -4063,12 +4063,12 @@ Lable726 :
 Lable725 :
     li $s5,57
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable729
+    seq $s7,$s6,$s5
+    beqz $s7,Lable729
     li $s6,0
     lw $s5,Lable58
-    seq $s5,$s5,$s6
-    beqz $s5,Lable730
+    seq $s7,$s5,$s6
+    beqz $s7,Lable730
     li $s5,57
     move $a0,$s5
     jal Lprinti
@@ -4089,12 +4089,12 @@ Lable730 :
 Lable729 :
     li $s5,58
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable733
+    seq $s7,$s4,$s5
+    beqz $s7,Lable733
     li $s4,0
     lw $s5,Lable59
-    seq $s5,$s5,$s4
-    beqz $s5,Lable734
+    seq $s7,$s5,$s4
+    beqz $s7,Lable734
     li $s5,58
     move $a0,$s5
     jal Lprinti
@@ -4115,12 +4115,12 @@ Lable734 :
 Lable733 :
     li $s5,59
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable737
+    seq $s7,$s6,$s5
+    beqz $s7,Lable737
     li $s6,0
     lw $s5,Lable60
-    seq $s5,$s5,$s6
-    beqz $s5,Lable738
+    seq $s7,$s5,$s6
+    beqz $s7,Lable738
     li $s5,59
     move $a0,$s5
     jal Lprinti
@@ -4141,12 +4141,12 @@ Lable738 :
 Lable737 :
     li $s5,60
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable741
+    seq $s7,$s4,$s5
+    beqz $s7,Lable741
     li $s4,0
     lw $s5,Lable61
-    seq $s5,$s5,$s4
-    beqz $s5,Lable742
+    seq $s7,$s5,$s4
+    beqz $s7,Lable742
     li $s5,60
     move $a0,$s5
     jal Lprinti
@@ -4167,12 +4167,12 @@ Lable742 :
 Lable741 :
     li $s5,61
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable745
+    seq $s7,$s6,$s5
+    beqz $s7,Lable745
     li $s6,0
     lw $s5,Lable62
-    seq $s5,$s5,$s6
-    beqz $s5,Lable746
+    seq $s7,$s5,$s6
+    beqz $s7,Lable746
     li $s5,61
     move $a0,$s5
     jal Lprinti
@@ -4193,12 +4193,12 @@ Lable746 :
 Lable745 :
     li $s5,62
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable749
+    seq $s7,$s4,$s5
+    beqz $s7,Lable749
     li $s4,0
     lw $s5,Lable63
-    seq $s5,$s5,$s4
-    beqz $s5,Lable750
+    seq $s7,$s5,$s4
+    beqz $s7,Lable750
     li $s5,62
     move $a0,$s5
     jal Lprinti
@@ -4219,12 +4219,12 @@ Lable750 :
 Lable749 :
     li $s5,63
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable753
+    seq $s7,$s6,$s5
+    beqz $s7,Lable753
     li $s6,0
     lw $s5,Lable64
-    seq $s5,$s5,$s6
-    beqz $s5,Lable754
+    seq $s7,$s5,$s6
+    beqz $s7,Lable754
     li $s5,63
     move $a0,$s5
     jal Lprinti
@@ -4245,12 +4245,12 @@ Lable754 :
 Lable753 :
     li $s5,64
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable757
+    seq $s7,$s4,$s5
+    beqz $s7,Lable757
     li $s4,0
     lw $s5,Lable65
-    seq $s5,$s5,$s4
-    beqz $s5,Lable758
+    seq $s7,$s5,$s4
+    beqz $s7,Lable758
     li $s5,64
     move $a0,$s5
     jal Lprinti
@@ -4271,12 +4271,12 @@ Lable758 :
 Lable757 :
     li $s5,65
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable761
+    seq $s7,$s6,$s5
+    beqz $s7,Lable761
     li $s6,0
     lw $s5,Lable66
-    seq $s5,$s5,$s6
-    beqz $s5,Lable762
+    seq $s7,$s5,$s6
+    beqz $s7,Lable762
     li $s5,65
     move $a0,$s5
     jal Lprinti
@@ -4297,12 +4297,12 @@ Lable762 :
 Lable761 :
     li $s5,66
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable765
+    seq $s7,$s4,$s5
+    beqz $s7,Lable765
     li $s4,0
     lw $s5,Lable67
-    seq $s5,$s5,$s4
-    beqz $s5,Lable766
+    seq $s7,$s5,$s4
+    beqz $s7,Lable766
     li $s5,66
     move $a0,$s5
     jal Lprinti
@@ -4323,12 +4323,12 @@ Lable766 :
 Lable765 :
     li $s5,67
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable769
+    seq $s7,$s6,$s5
+    beqz $s7,Lable769
     li $s6,0
     lw $s5,Lable68
-    seq $s5,$s5,$s6
-    beqz $s5,Lable770
+    seq $s7,$s5,$s6
+    beqz $s7,Lable770
     li $s5,67
     move $a0,$s5
     jal Lprinti
@@ -4349,12 +4349,12 @@ Lable770 :
 Lable769 :
     li $s5,68
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable773
+    seq $s7,$s4,$s5
+    beqz $s7,Lable773
     li $s4,0
     lw $s5,Lable69
-    seq $s5,$s5,$s4
-    beqz $s5,Lable774
+    seq $s7,$s5,$s4
+    beqz $s7,Lable774
     li $s5,68
     move $a0,$s5
     jal Lprinti
@@ -4375,12 +4375,12 @@ Lable774 :
 Lable773 :
     li $s5,69
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable777
+    seq $s7,$s6,$s5
+    beqz $s7,Lable777
     li $s6,0
     lw $s5,Lable70
-    seq $s5,$s5,$s6
-    beqz $s5,Lable778
+    seq $s7,$s5,$s6
+    beqz $s7,Lable778
     li $s5,69
     move $a0,$s5
     jal Lprinti
@@ -4401,12 +4401,12 @@ Lable778 :
 Lable777 :
     li $s5,70
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable781
+    seq $s7,$s4,$s5
+    beqz $s7,Lable781
     li $s4,0
     lw $s5,Lable71
-    seq $s5,$s5,$s4
-    beqz $s5,Lable782
+    seq $s7,$s5,$s4
+    beqz $s7,Lable782
     li $s5,70
     move $a0,$s5
     jal Lprinti
@@ -4427,12 +4427,12 @@ Lable782 :
 Lable781 :
     li $s5,71
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable785
+    seq $s7,$s6,$s5
+    beqz $s7,Lable785
     li $s6,0
     lw $s5,Lable72
-    seq $s5,$s5,$s6
-    beqz $s5,Lable786
+    seq $s7,$s5,$s6
+    beqz $s7,Lable786
     li $s5,71
     move $a0,$s5
     jal Lprinti
@@ -4453,12 +4453,12 @@ Lable786 :
 Lable785 :
     li $s5,72
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable789
+    seq $s7,$s4,$s5
+    beqz $s7,Lable789
     li $s4,0
     lw $s5,Lable73
-    seq $s5,$s5,$s4
-    beqz $s5,Lable790
+    seq $s7,$s5,$s4
+    beqz $s7,Lable790
     li $s5,72
     move $a0,$s5
     jal Lprinti
@@ -4479,12 +4479,12 @@ Lable790 :
 Lable789 :
     li $s5,73
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable793
+    seq $s7,$s6,$s5
+    beqz $s7,Lable793
     li $s6,0
     lw $s5,Lable74
-    seq $s5,$s5,$s6
-    beqz $s5,Lable794
+    seq $s7,$s5,$s6
+    beqz $s7,Lable794
     li $s5,73
     move $a0,$s5
     jal Lprinti
@@ -4505,12 +4505,12 @@ Lable794 :
 Lable793 :
     li $s5,74
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable797
+    seq $s7,$s4,$s5
+    beqz $s7,Lable797
     li $s4,0
     lw $s5,Lable75
-    seq $s5,$s5,$s4
-    beqz $s5,Lable798
+    seq $s7,$s5,$s4
+    beqz $s7,Lable798
     li $s5,74
     move $a0,$s5
     jal Lprinti
@@ -4531,12 +4531,12 @@ Lable798 :
 Lable797 :
     li $s5,75
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable801
+    seq $s7,$s6,$s5
+    beqz $s7,Lable801
     li $s6,0
     lw $s5,Lable76
-    seq $s5,$s5,$s6
-    beqz $s5,Lable802
+    seq $s7,$s5,$s6
+    beqz $s7,Lable802
     li $s5,75
     move $a0,$s5
     jal Lprinti
@@ -4557,12 +4557,12 @@ Lable802 :
 Lable801 :
     li $s5,76
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable805
+    seq $s7,$s4,$s5
+    beqz $s7,Lable805
     li $s4,0
     lw $s5,Lable77
-    seq $s5,$s5,$s4
-    beqz $s5,Lable806
+    seq $s7,$s5,$s4
+    beqz $s7,Lable806
     li $s5,76
     move $a0,$s5
     jal Lprinti
@@ -4583,12 +4583,12 @@ Lable806 :
 Lable805 :
     li $s5,77
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable809
+    seq $s7,$s6,$s5
+    beqz $s7,Lable809
     li $s6,0
     lw $s5,Lable78
-    seq $s5,$s5,$s6
-    beqz $s5,Lable810
+    seq $s7,$s5,$s6
+    beqz $s7,Lable810
     li $s5,77
     move $a0,$s5
     jal Lprinti
@@ -4609,12 +4609,12 @@ Lable810 :
 Lable809 :
     li $s5,78
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable813
+    seq $s7,$s4,$s5
+    beqz $s7,Lable813
     li $s4,0
     lw $s5,Lable79
-    seq $s5,$s5,$s4
-    beqz $s5,Lable814
+    seq $s7,$s5,$s4
+    beqz $s7,Lable814
     li $s5,78
     move $a0,$s5
     jal Lprinti
@@ -4635,12 +4635,12 @@ Lable814 :
 Lable813 :
     li $s5,79
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable817
+    seq $s7,$s6,$s5
+    beqz $s7,Lable817
     li $s6,0
     lw $s5,Lable80
-    seq $s5,$s5,$s6
-    beqz $s5,Lable818
+    seq $s7,$s5,$s6
+    beqz $s7,Lable818
     li $s5,79
     move $a0,$s5
     jal Lprinti
@@ -4661,12 +4661,12 @@ Lable818 :
 Lable817 :
     li $s5,80
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable821
+    seq $s7,$s4,$s5
+    beqz $s7,Lable821
     li $s4,0
     lw $s5,Lable81
-    seq $s5,$s5,$s4
-    beqz $s5,Lable822
+    seq $s7,$s5,$s4
+    beqz $s7,Lable822
     li $s5,80
     move $a0,$s5
     jal Lprinti
@@ -4687,12 +4687,12 @@ Lable822 :
 Lable821 :
     li $s5,81
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable825
+    seq $s7,$s6,$s5
+    beqz $s7,Lable825
     li $s6,0
     lw $s5,Lable82
-    seq $s5,$s5,$s6
-    beqz $s5,Lable826
+    seq $s7,$s5,$s6
+    beqz $s7,Lable826
     li $s5,81
     move $a0,$s5
     jal Lprinti
@@ -4713,12 +4713,12 @@ Lable826 :
 Lable825 :
     li $s5,82
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable829
+    seq $s7,$s4,$s5
+    beqz $s7,Lable829
     li $s4,0
     lw $s5,Lable83
-    seq $s5,$s5,$s4
-    beqz $s5,Lable830
+    seq $s7,$s5,$s4
+    beqz $s7,Lable830
     li $s5,82
     move $a0,$s5
     jal Lprinti
@@ -4739,12 +4739,12 @@ Lable830 :
 Lable829 :
     li $s5,83
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable833
+    seq $s7,$s6,$s5
+    beqz $s7,Lable833
     li $s6,0
     lw $s5,Lable84
-    seq $s5,$s5,$s6
-    beqz $s5,Lable834
+    seq $s7,$s5,$s6
+    beqz $s7,Lable834
     li $s5,83
     move $a0,$s5
     jal Lprinti
@@ -4765,12 +4765,12 @@ Lable834 :
 Lable833 :
     li $s5,84
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable837
+    seq $s7,$s4,$s5
+    beqz $s7,Lable837
     li $s4,0
     lw $s5,Lable85
-    seq $s5,$s5,$s4
-    beqz $s5,Lable838
+    seq $s7,$s5,$s4
+    beqz $s7,Lable838
     li $s5,84
     move $a0,$s5
     jal Lprinti
@@ -4791,12 +4791,12 @@ Lable838 :
 Lable837 :
     li $s5,85
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable841
+    seq $s7,$s6,$s5
+    beqz $s7,Lable841
     li $s6,0
     lw $s5,Lable86
-    seq $s5,$s5,$s6
-    beqz $s5,Lable842
+    seq $s7,$s5,$s6
+    beqz $s7,Lable842
     li $s5,85
     move $a0,$s5
     jal Lprinti
@@ -4817,12 +4817,12 @@ Lable842 :
 Lable841 :
     li $s5,86
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable845
+    seq $s7,$s4,$s5
+    beqz $s7,Lable845
     li $s4,0
     lw $s5,Lable87
-    seq $s5,$s5,$s4
-    beqz $s5,Lable846
+    seq $s7,$s5,$s4
+    beqz $s7,Lable846
     li $s5,86
     move $a0,$s5
     jal Lprinti
@@ -4843,12 +4843,12 @@ Lable846 :
 Lable845 :
     li $s5,87
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable849
+    seq $s7,$s6,$s5
+    beqz $s7,Lable849
     li $s6,0
     lw $s5,Lable88
-    seq $s5,$s5,$s6
-    beqz $s5,Lable850
+    seq $s7,$s5,$s6
+    beqz $s7,Lable850
     li $s5,87
     move $a0,$s5
     jal Lprinti
@@ -4869,12 +4869,12 @@ Lable850 :
 Lable849 :
     li $s5,88
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable853
+    seq $s7,$s4,$s5
+    beqz $s7,Lable853
     li $s4,0
     lw $s5,Lable89
-    seq $s5,$s5,$s4
-    beqz $s5,Lable854
+    seq $s7,$s5,$s4
+    beqz $s7,Lable854
     li $s5,88
     move $a0,$s5
     jal Lprinti
@@ -4895,12 +4895,12 @@ Lable854 :
 Lable853 :
     li $s5,89
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable857
+    seq $s7,$s6,$s5
+    beqz $s7,Lable857
     li $s6,0
     lw $s5,Lable90
-    seq $s5,$s5,$s6
-    beqz $s5,Lable858
+    seq $s7,$s5,$s6
+    beqz $s7,Lable858
     li $s5,89
     move $a0,$s5
     jal Lprinti
@@ -4921,12 +4921,12 @@ Lable858 :
 Lable857 :
     li $s5,90
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable861
+    seq $s7,$s4,$s5
+    beqz $s7,Lable861
     li $s4,0
     lw $s5,Lable91
-    seq $s5,$s5,$s4
-    beqz $s5,Lable862
+    seq $s7,$s5,$s4
+    beqz $s7,Lable862
     li $s5,90
     move $a0,$s5
     jal Lprinti
@@ -4947,12 +4947,12 @@ Lable862 :
 Lable861 :
     li $s5,91
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable865
+    seq $s7,$s6,$s5
+    beqz $s7,Lable865
     li $s6,0
     lw $s5,Lable92
-    seq $s5,$s5,$s6
-    beqz $s5,Lable866
+    seq $s7,$s5,$s6
+    beqz $s7,Lable866
     li $s5,91
     move $a0,$s5
     jal Lprinti
@@ -4973,12 +4973,12 @@ Lable866 :
 Lable865 :
     li $s5,92
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable869
+    seq $s7,$s4,$s5
+    beqz $s7,Lable869
     li $s4,0
     lw $s5,Lable93
-    seq $s5,$s5,$s4
-    beqz $s5,Lable870
+    seq $s7,$s5,$s4
+    beqz $s7,Lable870
     li $s5,92
     move $a0,$s5
     jal Lprinti
@@ -4999,12 +4999,12 @@ Lable870 :
 Lable869 :
     li $s5,93
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable873
+    seq $s7,$s6,$s5
+    beqz $s7,Lable873
     li $s6,0
     lw $s5,Lable94
-    seq $s5,$s5,$s6
-    beqz $s5,Lable874
+    seq $s7,$s5,$s6
+    beqz $s7,Lable874
     li $s5,93
     move $a0,$s5
     jal Lprinti
@@ -5025,12 +5025,12 @@ Lable874 :
 Lable873 :
     li $s5,94
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable877
+    seq $s7,$s4,$s5
+    beqz $s7,Lable877
     li $s4,0
     lw $s5,Lable95
-    seq $s5,$s5,$s4
-    beqz $s5,Lable878
+    seq $s7,$s5,$s4
+    beqz $s7,Lable878
     li $s5,94
     move $a0,$s5
     jal Lprinti
@@ -5051,12 +5051,12 @@ Lable878 :
 Lable877 :
     li $s5,95
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable881
+    seq $s7,$s6,$s5
+    beqz $s7,Lable881
     li $s6,0
     lw $s5,Lable96
-    seq $s5,$s5,$s6
-    beqz $s5,Lable882
+    seq $s7,$s5,$s6
+    beqz $s7,Lable882
     li $s5,95
     move $a0,$s5
     jal Lprinti
@@ -5077,12 +5077,12 @@ Lable882 :
 Lable881 :
     li $s5,96
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable885
+    seq $s7,$s4,$s5
+    beqz $s7,Lable885
     li $s4,0
     lw $s5,Lable97
-    seq $s5,$s5,$s4
-    beqz $s5,Lable886
+    seq $s7,$s5,$s4
+    beqz $s7,Lable886
     li $s5,96
     move $a0,$s5
     jal Lprinti
@@ -5103,12 +5103,12 @@ Lable886 :
 Lable885 :
     li $s5,97
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable889
+    seq $s7,$s6,$s5
+    beqz $s7,Lable889
     li $s6,0
     lw $s5,Lable98
-    seq $s5,$s5,$s6
-    beqz $s5,Lable890
+    seq $s7,$s5,$s6
+    beqz $s7,Lable890
     li $s5,97
     move $a0,$s5
     jal Lprinti
@@ -5129,12 +5129,12 @@ Lable890 :
 Lable889 :
     li $s5,98
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable893
+    seq $s7,$s4,$s5
+    beqz $s7,Lable893
     li $s4,0
     lw $s5,Lable99
-    seq $s5,$s5,$s4
-    beqz $s5,Lable894
+    seq $s7,$s5,$s4
+    beqz $s7,Lable894
     li $s5,98
     move $a0,$s5
     jal Lprinti
@@ -5155,12 +5155,12 @@ Lable894 :
 Lable893 :
     li $s5,99
     lw $s6,4($sp)
-    seq $s5,$s6,$s5
-    beqz $s5,Lable897
+    seq $s7,$s6,$s5
+    beqz $s7,Lable897
     li $s6,0
     lw $s5,Lable100
-    seq $s5,$s5,$s6
-    beqz $s5,Lable898
+    seq $s7,$s5,$s6
+    beqz $s7,Lable898
     li $s5,99
     move $a0,$s5
     jal Lprinti
@@ -5181,12 +5181,12 @@ Lable898 :
 Lable897 :
     li $s5,100
     lw $s4,4($sp)
-    seq $s5,$s4,$s5
-    beqz $s5,Lable900
+    seq $s7,$s4,$s5
+    beqz $s7,Lable900
     li $s4,0
     lw $s5,Lable101
-    seq $s5,$s5,$s4
-    beqz $s5,Lable901
+    seq $s7,$s5,$s4
+    beqz $s7,Lable901
     li $s5,100
     move $a0,$s5
     jal Lprinti
