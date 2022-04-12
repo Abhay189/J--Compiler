@@ -1,0 +1,221 @@
+commit 0763c669a58183564057c126cff3548fc917363c
+Author: abhay.sharma <abhay.sharma@linux12-wb.cs.ucalgary.ca>
+Date:   Tue Apr 12 04:56:30 2022 -0600
+
+    final commit for this project
+
+commit fbc2394ae9dd084b4430f023f336eff0b16062a2
+Author: abhay.sharma <abhay.sharma@linux12-wb.cs.ucalgary.ca>
+Date:   Mon Apr 11 17:44:04 2022 -0600
+
+    adding the spim outputs
+
+commit 978c687854e972fb30cb9d650797879139da0c8a
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Mon Apr 11 17:14:56 2022 -0600
+
+    adding sol files
+
+commit 96738ee0c2bdc4a417fdcf04bc78bb691f1fe892
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Mon Apr 11 08:17:42 2022 -0600
+
+    adding file before cleaning
+
+commit 9ead9049d0c1a1853cb1151930193532bad1530f
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Mon Apr 11 08:00:17 2022 -0600
+
+    adding some fixes
+
+commit e3d58ed9effa7aff05bca570e213afd6a5c74eab
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Mon Apr 11 00:16:09 2022 -0600
+
+    adding the currently working version
+
+commit 787a66236ff2312154daf26a46ed1d90791d4949
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Sun Apr 10 22:21:21 2022 -0600
+
+    adding && and || handlers and break statement handler
+
+commit 84c40932abff4181041e116f7f05205fb93deedb
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Sat Apr 9 05:21:49 2022 -0600
+
+    final commit of the day
+
+commit 11798d1e3ead21b75ed933e21627c4aeecbeabb8
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Sat Apr 9 04:48:07 2022 -0600
+
+    adding getchar implementation
+
+commit 7605959cacedb1f0fca959881a3d127f3d49cb9b
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Sat Apr 9 03:19:04 2022 -0600
+
+    adding if else statemests functionality
+
+commit c7a4ce1499249886bf55fe049ca5897e92be1ac8
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Fri Apr 8 23:45:08 2022 -0600
+
+    added return statement functionality
+
+commit 0b6d4d33f86d88f1365561ce065933f29929dc31
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Fri Apr 8 21:30:09 2022 -0600
+
+    fixing syntax checking issues
+
+commit 3590e79af7225f04a8ec9d6356b9b564aa3a55e2
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Fri Apr 8 06:55:13 2022 -0600
+
+    end of the day commit
+
+commit 7498c4c11526860178e692ce7f456619e3cc2e91
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Fri Apr 8 02:45:00 2022 -0600
+
+    fixing check semantic issue
+
+commit df468db61bb0d4aebd49e55a62c332f192d7bb43
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Thu Apr 7 23:42:12 2022 -0600
+
+    adding custom function handler
+
+commit 76dcecb457a98f2fe0cbef02eab3b9dd008dc3de
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Thu Apr 7 22:33:50 2022 -0600
+
+    reimplementing the assignment handler
+
+commit d7a8dd4064c7ea7412afd762166a6930caf3a7a2
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Thu Apr 7 17:27:25 2022 -0600
+
+    adding a seperate postorder treversal for =
+
+commit 5cc4fb3f5538b4ed56e31ae7fecc9a6110e877c2
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Thu Apr 7 02:27:55 2022 -0600
+
+    adding arithmatic expression handler
+
+commit 759458c3884f99c6edc07002c72d5dbea879bb5b
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Wed Apr 6 23:39:14 2022 -0600
+
+    adding some built in runtime functionality to code gen
+
+commit 4e207b69c1885531ace69c370978dab0dc751fd0
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Wed Apr 6 18:28:53 2022 -0600
+
+    adding prints functionality
+
+commit 7634810aa024ed738098b42e79c6c5813378d8c3
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Wed Apr 6 16:39:20 2022 -0600
+
+    adding semantic checking for prebuilt functions
+
+commit d5aafb6ff3a6175ec914709b6600ff8192563104
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Wed Apr 6 03:55:17 2022 -0600
+
+    Handles main function, globar variables and variable assignment
+
+commit b6a5e488939d504e3e247611af8446c5aa1acd0f
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Tue Apr 5 22:45:51 2022 -0600
+
+    adding more semantic checks
+
+commit 714ac0947db431517ced23c5f8371d1530b63b74
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Tue Apr 5 15:00:34 2022 -0600
+
+    fixing semantic checks according to new symboltable
+
+commit b0c468fa153738efa0904ad18d367da0c97ea8fc
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Tue Apr 5 00:36:47 2022 -0600
+
+    adding corrected files
+
+commit aa3226859697d2d6b4f95ae53e6cac74ec6ecd9e
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Mon Apr 4 19:02:27 2022 -0600
+
+    adding basic traversal and code gen functions
+
+commit b5b0a0a874fbeadc0f836bc193be6c0e21760ac9
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Sun Apr 3 18:13:16 2022 -0600
+
+    Adding the regester related functions and the lable maker
+
+commit ddb191a60cf982b9eddc3c040c55a29faea46d75
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Sun Apr 3 15:24:26 2022 -0600
+
+    Addming the new changes
+
+commit 0aeb04a2860b1a3ef6403bb11e2898f4edc90b79
+Author: abhay.sharma <abhay.sharma@linux10-eb.cs.ucalgary.ca>
+Date:   Wed Mar 30 13:56:16 2022 -0600
+
+    adding third iterator
+
+commit 5c3ed6129b9a5f6b39e7aa941b4837d442011d99
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Wed Mar 30 03:09:07 2022 -0600
+
+    cleaning the repo
+
+commit 2efbc97f5f8da4a8bd3b78682c096ba6993565ac
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Wed Mar 30 03:08:25 2022 -0600
+
+    adding second pass completed
+
+commit bc199ae94fd821c62c0f574c43b2aa585aa27164
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Tue Mar 29 05:29:20 2022 -0600
+
+    Saving progress
+
+commit e6c9194106af38ef1835bea16418ac2b910e9560
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Mon Mar 28 23:47:56 2022 -0600
+
+    fixing a small issue in stab.cpp
+
+commit 853b53839124cdfacda21e926d2127a8c2765f0a
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Mon Mar 28 23:47:11 2022 -0600
+
+    First pass implemented
+
+commit 5af1b5ddcb0d2f1ec20a9ef82e0cec22ab2055fa
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Mon Mar 28 02:22:01 2022 -0600
+
+    Fixing parser issues with multiple global  declerations
+
+commit fad27e035f06c3e18d240363bbd2fbe5a8bbd33d
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Sun Mar 27 18:04:50 2022 -0600
+
+    fixing some parser issues
+
+commit 05744905d02dc1bc9f2db69c9463b41846bf8658
+Author: Abhay189 <sabhay2001@gmail.com>
+Date:   Sun Mar 27 13:28:44 2022 -0600
+
+    Adding Milestone 2 stuff
