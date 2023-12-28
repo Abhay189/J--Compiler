@@ -14,7 +14,7 @@ all: build
 	bison -o $*.cc $<
 
 %.cc: %.l
-	flex --c++ -o $*.cc $<
+	flex -+ -o $*.cc $<
 
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) -c $< -MMD -MF $*.d
