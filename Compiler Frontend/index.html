@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler Interface</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png"> 
+</head>
+<body>
+
+<h1 style="text-align:center; color: #dcdcdc;">J-- Compiler Demo</h1>
+
+<div class="container">
+    <div class="panel">
+        <h2>Input Code</h2>
+        <div id="editor">\\ Enter your J-- code here...</div>
+        <!-- Updated button type to 'button' -->
+        <button type="button" id="compileButton">Compile</button>
+    </div>
+    <div class="panel">
+        <h2>Output (MIPS Assembly Code)</h2>
+        <textarea id="output" readonly></textarea>
+    </div>
+</div>
+
+<!-- Include Ace Editor -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

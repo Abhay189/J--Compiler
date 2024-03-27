@@ -1,0 +1,5 @@
+.vscode
+__pycache__
+py_env
+sipm_output
+mips_code

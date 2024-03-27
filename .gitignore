@@ -2,3 +2,5 @@
 *.o
 *.d
 *.cc
+__pycache__
+py_env
