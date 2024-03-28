@@ -15,14 +15,16 @@ def compile_code():
         code = request.json['code']
 
         # Define the path for the temporary file
-        temp_file_path = 'temp.jmm'
-
+        temp_file_path = 'temp.jmm'    
+ 
         # Save the processed code to the temporary file
         with open(temp_file_path, 'w') as file:
             file.write(code)
 
         # Define the compiler command with the path to the temporary file
         command = ["../Compiler-engine/parser", os.path.abspath(temp_file_path)]
+
+        print(command)
 
         # Execute the compiler command
         result = subprocess.run(command, capture_output=True, text=True)

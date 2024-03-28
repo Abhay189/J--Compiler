@@ -1,18 +1,15 @@
-# Start with the official Ubuntu base image
-FROM ubuntu:latest
+# Start with the official Python Alpine base image
+FROM python:3.9-alpine
 
-# Install Python, pip, and other necessary packages
-# Combine apt-get update, apt-get install, and cleanup into a single RUN to reduce image layers
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
+# Install g++, bison, flex, and make (assuming make is needed) with apk
+RUN apk add --no-cache \
     g++ \
     bison \
     flex \
-    && rm -rf /var/lib/apt/lists/*
+    make
 
-# Upgrade pip
-RUN python3 -m pip install --upgrade pip
+# Note: pip is included with the Python images, but we can upgrade it
+RUN pip install --upgrade pip
 
 # Install Python packages
 RUN pip install Flask flask_cors
@@ -21,14 +18,19 @@ RUN pip install Flask flask_cors
 WORKDIR /app
 
 # Copy your compiler engine and backend into the container
-COPY Compiler-engine/ /app/Compiler-engine
-COPY Compiler-Backend/ /app/Compiler-Backend
+COPY Compiler-engine ./Compiler-engine
+COPY Compiler-Backend ./Compiler-Backend
 
-# Run make in the Compiler-Backend directory
-RUN make -C /app/Compiler-Backend
+# Optionally, run make if your project requires it
+RUN make -C ./Compiler-engine/
+
+
+# Make the parser executable
+RUN chmod +x ./Compiler-engine/parser
 
 # Expose the port your app runs on
 EXPOSE 5000
 
 # Command to run your Flask app
-CMD ["python3", "Compiler-Backend/app.py"]
+CMD ["python3", "./Compiler-Backend/app.py"]
+
