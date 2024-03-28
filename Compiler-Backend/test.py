@@ -1,7 +1,7 @@
 import requests
 
 # The URL for your Flask API endpoint
-url = 'http://localhost:5000/compile'
+url = 'http://3.139.87.117/compile'
 
 # Example J-- code to compile
 jmm_code = """main() {

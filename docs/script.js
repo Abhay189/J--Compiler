@@ -14,7 +14,7 @@ document.getElementById('compileButton').addEventListener('click', function(even
 
 function compileCode() {
     const code = editor.getValue();
-    fetch('http://localhost:5000/compile', {
+    fetch('http://3.139.87.117/compile', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
