@@ -14,7 +14,7 @@ document.getElementById('compileButton').addEventListener('click', function(even
 
 function compileCode() {
     const code = editor.getValue();
-    fetch('http://3.139.87.117/compile', {
+    fetch('https://jcompiler.abhaysharma.site/compile', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
